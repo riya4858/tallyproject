@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% block body %}
+<form action="taxadd1" method="post" class="needs-validation" novalidate>
+    {% csrf_token %}
+    <div class="page-content">
+       
+        <div class="card radius-15" style="background-color: #243e54;">
+            <div class="card-body">
+                <div class="card-title">
+
+                </div>
+                <div class="row no-gutters">
+                    
+
+                    <div class="col" style="margin-left:10px;">
+                        &nbsp;
+
+                        <div class="col">
+                            Company Name
+                            <input type="text" class="form-control w-25"  name="" required
+                                   style="background-color: #2f516f;color: white;">
+                            
+                        </div>
+                        <br>
+                        <div class="col">
+                            Mailing Name Address
+                            <input type="text" class="form-control w-25"  name="" required
+                                   style="background-color: #2f516f;color: white;">
+                            
+                        </div>
+                        
+                        <br>
+                        <div class="col">
+                            State
+                            <input type="text" class="form-control w-25"  name="" required
+                                   style="background-color: #2f516f;color: white;">
+                            
+                        </div>
+                        <br>
+                        <div class="col">
+                            Country
+                            <input type="text" class="form-control w-25"  name="" required
+                                   style="background-color: #2f516f;color: white;">
+                            
+                        </div>
+                        <br>
+                        <div class="col">
+                            Pincode
+                            <input type="text" class="form-control w-25"  name="" required
+                                   style="background-color: #2f516f;color: white;">
+                            
+                        </div>
+                        <br>
+                        <div class="col">
+                            Telephone
+                            <input type="text" class="form-control w-25"  name="" required
+                                   style="background-color: #2f516f;color: white;">
+                            
+                        </div>
+                        <br>
+                        <div class="col">
+                            Mobile
+                            <input type="text" class="form-control w-25"  name="" required
+                                   style="background-color: #2f516f;color: white;">
+                            
+                        </div>
+                        <br>
+                        <div class="col">
+                            Fax
+                            <input type="text" class="form-control w-25"  name="" required
+                                   style="background-color: #2f516f;color: white;">
+                            
+                        </div>
+                        <br>
+                        <div class="col">
+                            Email
+                            <input type="text" class="form-control w-25"  name="" required
+                                   style="background-color: #2f516f;color: white;">
+                            
+                        </div>
+                        
+                        <br>
+                        <!-- <div class="col">
+                            <div class="form-row">
+                                <div class="col-md-3"></div>
+                                <div class="col-md-6">
+                                    <button class="btn btn-outline-info text-light rounded-pill w-100"
+                                            type="submit">SAVE
+                                    </button>
+                                </div>
+                                <div class="col-md-3"></div>
+
+                            </div>
+
+                        </div> -->
+                    </div>
+
+
+
+
+{% endblock %}
