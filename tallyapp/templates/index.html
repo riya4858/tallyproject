@@ -1,6 +1,121 @@
 {% extends 'base.html' %}
 {% block body %}
 
+<div class="page-content">
+ 
+    <div class="card radius-15" style="background-color: #243e54;">
+        <div class="card-body">
+            <div class="card-title">
+                <h4 class="mb-0">Company Creation</h4>
+            </div>
+            <hr/>
+            <form action="customers" method="post" class="needs-validation" novalidate>
+                {% csrf_token %}
+                
+                    <div class="row">
+                        
+                        <div class="col-md-4 mt-3">
+                            <label for="validationCustom02">Company name</label>
+                            <input type="text" class="form-control" id="validationCustom02" name="firstname"
+                                   required style="background-color: #2f516f;color: white;">
+                            <div class="valid-feedback">Looks good!</div>
+                        </div>
+                        <div class="col-md-4 mt-3">
+                            <label for="validationCustom02">Mailing name</label>
+                            <input type="text" class="form-control" id="validationCustom02" name="lastname"
+                                   required style="background-color: #2f516f;color: white;">
+                            <div class="valid-feedback">Looks good!</div>
+                        </div>
+                        <div class="col-md-4 mt-3">
+                            <label for="validationCustom03">Address</label>
+                            <textarea class="form-control" id="validationCustom03" name="company"
+                                   required style="background-color: #2f516f;color: white;"></textarea>
+                            
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 mt-3">
+                            <label for="validationCustom03">State</label>
+                            <input type="text" class="form-control" id="validationCustom03" name="location"
+                                   required style="background-color: #2f516f;color: white;">
+                            <div class="valid-feedback">Looks good!</div>
+                        </div>
+                        <div class="col-md-4 mt-3">
+                            <label for="validationCustom03">Country</label>
+                            <input type="text" class="form-control" id="validationCustom03" name="location"
+                                   required style="background-color: #2f516f;color: white;">
+                            <div class="valid-feedback">Looks good!</div>
+                        </div>
+                        <div class="col-md-4 mt-3">
+                            <label for="validationCustom03">Pincode</label>
+                            <input type="text" class="form-control" id="validationCustom03" name="location"
+                                   required style="background-color: #2f516f;color: white;">
+                            <div class="valid-feedback">Looks good!</div>
+                        </div>
+                        <div class="col-md-4 mt-3">
+                            <label for="validationCustom03">Telephone</label>
+                            <input type="text" class="form-control" id="validationCustom03" name="location"
+                                   required style="background-color: #2f516f;color: white;">
+                            <div class="valid-feedback">Looks good!</div>
+                        </div>
+                        <div class="col-md-4 mt-3">
+                            <label for="validationCustom03">Mobile</label>
+                            <input type="text" class="form-control" id="validationCustom03" name="location"
+                                   required style="background-color: #2f516f;color: white;">
+                            <div class="valid-feedback">Looks good!</div>
+                        </div>
+                        
+                        <div class="col-md-4 mt-3">
+                            <label for="validationCustom03">Fax</label>
+                            <input type="text" class="form-control" id="validationCustom03" name="location"
+                                   required style="background-color: #2f516f;color: white;">
+                            <div class="valid-feedback">Looks good!</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 mt-3">
+                            <label for="validationCustom03">Email</label>
+                            <input type="text" class="form-control" id="validationCustom03" name="location"
+                                   required style="background-color: #2f516f;color: white;">
+                            <div class="valid-feedback">Looks good!</div>
+                        </div>
+                        <div class="col-md-4 mt-3">
+                            <label for="validationCustom03">Website</label>
+                            <input type="text" class="form-control" id="validationCustom03" name="location"
+                                   required style="background-color: #2f516f;color: white;">
+                            <div class="valid-feedback">Looks good!</div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 mt-3">
+                            <label for="validationCustom03">Financial year begin from</label>
+                            <input type="text" class="form-control" id="validationCustom03" name="location"
+                                   required style="background-color: #2f516f;color: white;">
+                            <div class="valid-feedback">Looks good!</div>
+                        </div>
+                        <div class="col-md-4 mt-3">
+                            <label for="validationCustom03">Books beginning from</label>
+                            <input type="text" class="form-control" id="validationCustom03" name="location"
+                                   required style="background-color: #2f516f;color: white;">
+                            <div class="valid-feedback">Looks good!</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 mt-3">
+                            <label for="validationCustom03">Base currency symbol</label>
+                            <input type="text" class="form-control" id="validationCustom03" name="location"
+                                   required style="background-color: #2f516f;color: white;">
+                            <div class="valid-feedback">Looks good!</div>
+                        </div>
+                        <div class="col-md-4 mt-3">
+                            <label for="validationCustom03">Formal name</label>
+                            <input type="text" class="form-control" id="validationCustom03" name="location"
+                                   required style="background-color: #2f516f;color: white;">
+                            <div class="valid-feedback">Looks good!</div>
+                        </div>
+                    </div>
+
 
 
 

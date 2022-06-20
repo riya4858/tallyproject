@@ -10,7 +10,15 @@
             </div>
             
            <a href="{% url 'createcompany' %}" class="float:right;" >Create Company</a>
-
+<hr>
+           <div>
+               <table>
+               {% for i in com %}
+               <tr>
+                {{i.name}}<br></tr>
+               {% endfor %}
+               </table>
+           </div>
         </div>
     </div>
 

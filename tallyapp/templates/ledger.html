@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block body %}
+<style>
+    input{
+        padding:1px 20px;
+    }
+    label {
+        display: inline-block;
+        width: 150px;
+        
+      }
+</style>
+<div style="height:100%;width: 50%;">
+    <div style="height:20px;width: 200%;background: #41b6d7;padding:2px;padding-left: none;
+    display: flex;color: black;align-items: center;justify-content:space-between;
+    font-size: 15px;
+    font-weight: bolder;
+    ">
+
+        <p style="margin-bottom: 0px;margin-left: 2px;">Ledger Creation </p>
+        <!-- <span>Abc Pvt Ltd</span> -->
+        <span style="margin-right: 2px;"><i style="font-size: 18px;font-weight: bolder;" class='bx bx-x'></i></span>
+
+    </div>
+    <div
+        style="width:60% ;height: 20%;background: rgba(255, 255, 255, 0.914);padding: 2%;border: 0.4px solid black;border-top: unset !important;">
+        <div
+            style=" margin-top: 2%;height: auto;width: 100%;color: black;font-size: 12px;font-weight: 600;">
+            <div>
+                <label  >Name:</label>
+                <input id="name" name="username" type="text" onkeypress="document.getElementById('alias').focus()";>
+            </div>
+            <div >
+               
+                <label for="" style="font-style:italic ;">(alias) </label>
+          
+            
+                    <input id="alias" type="text" onkeypress="document.getElementById('under').focus()";>
+                
+            </div>
+            <div>
+                <span>
+                    <label for="">Under</label>
+                </span>
+                <span>
+                    <input id="under" type="text" onkeypress="document.getElementById('groups').focus()";>
+                </span>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+{% endblock %}
