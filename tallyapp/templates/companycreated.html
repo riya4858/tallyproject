@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<script>
+    function save(){
+        document.getElementById("comp").submit();
+    }
+</script>
+
+<div class="page-content">
+ 
+    <div class="card radius-15" style="background-color: #243e54;">
+        <div class="card-body">
+            <div class="card-title">
+                <h6 class="mb-0" style="margin-left: 480px;"><b>Company Created Successfully</b></h6>
+            </div>
+            <hr/>
+            <h6>Company:</h6>{{com.name}}
+           
+            <hr>
+            <div>
+            <h6><b>Accounting</b></h6>
+                <label>Maintain Accounts:</label><br>
+                <label>Enable Bill-wise entry:</label><br>
+                <label>Enable Cost Centres:</label><br>
+                <label>Enable Interest Calculation:</label><br>
+            </div>
+            <div>
+                <h6><b>Inventory</b></h6>
+                    <label>Maintain Inventory:</label><br>
+                    <label>Integrate Accounts with Inventory:</label><br>
+                    <label>Enable Multiple Price Levels:</label><br>
+                    <label>Enable Batches:</label><br>
+                    <label>Maintain Expiry Date for Batches:</label><br>
+                    <label>Enable Job Order Processing</label><br>
+                    <label>Enable Cost Tracking</label><br>
+                    <label>Enable Job Costing</label><br>
+                    <label>Use Discount Column in invoices</label><br>
+                    <label>Use Seperate Actual and Billed Quantity Columns in Invoices</label><br>
+                </div>
+            
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

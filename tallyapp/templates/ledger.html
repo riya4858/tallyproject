@@ -1,51 +1,52 @@
 {% extends 'base.html' %}
 {% block body %}
-<style>
-    input{
-        padding:1px 20px;
+<script>
+    function save(){
+        document.getElementById("comp").submit();
     }
-    label {
-        display: inline-block;
-        width: 150px;
-        
-      }
-</style>
-<div style="height:100%;width: 50%;">
-    <div style="height:20px;width: 200%;background: #41b6d7;padding:2px;padding-left: none;
-    display: flex;color: black;align-items: center;justify-content:space-between;
-    font-size: 15px;
-    font-weight: bolder;
-    ">
+</script>
 
-        <p style="margin-bottom: 0px;margin-left: 2px;">Ledger Creation </p>
-        <!-- <span>Abc Pvt Ltd</span> -->
-        <span style="margin-right: 2px;"><i style="font-size: 18px;font-weight: bolder;" class='bx bx-x'></i></span>
-
-    </div>
-    <div
-        style="width:60% ;height: 20%;background: rgba(255, 255, 255, 0.914);padding: 2%;border: 0.4px solid black;border-top: unset !important;">
-        <div
-            style=" margin-top: 2%;height: auto;width: 100%;color: black;font-size: 12px;font-weight: 600;">
-            <div>
-                <label  >Name:</label>
-                <input id="name" name="username" type="text" onkeypress="document.getElementById('alias').focus()";>
+<div class="page-content">
+ 
+    <div class="card radius-15" style="background-color: #243e54;">
+        <div class="card-body">
+            <div class="card-title">
+                <h4 class="mb-0">Ledger Creation</h4>
             </div>
-            <div >
-               
-                <label for="" style="font-style:italic ;">(alias) </label>
-          
-            
-                    <input id="alias" type="text" onkeypress="document.getElementById('under').focus()";>
+            <hr/>
+            <form id="comp" action="" method="post" class="needs-validation" novalidate>
+                {% csrf_token %}
                 
-            </div>
-            <div>
-                <span>
-                    <label for="">Under</label>
-                </span>
-                <span>
-                    <input id="under" type="text" onkeypress="document.getElementById('groups').focus()";>
-                </span>
-            </div>
+                    <div class="row">
+                        
+                        <div class="col-md-4 mt-3">
+                            <label for="validationCustom02">Name</label>
+                            <input id="compnayname" type="text" class="form-control w-75" id="validationCustom02" name="name"
+                                   required style="background-color: #2f516f;color: white;" onkeypress="document.getElementById('mailing_name').focus();document.getElementById('mailing_name').value=document.getElementById('companyname').value">
+                            <div class="valid-feedback">Looks good!</div>
+                        </div>
+                        <div class="col-md-4 mt-3">
+                            <label for="validationCustom02" style="font-style:italic ;">(alias)</label>
+                            <input id="mailing_name" type="text" class="form-control w-75" id="validationCustom02" name="mailing_name"
+                                   required style="background-color: #2f516f;color: white;"
+                                   onkeypress="document.getElementById('address1').focus();">
+                            <div class="valid-feedback">Looks good!</div>
+                        </div>
+                        <div class="col-md-4 mt-3">
+                            <label for="validationCustom03">Under</label>
+                            <input type="text" id="address1" class="form-control w-75" id="validationCustom03" name="address1"
+                                   required style="background-color: #2f516f;color: white;"
+                                   onkeypress="save()">
+                            
+                        </div>
+                    </div>
+                    
+                                  
+                            
+                    </div>
+            </form>
+           
+                
             
         </div>
     </div>

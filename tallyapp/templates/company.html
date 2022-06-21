@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 {% block body %}
 
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <div class="card-deck flex-column flex-lg-row" style="width: 400px;height:500px; margin-left:500px;">
     <div class="card radius-5 " >
         <div class="card-body"  >
             <div class="card-title">
-                <h5>List of companies </h5>
+                <h6><u>List of Companies</u> </h6>
             </div>
             
-           <a href="{% url 'createcompany' %}" class="float:right;" >Create Company</a>
+           <a href="{% url 'createcompany' %}" style="margin-left:200px;" >Create Company</a>
 <hr>
            <div>
                <table>
@@ -21,5 +21,6 @@
            </div>
         </div>
     </div>
+   
 
 {% endblock %}

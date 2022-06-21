@@ -10,4 +10,5 @@ urlpatterns = [
     path('ledger',views.ledger,name='ledger'),
     path('costcentre',views.costcentre,name='costcentre'),
     path('currency',views.currency,name='currency'),
+    path('companycreated',views.companycreated,name='companycreated'),
 ]

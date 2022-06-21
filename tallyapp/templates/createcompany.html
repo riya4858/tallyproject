@@ -1,235 +1,137 @@
 {% extends 'base.html' %}
 {% block body %}
-<script src="https://code.jquery.com/jquery-git.js"></script>
-<style>
-    .displayBlock
-    {
-        display: inline-block;
-    }
-    td a {
-        display:block;
-        width:100%;
-    }
-   
 
-    table.one {
-        position:relative;
-        float:right;
-        border:solid 1px green;
-      }
-</style>
 <script>
     function save(){
         document.getElementById("comp").submit();
     }
-
-    function finYear(){
-        document.getElementById('fin').value="04/01/2022"
-        }
-
-    function showState(){
-        
-        document.getElementById('tblState').style.visibility= "visible";
-    }
-
-    function showCountry(){
-        
-        document.getElementById('tblCountry').style.visibility= "visible";
-    }
-
-    function setState(state){
-        document.getElementById('state').value= state;
-        document.getElementById('tblState').style.visibility= "hidden";
-        document.getElementById('country').focus();
-
-    }
-
-    $(document).ready(function(){
-        document.getElementById('tblState').style.visibility= "hidden";
-        document.getElementById('tblCountry').style.visibility= "hidden";
-        finYear();
-        document.getElementById('fin').value = new date();
-    })
 </script>
-<form id="comp" action="{% url 'companycreate' %}" method="post" class="needs-validation form-group" novalidate>
-    {% csrf_token %}
-   
-    <div class="page-content">
-       
-        <div class="card radius-15" style="background-color: #243e54;">
-            
-            <div class="card-body">
-                
-                <div class="card-title" style="background-color: rgb(42, 134, 170); height:50px">
-                    
-                    <h6>Company</h6>
-                </div>
-                <table id="tblState" class="one form-control" style="width: 20%;">
-                    <tr>
-                    <td>
-                        <a onclick="setState('Kerala')">Kerala</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <a onclick="setState('Karnataka')">Karnataka</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <a onclick="setState('Maharashtra')">Maharashtra</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <a onclick="setState('TamilNadu')">TamilNadu</a>
-                    </td>
-                </tr>
-               
-               
-                </table>
-                <table id="tblCountry" class="one" style="width: 20%;">
-                    <tr>
-                    <td>
-                        <a>India</a>
-                    </td>
-                </tr>
-                
-               
-               
-                </table>
-                <div class="row no-gutters">
-                    
 
-                    <div class="col" style="float:right">
-                        
-                        
-                        
-                       
-                        <div class="col">
-                            Company Name
-                            <input id="companyname" type="text" class="form-control w-25"  name="name" required
-                                   style="height:25px;  " onkeypress="document.getElementById('address1').focus();document.getElementById('address1').value=document.getElementById('companyname').value">
-                            
-                        </div>
-                        <br>
-                        <div class="col">
-                            Address:
-                            <input id="address1" type="text" class="form-control w-25"  name="address1" required
-                                   style="height:25px" onkeypress="document.getElementById('address2').focus();">
-                                   <input id="address2" type="text" class="form-control w-25"  name="" required
-                                   style="height:25px" onkeypress="document.getElementById('address3').focus();">
-                                   <input id="address3" type="text" class="form-control w-25"  name="" required
-                                   style="height:25px" onkeypress="document.getElementById('address4').focus();">
-                                   <input id="address4" type="text" class="form-control w-25"  name="" required
-                                   style="height:25px" onkeypress="document.getElementById('state').focus();">
-                            
-                        </div>
-                        <br>
-                        
-                        <div class="col">
-                            State
-                            <input id="state" type="text" class="form-control w-25"  name="" required
-                                   style="height:25px"
-                                   
-                                   onkeypress="showState();">
-                            
-                        </div>
-                        <br>
-                        <div class="col">
-                            Country
-                            <input id="country" type="text" class="form-control w-25"  name="" required
-                                   style="height:25px" onkeypress="showCountry()">
-                            
-                        </div>
-                        <br>
-                        <div class="col">
-                            Pincode
-                            <input id="pin" type="text" class="form-control w-25"  name="" required
-                                   style="height:25px" onkeypress="document.getElementById('tel').focus();">
-                            
-                        </div>
-                        <br>
-                        <div class="col">
-                            Telephone
-                            <input id="tel" type="text" class="form-control w-25"  name="" required
-                                   style="height:25px" onkeypress="document.getElementById('mob').focus();">
-                            
-                        </div>
-                        <br>
-                        <div class="col">
-                            Mobile
-                            <input id="mob" type="text" class="form-control w-25"  name="" required
-                                   style="height:25px" onkeypress="document.getElementById('fax').focus();">
-                            
-                        </div>
-                        <br>
-                        <div class="col">
-                            Fax
-                            <input id="fax" type="text" class="form-control w-25"  name="" required
-                                   style="height:25px" onkeypress="document.getElementById('email').focus();">
-                            
-                        </div>
-                        <br>
-                        <div class="col">
-                            Email
-                            <input id="email" type="text" class="form-control w-25"  name="" required
-                                   style="height:25px" onkeypress="document.getElementById('web').focus();">
-                            
-                        </div>
-                        <br>
-                        <div class="col">
-                            Website
-                            <input id="web" type="text" class="form-control w-25"  name="" required
-                                   style="height:25px;"  onkeypress="document.getElementById('fin').focus();">
-                            
-                        </div>
-                        <hr>
-                        <div class="col">
-                            Financial year beginning from
-                            <input id="fin" type="date" class="form-control w-25"  name="fin_begin" required
-                                   style="height:25px;"  onkeypress="document.getElementById('book').focus();">
-                            
-                        </div><br>
-                        <div class="col">
-                            Books beginning from
-                            <input id="book" type="date" class="form-control w-25"  name="books_begin" required
-                                   style="height:25px;"  onkeypress="document.getElementById('cur').focus();">
-                            
-                        </div>
-                        
-                        <hr>
-                        <div class="col">
-                            Base currency symbol
-                            <input id="cur" type="text" class="form-control w-25"  name="" required
-                                   style="height:25px;"  onkeypress="document.getElementById('formal').focus();">
-                            
-                        </div><br>
-                        <div class="col">
-                            Formal name
-                            <input id="formal" type="text" class="form-control w-25"  name="" required
-                                   style="height:25px;" onkeypress="save()">
-                            
-                        </div>
-                        <!-- <div class="col">
-                            <div class="form-row">
-                                <div class="col-md-3"></div>
-                                <div class="col-md-6">
-                                    <button class="btn btn-outline-info text-light rounded-pill w-100"
-                                            type="submit">SAVE
-                                    </button>
-                                </div>
-                                <div class="col-md-3"></div>
-
-                            </div>
-
-                        </div> -->
-                    </div>
-                </div>
+<div class="page-content">
+ 
+    <div class="card radius-15" style="background-color: #243e54;">
+        <div class="card-body">
+            <div class="card-title">
+                <h4 class="mb-0">Company Creation</h4>
             </div>
+            <hr/>
+            <form id="comp" action="{% url 'companycreate' %}" method="post" class="needs-validation" novalidate>
+                {% csrf_token %}
+                
+                    <div class="row">
+                        
+                        <div class="col-md-4 mt-3">
+                            <label for="validationCustom02">Company name</label>
+                            <input id="compnayname" value="{{ctg.name}}" type="text" class="form-control" id="validationCustom02" name="name"
+                                   required style="background-color: #2f516f;color: white;" onkeypress="document.getElementById('mailing_name').focus();document.getElementById('mailing_name').value=document.getElementById('companyname').value">
+                            <div class="valid-feedback">Looks good!</div>
+                        </div>
+                        <div class="col-md-4 mt-3">
+                            <label for="validationCustom02">Mailing name</label>
+                            <input id="mailing_name" type="text" class="form-control" id="validationCustom02" name="mailing_name"
+                                   required style="background-color: #2f516f;color: white;"
+                                   onkeypress="document.getElementById('address1').focus();">
+                            <div class="valid-feedback">Looks good!</div>
+                        </div>
+                        <div class="col-md-4 mt-3">
+                            <label for="validationCustom03">Address</label>
+                            <textarea id="address1" class="form-control" id="validationCustom03" name="address1"
+                                   required style="background-color: #2f516f;color: white;"
+                                   onkeypress="document.getElementById('state').focus();"></textarea>
+                            
+                        </div>
+                    </div>
+                    <div class="row">
+                        
+                        <div class="col-md-4 mt-3">
+                            <label for="validationCustom03">Pincode</label>
+                            <input id="pincode" type="text" class="form-control" id="validationCustom03" name="pincode"
+                                   required style="background-color: #2f516f;color: white;"
+                                   onkeypress="document.getElementById('telephone').focus();">
+                            <div class="valid-feedback">Looks good!</div>
+                        </div>
+                        <div class="col-md-4 mt-3">
+                            <label for="validationCustom03">Telephone</label>
+                            <input id="telephone" type="text" class="form-control" id="validationCustom03" name="telephone"
+                                   required style="background-color: #2f516f;color: white;"
+                                   onkeypress="document.getElementById('mobile').focus();">
+                            <div class="valid-feedback">Looks good!</div>
+                        </div>
+                        <div class="col-md-4 mt-3">
+                            <label for="validationCustom03">Mobile</label>
+                            <input id="mobile" type="text" class="form-control" id="validationCustom03" name="mobile"
+                                   required style="background-color: #2f516f;color: white;"
+                                   onkeypress="document.getElementById('fax').focus();">
+                            <div class="valid-feedback">Looks good!</div>
+                        </div>
+                        
+                        <div class="col-md-4 mt-3">
+                            <label for="validationCustom03">Fax</label>
+                            <input id="fax" type="text" class="form-control" id="validationCustom03" name="fax"
+                                   required style="background-color: #2f516f;color: white;"
+                                   onkeypress="document.getElementById('email').focus();">
+                            <div class="valid-feedback">Looks good!</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 mt-3">
+                            <label for="validationCustom03">Email</label>
+                            <input id="email" type="email" class="form-control" id="validationCustom03" name="email"
+                                   required style="background-color: #2f516f;color: white;"
+                                   onkeypress="document.getElementById('website').focus();">
+                            <div class="valid-feedback">Looks good!</div>
+                        </div>
+                        <div class="col-md-4 mt-3">
+                            <label for="validationCustom03">Website</label>
+                            <input id="website" type="text" class="form-control" id="validationCustom03" name="website"
+                                   required style="background-color: #2f516f;color: white;"
+                                   onkeypress="document.getElementById('').focus();">
+                            <div class="valid-feedback">Looks good!</div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 mt-3">
+                            <label for="validationCustom03">Financial year begin from</label>
+                            <input id="fin_year" type="date" class="form-control" id="validationCustom03" name="fin_begin"
+                                   required style="background-color: #2f516f;color: white;"
+                                   onkeypress="document.getElementById('books_begin').focus();">
+                            <div class="valid-feedback">Looks good!</div>
+                        </div>
+                        <div class="col-md-4 mt-3">
+                            <label for="validationCustom03">Books beginning from</label>
+                            <input id="books_begin" type="date" class="form-control" id="validationCustom03" name="books_begin"
+                                   required style="background-color: #2f516f;color: white;"
+                                   onkeypress="document.getElementById('currency_symbol').focus();">
+                            <div class="valid-feedback">Looks good!</div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-4 mt-3">
+                            <label for="validationCustom03">Base currency symbol</label>
+                            <input id="currency_symbol" type="text" class="form-control" id="validationCustom03" name="currency_symbol"
+                                   required style="background-color: #2f516f;color: white;"
+                                   onkeypress="document.getElementById('formal_name').focus();">
+                            <div class="valid-feedback">Looks good!</div>
+                        </div>
+                        <div class="col-md-4 mt-3">
+                            <label for="validationCustom03">Formal name</label>
+                            <input id="formal_name" type="text" class="form-control" id="validationCustom03" name="formal_name"
+                                   required style="background-color: #2f516f;color: white;"
+                                   onkeypress="save()">
+                            <div class="valid-feedback">Looks good!</div>
+                        </div>
+                    </div>
+            </form>
+           
+                
+            
         </div>
     </div>
-</form>
+</div>
+
+
 
 
 
