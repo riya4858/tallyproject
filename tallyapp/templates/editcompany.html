@@ -38,18 +38,18 @@
     <div class="card mx-auto " style="background-color: #243e54; width:75%;">
         <div class="card-body">
             <div class="card-title">
-                <h4 class="mb-0">Company Creation</h4>
+                <h4 class="mb-0">Company Alteration</h4>
             </div>
             <hr/>
             
-            <form  action="{% url 'companycreate' %}" method="post" class="needs-validation" novalidate>
+            <form  action="" method="post" class="needs-validation" novalidate>
                 {% csrf_token %}
                 
                     <div class="row">
                         
                         <div class="col-md-4 mt-3">
                             <label for="validationCustom02">Company name</label>
-                            <input id="companyname" type="text" class="form-control" id="validationCustom02" name="name"
+                            <input id="companyname" value="{{comp.name}}" type="text" class="form-control" id="validationCustom02" name="name"
                                    required style="background-color: #2f516f;color: white;" 
                                    onkeypress="document.getElementById('mailing_name').focus();
                                    document.getElementById('mailing_name').value=document.getElementById('companyname').value">
@@ -57,35 +57,35 @@
                         </div>
                         <div class="col-md-4 mt-3">
                             <label for="validationCustom02">Mailing name</label>
-                            <input id="mailing_name" type="text" onclick="addressFunction()" class="form-control" id="validationCustom02" name="mailing_name"
+                            <input id="mailing_name" value="{{comp.mailing_name}}" type="text" onclick="addressFunction()" class="form-control" id="validationCustom02" name="mailing_name"
                                    required style="background-color: #2f516f;color: white;"
                                    onkeypress="document.getElementById('address1').focus();">
                             <div class="valid-feedback">Looks good!</div>
                         </div>
                         <div class="col-md-4 mt-3">
                             <label for="validationCustom03">Address1</label>
-                            <input type="text" id="address1" class="form-control" id="validationCustom03" name="address1"
+                            <input type="text" value="{{comp.address1}}" id="address1" class="form-control" id="validationCustom03" name="address1"
                                    required style="background-color: #2f516f;color: white;"
                                    onkeypress="document.getElementById('address2').focus();">
                             
                         </div>
                         <div class="col-md-4 mt-3">
                             <label for="validationCustom03">Address2</label>
-                            <input type="text" id="address2" class="form-control" id="validationCustom03" name="address2"
+                            <input type="text" value="{{comp.address2}}" id="address2" class="form-control" id="validationCustom03" name="address2"
                                    required style="background-color: #2f516f;color: white;"
                                    onkeypress="document.getElementById('address3').focus();">
                             
                         </div>
                         <div class="col-md-4 mt-3">
                             <label for="validationCustom03">Address3</label>
-                            <input type="text" id="address3" class="form-control" id="validationCustom03" name="address3"
+                            <input type="text" value="{{comp.address3}}" id="address3" class="form-control" id="validationCustom03" name="address3"
                                    required style="background-color: #2f516f;color: white;"
                                    onkeypress="document.getElementById('address4').focus();">
                             
                         </div>
                         <div class="col-md-4 mt-3">
                             <label for="validationCustom03">Address4</label>
-                            <input type="text" id="address4" class="form-control" id="validationCustom03" name="address4"
+                            <input type="text" value="{{comp.address4}}" id="address4" class="form-control" id="validationCustom03" name="address4"
                                    required style="background-color: #2f516f;color: white;"
                                    onkeypress="document.getElementById('state').focus();">
                             
@@ -108,7 +108,7 @@
                         
                         <div class="col-md-4 mt-3">
                             <label for="validationCustom03">Pincode</label>
-                            <input id="pincode" type="text" class="form-control" id="validationCustom03" name="pincode"
+                            <input id="pincode" value="{{comp.pincode}}" type="text" class="form-control" id="validationCustom03" name="pincode"
                                    required style="background-color: #2f516f;color: white;"
                                    pattern="[0-9]{6}"
                                    onkeypress="document.getElementById('telephone').focus();">
@@ -116,14 +116,14 @@
                         </div>
                         <div class="col-md-4 mt-3">
                             <label for="validationCustom03">Telephone</label>
-                            <input id="telephone" type="text" class="form-control" id="validationCustom03" name="telephone"
+                            <input id="telephone" value="{{comp.telephone}}" type="text" class="form-control" id="validationCustom03" name="telephone"
                                    required style="background-color: #2f516f;color: white;"
                                    onkeypress="document.getElementById('mobile').focus();">
                             <div class="valid-feedback">Looks good!</div>
                         </div>
                         <div class="col-md-4 mt-3">
                             <label for="validationCustom03">Mobile</label>
-                            <input id="mobile" type="text" class="form-control" id="validationCustom03" name="mobile"
+                            <input id="mobile" value="{{comp.mobile}}" type="text" class="form-control" id="validationCustom03" name="mobile"
                                    required style="background-color: #2f516f;color: white;"
                                    onkeypress="document.getElementById('fax').focus();">
                             <div class="valid-feedback">Looks good!</div>
@@ -131,7 +131,7 @@
                         
                         <div class="col-md-4 mt-3">
                             <label for="validationCustom03">Fax</label>
-                            <input id="fax" type="text" class="form-control" id="validationCustom03" name="fax"
+                            <input id="fax" value="{{comp.fax}}" type="text" class="form-control" id="validationCustom03" name="fax"
                                    required style="background-color: #2f516f;color: white;"
                                    onkeypress="document.getElementById('email').focus();">
                             <div class="valid-feedback">Looks good!</div>
@@ -140,14 +140,14 @@
                     <div class="row">
                         <div class="col-md-4 mt-3">
                             <label for="validationCustom03">Email</label>
-                            <input id="email" type="email" class="form-control" id="validationCustom03" name="email"
+                            <input id="email" value="{{comp.email}}" type="email" class="form-control" id="validationCustom03" name="email"
                                    required style="background-color: #2f516f;color: white;"
                                    onkeypress="document.getElementById('website').focus();">
                             <div class="valid-feedback">Looks good!</div>
                         </div>
                         <div class="col-md-4 mt-3">
                             <label for="validationCustom03">Website</label>
-                            <input id="website" type="text" class="form-control" id="validationCustom03" name="website"
+                            <input id="website" value="{{comp.website}}" type="text" class="form-control" id="validationCustom03" name="website"
                                    required style="background-color: #2f516f;color: white;"
                                    >
                             <div class="valid-feedback">Looks good!</div>
@@ -157,14 +157,14 @@
                     <div class="row">
                         <div class="col-md-4 mt-3">
                             <label for="validationCustom03">Financial year begin from</label>
-                            <input id="fin_year" type="date" class="form-control" id="validationCustom03" name="fin_begin"
+                            <input id="fin_year" value="{{comp.fin_begin|date:'Y-m-d'}}" type="date" class="form-control" id="validationCustom03" name="fin_begin"
                                    required style="background-color: #2f516f;color: white;"
                                    onkeypress="document.getElementById('books_begin').focus();">
-                            <div class="valid-feedback">Looks good!</div>
+                                   
                         </div>
                         <div class="col-md-4 mt-3">
                             <label for="validationCustom03">Books beginning from</label>
-                            <input id="books_begin" type="date" class="form-control" id="validationCustom03" name="books_begin"
+                            <input id="books_begin" value="{{comp.books_begin|date:'Y-m-d'}}" type="date" class="form-control" id="validationCustom03" name="books_begin"
                                    required style="background-color: #2f516f;color: white;"
                                    >
                             <div class="valid-feedback">Looks good!</div>
@@ -188,7 +188,7 @@
                         </div>
                     </div> -->
                     <div class="col text-center">
-                        <button onclick="javascript:alert('Created Successfully');" type="submit" class="btn btn-info" >Create</button>
+                        <button onclick="javascript:alert('Updated Successfully');" type="submit" class="btn btn-info" >Update</button>
 
                       </div>
             </form>

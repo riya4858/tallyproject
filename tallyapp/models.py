@@ -2,13 +2,16 @@ from django.db import models
 
 class Countries(models.Model):
     name=models.CharField(max_length=225)
+    currency_symbol=models.CharField(max_length=225,default='')
+    formal_name=models.CharField(max_length=225,default='')
+
     
 class States(models.Model):
     name=models.CharField(max_length=225)
     country=models.ForeignKey(Countries,on_delete=models.CASCADE,blank=True,null=True)
 class Companies(models.Model):
     name=models.CharField(max_length=225)
-    mailing_name=models.CharField(max_length=225,default='SOME STRING')
+    mailing_name=models.CharField(max_length=225)
     address1=models.CharField(max_length=225)
     address2=models.CharField(max_length=225)
     address3=models.CharField(max_length=225)
@@ -23,5 +26,13 @@ class Companies(models.Model):
     books_begin=models.DateField(null=True)
     country=models.ForeignKey(Countries,on_delete=models.CASCADE,blank=True,null=True)
     state=models.ForeignKey(States,on_delete=models.CASCADE,blank=True,null=True)
-    currency_symbol=models.CharField(max_length=225,default='SOME STRING')
-    formal_name=models.CharField(max_length=225,default='SOME STRING')
+    
+class Group(models.Model):
+    name = models.CharField(max_length=225)
+    alias = models.CharField(max_length=225,null=True)
+    under = models.CharField(max_length=225)
+    sub_ledger = models.BooleanField(default=False)
+    debit_credit = models.BooleanField(default=False)
+    calculation = models.BooleanField(default=False)
+    used_purchase = models.CharField(max_length=225,null=True,blank=True)
+    company=models.ForeignKey(Companies,on_delete=models.CASCADE,blank=True,null=True)

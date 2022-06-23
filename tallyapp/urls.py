@@ -11,4 +11,9 @@ urlpatterns = [
     path('costcentre',views.costcentre,name='costcentre'),
     path('currency',views.currency,name='currency'),
     path('companycreated',views.companycreated,name='companycreated'),
+    path('create_group',views.create_group,name='create_group'),
+    path('features',views.features,name='features'),
+    path('altercompanyview',views.altercompanyview,name='altercompanyview'),
+    path('selectcompany',views.selectcompany,name='selectcompany'),
+    path('altercompany/<int:pk>',views.altercompany,name='altercompany'),
 ]

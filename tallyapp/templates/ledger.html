@@ -1,55 +1,206 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+{% load static %}
 {% block body %}
-<script>
-    function save(){
-        document.getElementById("comp").submit();
+<style>
+    .close {
+        position: absolute;
+        top: 3px;
+        right: 8px;
+        font-size: 25px;
+        color: rgb(255, 255, 255);
+        transform: rotate(45deg);
+        cursor: pointer;
+        text-decoration: none;
     }
-</script>
+    .flexy{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
-<div class="page-content">
- 
-    <div class="card radius-15" style="background-color: #243e54;">
-        <div class="card-body">
-            <div class="card-title">
-                <h4 class="mb-0">Ledger Creation</h4>
-            </div>
-            <hr/>
-            <form id="comp" action="" method="post" class="needs-validation" novalidate>
-                {% csrf_token %}
+
+
+</style>
+
+
+
+<div class="m-0">
+    
+        <a href="javascript:history.back();" class="close">+</a>
+    <h6 style="" class="bg-info text-light p-2">Group Creation</h6>
+    <form  style="background-color:rgba(0,0,0,.4);">
                 
-                    <div class="row">
-                        
-                        <div class="col-md-4 mt-3">
-                            <label for="validationCustom02">Name</label>
-                            <input id="compnayname" type="text" class="form-control w-75" id="validationCustom02" name="name"
-                                   required style="background-color: #2f516f;color: white;" onkeypress="document.getElementById('mailing_name').focus();document.getElementById('mailing_name').value=document.getElementById('companyname').value">
-                            <div class="valid-feedback">Looks good!</div>
-                        </div>
-                        <div class="col-md-4 mt-3">
-                            <label for="validationCustom02" style="font-style:italic ;">(alias)</label>
-                            <input id="mailing_name" type="text" class="form-control w-75" id="validationCustom02" name="mailing_name"
-                                   required style="background-color: #2f516f;color: white;"
-                                   onkeypress="document.getElementById('address1').focus();">
-                            <div class="valid-feedback">Looks good!</div>
-                        </div>
-                        <div class="col-md-4 mt-3">
-                            <label for="validationCustom03">Under</label>
-                            <input type="text" id="address1" class="form-control w-75" id="validationCustom03" name="address1"
-                                   required style="background-color: #2f516f;color: white;"
-                                   onkeypress="save()">
-                            
-                        </div>
-                    </div>
-                    
-                                  
-                            
-                    </div>
-            </form>
+        <div class="row container-fluid p-0 m-0" >
+
+            <div class="col-sm-6 m-0 p-4">
+
+                <div class="row container-fluid  p-2 m-0">
+                    <div class="col-sm-4 m-0 p-0"> <label for="a">Name</label></div>
+                    <div class="col-sm-8 m-0 p-0"><input type="text" class="form-control" id="a" placeholder=""></div>
+                </div>
+
+                <div class="row container-fluid  p-2 m-0">
+                    <div class="col-sm-4 m-0 p-0"> <label for="b">Alias</label></div>
+                    <div class="col-sm-8 m-0 p-0"> 
+                    <input type="text" class="form-control" id="b" placeholder=""></div>
+                </div>
+
+
+            </div>
+
+            
+
+        
+        
+    </div>
+
+        
+            
            
+        <div class="row container-fluid  p-0 m-0" style=" border: 1px solid rgba(128, 128, 128, 0.6);">
+            <div class="col-sm-4 m-0 p-4" style=" border-right: 1px solid rgba(128, 128, 128, 0.6);">
+                
+
+                <div class="row container-fluid  p-2 m-0">
+                    <div class="col-sm-6 m-0 p-0"> <label for="c">Under</label></div>
+                    <div class="col-sm-6 m-0 p-0">
+                        <select name="under" id="c" class="form-control">
+                            <option value="Bank Account">Bank Accouts</option>
+                            <option value="Bank OCC A/c">Bank OCC A/c</option>
+                            <option value="Bank OD A/c">Bank OD A/c</option>
+                            <option value="Bank_Account">Branch Divisions</option>
+                            <option value="Bank_Account">Capital Amount</option>
+                            <option value="Bank_Account">Cash in Hand</option>
+                            <option value="Bank_Account">Current Assets</option>
+                            <option value="Bank_Account">Current Liabilities</option>
+                            <option value="Bank_Account">Deposits (Asset)</option>
+                            <option value="Bank_Account">Direct Expenses</option>
+                            <option value="Bank_Account">Direct Incomes</option>
+                            <option value="Bank_Account">Duties and Taxes</option>
+                            <option value="Bank_Account">Expenses(Direct)</option>
+                            <option value="Bank_Account">Expenses(Indirect)</option>
+                            <option value="Bank_Account">Fixed Assets</option>
+                            <option value="Bank_Account">Income (Direct)</option>
+                            <option value="Bank_Account">Income (Indirect)</option>
+                            <option value="Bank_Account">Investments</option>
+                            <option value="Bank_Account">Loans & Advances (Asset)</option>
+                            <option value="Bank_Account">Loans (Liability)</option>
+                            <option value="Bank_Account">Misc. Expenses (Asset)</option>
+                            <option value="Bank_Account">provisions</option>
+                            <option value="Bank_Account">Purchase Accounts</option>
+                            <option value="Bank_Account">Reserves & Surplus</option>
+                            <option value="Bank_Account">Retained Earnings</option>
+                            <option value="Bank_Account">Sales Accounts</option>
+                            <option value="Bank_Account">Secured Loans</option>
+                            <option value="Bank_Account">Stock-in-Hand</option>
+                            <option value="Bank_Account">Sundry Creditors</option>
+                            <option value="Bank_Account">Sundry Debtors</option>
+                            <option value="Bank_Account">Suspence A/c</option>
+                            <option value="Bank_Account">Unsecured Loans</option>   
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="col-sm-4 m-0 p-4" style=" border-right: 1px solid rgba(128, 128, 128, 0.6);">
+                <h5 class="text-center">Mailing Address</h5>
+
+                <div class="row container-fluid  p-2 m-0">
+                    <div class="col-sm-6 m-0 p-0"> <label for="a">Name</label></div>
+                    <div class="col-sm-6 m-0 p-0"><input type="text" class="form-control" id="a" placeholder=""></div>
+                    
+                </div>
+                <div class="row container-fluid   p-2 m-0">
+                    <div class="col-sm-6 m-0 p-0"> <label for="adrs">Address</label></div>
+                    <div class="col-sm-6 m-0 p-0"><textarea type="text" rows="4" class="form-control" id="adrs" placeholder=""></textarea></div>
+                </div>
+
+                <div class="row container-fluid   p-2 m-0">
+                    <div class="col-sm-6 m-0 p-0"> <label for="ctry">Country</div>
+                    <div class="col-sm-6 m-0 p-0">
+                        <select name="country" id="ctry" class="form-control">
+                            <option value="">Select Country</option>
+                            <option value="['Nigeria','NG']">Nigeria</option>
+                            <option value="['Afghanistan','AF']">Afghanistan</option>
+                            
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row container-fluid  p-2 m-0">
+                    <div class="col-sm-6 m-0 p-0"> <label for="state">State</label></div>
+                    <div class="col-sm-6 m-0 p-0"><input type="text" class="form-control" id="state" placeholder=""></div>
+                    
+                </div>
+
+                <div class="row container-fluid  p-2 m-0">
+                    <div class="col-sm-6 m-0 p-0"> <label for="pin">PIN</label></div>
+                    <div class="col-sm-6 m-0 p-0"><input type="text" class="form-control" id="pin" placeholder=""></div>
+                    
+                </div>
+            </div>
+         
+
+
+
+                <div class="col-sm-4 m-0 p-4" style=" border-right: 1px solid rgba(128, 128, 128, 0.6);">
+                <div class="row container-fluid   p-2 m-0">
+                    <h6>Banking Details</h6>
+                    <div class="row container-fluid   p-2 m-0">
+                        <div class="col-sm-6 m-0 p-0"> <label for="bank">Provide bank details</label></div>
+                        <div class="col-sm-6 m-0 p-0">
+                            <select name="Activate" id="bank" class="form-control">
+                                <option value="No">No</option> 
+                                <option value="Yes">Yes</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <h6>Tax Registration Details</h6>
+
+                    <div class="row container-fluid  p-2 m-0">
+                        <div class="col-sm-6 m-0 p-0"> <label for="pan">PAN/IT No.</label></div>
+                        <div class="col-sm-6 m-0 p-0"><input type="text" class="form-control" id="pan" placeholder=""></div>
+                        
+                    </div>
+
+                    <div class="row container-fluid   p-2 m-0">
+                        <div class="col-sm-6 m-0 p-0"> <label for="rgtype" >registration Type</label></div>
+                        <div class="col-sm-6 m-0 p-0">
+                            <select name="regtype" id="regtype" class="form-control">
+                                <option value="No">Regular</option> 
+                                <option value="Yes">Composition</option>
+                                <option value="Yes">Consumer</option>
+                                <option value="Yes">Unregistered</option>
+                                <option value="Yes">Unknown</option>
+                                 
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row container-fluid  p-2 m-0">
+                        <div class="col-sm-6 m-0 p-0"> <label for="gstin">GSTIN/UN No.</label></div>
+                        <div class="col-sm-6 m-0 p-0"><input type="text" class="form-control" id="gstin" placeholder=""></div>
+                        
+                    </div>
+
+                    <div class="row container-fluid  p-2 m-0">
+                        <div class="col-sm-6 m-0 p-0"> <label for="setgst">Set/Alter GST Details</label></div>
+                        <div class="col-sm-6 m-0 p-0"><input type="text" class="form-control" id="setgst" placeholder=""></div>
+                        
+                    </div>
+
                 
             
+                </div>
         </div>
     </div>
+    <div><input type="submit" style="margin-left: 250px;" value="create" class="btn btn-info"></div>  
+        
+    </form>
 </div>
+
 
 {% endblock %}

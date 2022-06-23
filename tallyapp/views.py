@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from .models import *
 from tallyapp.models import Companies
 from django.contrib import messages
+from django.http import JsonResponse
 def index(request):
     return render(request,'index.html')
 
@@ -18,6 +19,7 @@ def createcompany(request):
 def companycreate(request):
     if request.method=='POST':
             name=request.POST['name']
+            mailing_name=request.POST['mailing_name']
             address1=request.POST['address1']
             address2=request.POST['address2']
             address3=request.POST['address3']
@@ -32,12 +34,13 @@ def companycreate(request):
             website=request.POST['website']
             fin_begin=request.POST['fin_begin']
             books_begin=request.POST['books_begin']
-            currency_symbol=request.POST['currency_symbol']
-            formal_name=request.POST['formal_name']
+            # currency_symbol=request.POST['currency_symbol']
+            # formal_name=request.POST['formal_name']
             
-            ctg=Companies(name=name,address1=address1,address2=address2,address3=address3,address4=address4,pincode=pincode,
+            ctg=Companies(name=name,mailing_name=mailing_name,address1=address1,address2=address2,address3=address3,address4=address4,
+                          pincode=pincode,
                           telephone=telephone,mobile=mobile,fax=fax,email=email,website=website,fin_begin=fin_begin,
-                          books_begin=books_begin,currency_symbol=currency_symbol,formal_name=formal_name)
+                          books_begin=books_begin)
             ctg.save()
             messages.info(request,'Company added')
             # return redirect('companycreated')
@@ -57,3 +60,65 @@ def currency(request):
 def companycreated(request):
     # com=Companies.objects.get(id=pk)
     return render(request,'companycreated.html')
+
+def create_group(request):
+    if request.method == 'POST':
+        gname = request.POST['gname']
+        alia = request.POST['alia']
+        
+
+        under = request.POST['und']
+        gp = request.POST['subled']
+        nett = request.POST['nee']
+        calc = request.POST['cal']
+        meth = request.POST['meth']
+
+        mdl = Group(
+            name=gname,
+            alias=alia,
+            under=under,
+            sub_ledger=gp,
+            debit_credit=nett,
+            calculation=calc,
+            used_purchase=meth,
+        )
+        mdl.save()
+        return redirect('group')
+        
+    return render(request,'group.html')
+
+def features(request):
+    return render(request,'features.html')
+def altercompanyview(request):
+    com=Companies.objects.all()
+    return render(request,'altercompanyview.html',{'com':com})
+
+def altercompany(request,pk):
+    comp=Companies.objects.get(id=pk)
+    if request.method == 'POST':
+        comp.name=request.POST['name']
+        comp.mailing_name=request.POST['mailing_name']
+        comp.address1=request.POST['address1']
+        comp.address2=request.POST['address2']
+        comp.address3=request.POST['address3']
+        comp.address4=request.POST['address4']
+            # state=request.POST['state']
+            # country=request.POST['country']
+        comp.pincode=request.POST['pincode']
+        comp.telephone=request.POST['telephone']
+        comp.mobile=request.POST['mobile']
+        comp.fax=request.POST['fax']
+        comp.email=request.POST['email']
+        comp.website=request.POST['website']
+        comp.fin_begin=request.POST['fin_begin']
+        comp.books_begin=request.POST['books_begin']
+            # currency_symbol=request.POST['currency_symbol']
+            # formal_name=request.POST['formal_name']
+        comp.save()
+        return redirect('altercompanyview')
+    return render(request,'editcompany.html',{'comp':comp})
+
+def selectcompany(request):
+    com=Companies.objects.all()
+    return render(request,'selectcompany.html',{'com':com})
+    

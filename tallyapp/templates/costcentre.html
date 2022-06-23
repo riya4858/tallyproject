@@ -1,55 +1,67 @@
 {% extends 'base.html' %}
 {% block body %}
-<script>
-    function save(){
-        document.getElementById("comp").submit();
-    }
-</script>
 
-<div class="page-content">
- 
-    <div class="card radius-15" style="background-color: #243e54;">
-        <div class="card-body">
-            <div class="card-title">
-                <h4 class="mb-0">Cost Centre Creation</h4>
-            </div>
-            <hr/>
-            <form id="comp" action="" method="post" class="needs-validation" novalidate>
-                {% csrf_token %}
-                
-                    <div class="row">
-                        
-                        <div class="col-md-4 mt-3">
-                            <label for="validationCustom02">Name</label>
-                            <input id="compnayname" type="text" class="form-control w-75" id="validationCustom02" name="name"
-                                   required style="background-color: #2f516f;color: white;" onkeypress="document.getElementById('mailing_name').focus();document.getElementById('mailing_name').value=document.getElementById('companyname').value">
-                            <div class="valid-feedback">Looks good!</div>
-                        </div>
-                        <div class="col-md-4 mt-3">
-                            <label for="validationCustom02" style="font-style:italic ;">(alias)</label>
-                            <input id="mailing_name" type="text" class="form-control w-75" id="validationCustom02" name="mailing_name"
-                                   required style="background-color: #2f516f;color: white;"
-                                   onkeypress="document.getElementById('address1').focus();">
-                            <div class="valid-feedback">Looks good!</div>
-                        </div>
-                        <div class="col-md-4 mt-3">
-                            <label for="validationCustom03">Under</label>
-                            <input type="text" id="address1" class="form-control w-75" id="validationCustom03" name="address1"
-                                   required style="background-color: #2f516f;color: white;"
-                                   onkeypress="save()">
-                            
-                        </div>
+<style>
+    .close {
+        position: absolute;
+        top: 3px;
+        right: 8px;
+        font-size: 25px;
+        color: rgb(255, 255, 255);
+        transform: rotate(45deg);
+        cursor: pointer;
+        text-decoration: none;
+    }
+    .flexy{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
+<div class="row container-fluid p-0 mx-0">
+    <div class="col-sm-3 m-0 p-0"></div>
+    <div class="col-sm-6 m-0 p-0" style=" background-color:rgba(0,0,0,0.2);">
+        <a href="javascript:history.go(-1);" class="close">+</a>
+    <h6  class="bg-info text-light p-2">Cost Centre Creation</h6>
+    
+
+<form id="myForm" action="{% url 'create_group' %}" method="post" class="p-5">
+        {% csrf_token %}
+   
+                    <div class="row container-fluid  p-2 m-0">
+                        <div class="col-sm-4 m-0 p-0"> <label for="gname">Name :</label></div>
+                        <div class="col-sm-8 m-0 p-0"><input type="text" id="gname" onfocus="this.value=''" name="gname" class="form-control" placeholder=""></div> 
                     </div>
-                    
-                                  
-                            
+
+                    <div class="row container-fluid  p-2 m-0">
+                        <div class="col-sm-4 m-0 p-0"> <label for="alia">(Alias) :</label></div>
+                        <div class="col-sm-8 m-0 p-0"><input type="text" id="alia" name="alia"class="form-control" placeholder=""></div> 
                     </div>
-            </form>
-           
-                
-            
-        </div>
-    </div>
+
+                    <div class="row container-fluid  p-2 m-0">
+                        <div class="col-sm-4 m-0 p-0"> <label for="under">Under :</label></div>
+                        <div class="col-sm-8 m-0 p-0">
+                            <select id="under" name="und" class="form-control ">
+                                <option value="primary" selected>*Primary</option>
+                                
+                                
+                            </select>
+
+                        </div> 
+                    </div>
+<div><input type="submit" style="margin-left: 250px;" value="create" class="btn btn-info"></div>
+
+                    <!-- <div class="flexy w-100 py-4"><button id="cbtn" type="button" class="btn btn-info w-50">Create</button></div> -->
+    
+</form>
+
 </div>
+</div>
+<div class="col-sm-3  m-0 p-0"></div>
+
+</div> 
+
+
+
 
 {% endblock %}
