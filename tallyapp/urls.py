@@ -15,5 +15,17 @@ urlpatterns = [
     path('features',views.features,name='features'),
     path('altercompanyview',views.altercompanyview,name='altercompanyview'),
     path('selectcompany',views.selectcompany,name='selectcompany'),
+    path('shutcompany',views.shutcompany,name='shutcompany'),
+    path('addstate',views.addstate,name='addstate'),
+    path('addcountry',views.addcountry,name='addcountry'),
     path('altercompany/<int:pk>',views.altercompany,name='altercompany'),
+    path('ratesofexchange',views.ratesofexchange,name='ratesofexchange'),
+    path('voucher',views.voucher,name='voucher'),
+    path('democreate',views.democreate,name='democreate'),
+    path('demo1/<int:pk>',views.demo1,name='demo1'),
+    path('demo2/<int:pk>',views.demo2,name='demo2'),
+    path('featurecompany/<int:pk>',views.featurecompany,name='featurecompany'),
+    path('disable/<int:pk>',views.disable,name='disable'),
+    path('enable/<int:pk>',views.enable,name='enable'),
+    
 ]

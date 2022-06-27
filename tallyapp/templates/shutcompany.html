@@ -21,7 +21,16 @@
 
 
 </style>
-
+<script>
+    function disable() {
+        alert('pp');
+      document.getElementById("mySelect").disabled = true;
+      document.getElementById('mySelect').style.visibility= "hidden";
+    }
+    function confirm(){
+        alert('Are you sure you want to shut this company??');
+    }
+    </script>
 
 
 <div class="row container-fluid p-0 mx-0">
@@ -29,13 +38,16 @@
     <div class="col-sm-4 m-0 p-0" style=" background-color:rgba(0,0,0,0.2);">
         <!-- <a href="javascript:history.go(-1);" class="close">+</a> -->
     <h6  class="bg-info text-light p-2">List of Companies</h6>
-    <a href="{% url 'createcompany' %}" style="margin-left:330px;" >Create Company</a>
 
            <div>
                <table>
                {% for i in com %}
-               <tr><a href="{% url 'enable' i.id %}">&nbsp;&nbsp;{{i.name}}</a>
+               {% if i.disabled == 0 %}
+
+               {% else %}
+               <tr><a href="{% url 'disable' i.id %}"  onclick="confirm()" id='mySelect'>&nbsp;&nbsp;{{i.name}}</a>
                 <br></tr>
+                {% endif %}
                {% endfor %}
                </table>
            </div>

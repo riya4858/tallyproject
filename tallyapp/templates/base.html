@@ -112,7 +112,7 @@
                 <nav class="topbar-nav">
                     <ul class="metismenu" id="menu">
                         <li>
-                            <a href="">
+                            <a href="{% url 'index' %}">
                                 <div class="menu-title">Dashboard</div>
                             </a>
                         </li>
@@ -131,10 +131,10 @@
                                           <a href="{% url 'ledger' %}">Ledger</a>
                                           <a href="{% url 'costcentre' %}">Cost centre</a>
                                           <a href="{% url 'currency' %}">Currency</a>
-                                          <a href="">Rates of 
+                                          <a href="{% url 'ratesofexchange' %}">Rates of 
                                             Exchange
                                           </a>
-                                          <a href="">Voucher Type</a>
+                                          <a href="{% url 'voucher' %}">Voucher Type</a>
 
                                       </li>
                                   </ul>

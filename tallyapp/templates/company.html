@@ -12,13 +12,15 @@
            <a href="{% url 'createcompany' %}" style="margin-left:200px;" >Create Company</a>
            <a href="{% url 'altercompanyview' %}" style="margin-left:200px;" >Alter Company</a>
            <a href="{% url 'selectcompany' %}" style="margin-left:200px;" >Select Company</a>
-           <a href="" style="margin-left:200px;" >Shut Company</a>
+           <a href="{% url 'shutcompany' %}" style="margin-left:200px;" >Shut Company</a>
 <hr>
            <div>
                <table>
                {% for i in com %}
+               {% if i.disabled == 1 %}
                <tr>
                 {{i.name}}<br></tr>
+                {% endif %}
                {% endfor %}
                </table>
            </div>

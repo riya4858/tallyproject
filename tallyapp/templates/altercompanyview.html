@@ -14,8 +14,10 @@
            <div>
                <table>
                {% for i in com %}
+               {% if i.disabled == 0 %}
                <tr><a href="{% url 'altercompany' i.id %}">{{i.name}}</a>
                 <br></tr>
+                {% endif %}
                {% endfor %}
                </table>
            </div>

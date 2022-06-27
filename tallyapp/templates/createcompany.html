@@ -7,19 +7,72 @@
         float:right;
         border:solid 1px green;
       }
+      
+      .form-popup {
+        display: none;
+        position: fixed;
+        top: 250px;
+        right: 15px;
+        border: 1px solid #f1f1f1;
+        z-index: 9;
+        width: 300px;
+        height: 600px;
+      }
+    
+      .content a:hover {background-color: rgb(238, 167, 75);}
+      
+      /* Add styles to the form container */
+      .form-container {
+        max-width: 50px;
+        height: 500px;
+        padding: 10px;
+      }
+      .form-container1 {
+        max-width: 350px;
+        height: 500px;
+        padding: 2px;
+       
+      }
+     
 </style>
 <script>
     function save(){
-        document.getElementById("comp").submit();
+        document.getElementById("create").submit();
     }
-    function showState(){
-        document.getElementById('tblState').style.visibility= "visible";
+    function showState(country){
+        
+        document.getElementById('myForm').style.visibility= "visible";
+        document.getElementById("myForm").style.display = "block";
+        
+        
     }
-    function setState(state){
-        document.getElementById('state').value= state;
-        document.getElementById('tblState').style.visibility= "hidden";
-        document.getElementById('country').focus();
 
+    function getValue(){
+       
+        return document.getElementById('country').value;
+    }
+    
+    function showCountry(){
+        
+        document.getElementById("myForm1").style.display = "block";
+        
+        
+    }
+    function setState(state,stateId){
+        document.getElementById('state').value= state;
+        document.getElementById('myForm').style.visibility= "hidden";
+        document.getElementById('country').focus();
+        document.getElementsByName('statehidden').value= stateId;
+        
+ 
+    }
+    function setCountry(country,countryId){
+        document.getElementById('country').value= country;
+        document.getElementById('myForm1').style.visibility= "hidden";
+        document.getElementById('pincode').focus();
+       
+        document.getElementsByName('countryhidden').value= countryId;
+       
     }
 
     $(document).ready(function(){
@@ -27,151 +80,217 @@
         document.getElementById('tblCountry').style.visibility= "hidden";
         finYear();
         document.getElementById('fin').value = new date();
+       
+        
     })
     
-
+    
 
 </script>
 
 <div class="page-content">
- 
-    <div class="card mx-auto " style="background-color: #243e54; width:75%;">
-        <div class="card-body">
-            <div class="card-title">
-                <h4 class="mb-0">Company Creation</h4>
+<div class="card mx-auto " style="background-color: #243e54; width:75%;">
+    <div class="card-body">
+        <div class="card-title">
+            <h4 class="mb-0">Company Creation</h4>
+        </div>
+        <hr/>
+        <form id="create" action="{% url 'companycreate' %}" method="post" class="needs-validation" novalidate>
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-4 mt-3">
+                <label for="validationCustom02">Company name</label>
+                <input id="companyname" type="text" class="form-control" id="validationCustom02" name="name"
+                required style="background-color: #2f516f;color: white;" 
+                onkeypress="document.getElementById('mailing_name').focus();
+                document.getElementById('mailing_name').value=document.getElementById('companyname').value">
             </div>
-            <hr/>
-            
-            <form  action="{% url 'companycreate' %}" method="post" class="needs-validation" novalidate>
-                {% csrf_token %}
+            <div class="col-md-4 mt-3">
+                <label for="validationCustom02">Mailing name</label>
+                <input id="mailing_name" type="text" onclick="addressFunction()" class="form-control" id="validationCustom02" name="mailing_name"
+                required style="background-color: #2f516f;color: white;"
+                 onkeypress="document.getElementById('address1').focus();">
+            </div>
+            <div class="col-md-4 mt-3">
+                <label for="validationCustom03">Address1</label>
+                <input type="text" id="address1" class="form-control" id="validationCustom03" name="address1"
+                required style="background-color: #2f516f;color: white;"
+                onkeypress="document.getElementById('address2').focus();">
+            </div>
+            <div class="col-md-4 mt-3">
+                <label for="validationCustom03">Address2</label>
+                <input type="text" id="address2" class="form-control" id="validationCustom03" name="address2"
+                required style="background-color: #2f516f;color: white;"
+                onkeypress="document.getElementById('address3').focus();">
+            </div>
+            <div class="col-md-4 mt-3">
+                <label for="validationCustom03">Address3</label>
+                <input type="text" id="address3" class="form-control" id="validationCustom03" name="address3"
+                required style="background-color: #2f516f;color: white;"
+                onkeypress="document.getElementById('address4').focus();">
+            </div>
+            <div class="col-md-4 mt-3">
+                <label for="validationCustom03">Address4</label>
+                <input type="text" id="address4" class="form-control" id="validationCustom03" name="address4"
+                required style="background-color: #2f516f;color: white;"
+                onkeypress="document.getElementById('state').focus();">
+            </div>
+            <div class="col-md-4 mt-3">
+                <label for="validationCustom03">State</label>
                 
-                    <div class="row">
-                        
-                        <div class="col-md-4 mt-3">
-                            <label for="validationCustom02">Company name</label>
-                            <input id="companyname" type="text" class="form-control" id="validationCustom02" name="name"
-                                   required style="background-color: #2f516f;color: white;" 
-                                   onkeypress="document.getElementById('mailing_name').focus();
-                                   document.getElementById('mailing_name').value=document.getElementById('companyname').value">
-                            <div class="valid-feedback">Looks good!</div>
-                        </div>
-                        <div class="col-md-4 mt-3">
-                            <label for="validationCustom02">Mailing name</label>
-                            <input id="mailing_name" type="text" onclick="addressFunction()" class="form-control" id="validationCustom02" name="mailing_name"
-                                   required style="background-color: #2f516f;color: white;"
-                                   onkeypress="document.getElementById('address1').focus();">
-                            <div class="valid-feedback">Looks good!</div>
-                        </div>
-                        <div class="col-md-4 mt-3">
-                            <label for="validationCustom03">Address1</label>
-                            <input type="text" id="address1" class="form-control" id="validationCustom03" name="address1"
-                                   required style="background-color: #2f516f;color: white;"
-                                   onkeypress="document.getElementById('address2').focus();">
-                            
-                        </div>
-                        <div class="col-md-4 mt-3">
-                            <label for="validationCustom03">Address2</label>
-                            <input type="text" id="address2" class="form-control" id="validationCustom03" name="address2"
-                                   required style="background-color: #2f516f;color: white;"
-                                   onkeypress="document.getElementById('address3').focus();">
-                            
-                        </div>
-                        <div class="col-md-4 mt-3">
-                            <label for="validationCustom03">Address3</label>
-                            <input type="text" id="address3" class="form-control" id="validationCustom03" name="address3"
-                                   required style="background-color: #2f516f;color: white;"
-                                   onkeypress="document.getElementById('address4').focus();">
-                            
-                        </div>
-                        <div class="col-md-4 mt-3">
-                            <label for="validationCustom03">Address4</label>
-                            <input type="text" id="address4" class="form-control" id="validationCustom03" name="address4"
-                                   required style="background-color: #2f516f;color: white;"
-                                   onkeypress="document.getElementById('state').focus();">
-                            
-                        </div>
-                        <!-- <div class="col-md-4 mt-3">
-                            <label for="validationCustom03">State</label>
-                            <input type="text" id="state" class="form-control" id="validationCustom03" name="state"
-                                   required style="background-color: #2f516f;color: white;"
-                                   onkeypress="showState();">
-                            
-                        </div>
-                        <div class="col-md-4 mt-3">
-                            <label for="validationCustom03">Country</label>
-                            <input type="text" id="country" class="form-control" id="validationCustom03" name="country"
-                                   required style="background-color: #2f516f;color: white;"
-                                   onkeypress="document.getElementById('pincode').focus();">
-                            
-                        </div> -->
+                <input type="text" id="state" class="form-control" id="validationCustom03" name="state"
+                required style="background-color: #2f516f;color: white;"
+                onclick="showState(document.getElementById('country').value);">
+            </div>
+            <div class="form-popup" id="myForm" style="background-color: rgb(216, 232, 238);" >
+                <form action="" class="form-container" id="countryform" >
+                    <h6 style="background-color:rgb(17, 169, 240) ;color:white">List of states</h6>
+                    <a data-toggle="modal" data-target="#myModal" href="" style="margin-left:218px; color:black;">New State</a>
+                    <a  onclick="showCountry();" style="margin-left:180px;color:black;cursor:pointer" >Change Country</a>  
+                <hr >
+                <div>
+                   
+                    <table >
+                    <tr >
+                                 
+                    {% for i in com %}
+                
+                    {% if i.country.name == "India" %}
                     
-                        
-                        <div class="col-md-4 mt-3">
-                            <label for="validationCustom03">Pincode</label>
-                            <input id="pincode" type="text" class="form-control" id="validationCustom03" name="pincode"
-                                   required style="background-color: #2f516f;color: white;"
-                                   pattern="[0-9]{6}"
-                                   onkeypress="document.getElementById('telephone').focus();">
-                            <div class="valid-feedback">Looks good!</div>
-                        </div>
-                        <div class="col-md-4 mt-3">
-                            <label for="validationCustom03">Telephone</label>
-                            <input id="telephone" type="text" class="form-control" id="validationCustom03" name="telephone"
-                                   required style="background-color: #2f516f;color: white;"
-                                   onkeypress="document.getElementById('mobile').focus();">
-                            <div class="valid-feedback">Looks good!</div>
-                        </div>
-                        <div class="col-md-4 mt-3">
-                            <label for="validationCustom03">Mobile</label>
-                            <input id="mobile" type="text" class="form-control" id="validationCustom03" name="mobile"
-                                   required style="background-color: #2f516f;color: white;"
-                                   onkeypress="document.getElementById('fax').focus();">
-                            <div class="valid-feedback">Looks good!</div>
-                        </div>
-                        
-                        <div class="col-md-4 mt-3">
-                            <label for="validationCustom03">Fax</label>
-                            <input id="fax" type="text" class="form-control" id="validationCustom03" name="fax"
-                                   required style="background-color: #2f516f;color: white;"
-                                   onkeypress="document.getElementById('email').focus();">
-                            <div class="valid-feedback">Looks good!</div>
-                        </div>
+                    <a onclick="setState('{{i.name}}','{{i.id}}')" class="content" style="cursor:pointer;color:black;">&nbsp;&nbsp;{{i.name}}</a><br>
+                   {% endif %}
+                   
+                    {% endfor %}
+                    </tr>
+                    </table>
+                </div>
+                <input type="text" name="statehidden" hidden value="{{i.id}}">
+                </form>
+               
+            </div>
+            <!--starting of modal-->
+            <div class="modal fade" id="myModal" role="dialog" style="margin-top: 150px;">
+            <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-body">
+            <form action="{% url 'addstate' %}" method="POST" >
+            {% csrf_token %}
+                <div class="form-group" align="center">
+                    <input type="text" name="name" placeholder="New state name" class="form-control w-75"><br>
+                    <input type="submit"  value="Submit" class="form-control w-25 btn btn-dark"><br>
+                </div>
+            </form>
+            </div>
+            </div>
+            </div>
+            </div> <!--end of modal-->
+            
+            <div class="col-md-4 mt-3">
+                <label for="validationCustom03">Country</label>
+                <input type="text" id="country" class="form-control" id="validationCustom03" name="country"
+                required style="background-color: #2f516f;color: white;" onclick="showCountry();"
+                value="India">
+            </div>
+            <div class="form-popup" id="myForm1" style="background-color: rgb(216, 232, 238);" >
+                <form action="" class="form-container1" >
+                    <h6 style="background-color:rgb(17, 169, 240) ;color:white">List of Countries</h6>
+                    <a data-toggle="modal" data-target="#myModal1" href="" style="margin-left:200px; color:black;">New Country</a>
+                    <a   style="margin-left:250px;color:black;cursor:pointer" >Back</a>  
+                <hr >
+                <div>
+                    <table >
+                    <tr >
+                    {% for i in country %}
+                   
+                
+                    <a onclick="setCountry('{{i.name}}','{{i.id}}')"  class="content" style="cursor:pointer;color:black;">&nbsp;&nbsp;{{i.name}}</a><br>
+                    {% endfor %}
+                    </tr>
+                    </table>
+                </div>
+               
+                </form>
+            </div>
+            <!--starting of countrymodal-->
+            <div class="modal fade" id="myModal1" role="dialog" style="margin-top: 150px;">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-body">
+                <form action="{% url 'addcountry' %}" method="POST" >
+                {% csrf_token %}
+                    <div class="form-group" align="center">
+                        <input type="text" name="name" placeholder="New country name" class="form-control w-75"><br>
+                        <input type="submit"  value="Submit" class="form-control w-25 btn btn-dark"><br>
                     </div>
-                    <div class="row">
-                        <div class="col-md-4 mt-3">
-                            <label for="validationCustom03">Email</label>
-                            <input id="email" type="email" class="form-control" id="validationCustom03" name="email"
-                                   required style="background-color: #2f516f;color: white;"
-                                   onkeypress="document.getElementById('website').focus();">
-                            <div class="valid-feedback">Looks good!</div>
-                        </div>
-                        <div class="col-md-4 mt-3">
-                            <label for="validationCustom03">Website</label>
-                            <input id="website" type="text" class="form-control" id="validationCustom03" name="website"
-                                   required style="background-color: #2f516f;color: white;"
-                                   >
-                            <div class="valid-feedback">Looks good!</div>
-                        </div>
-
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4 mt-3">
-                            <label for="validationCustom03">Financial year begin from</label>
-                            <input id="fin_year" type="date" class="form-control" id="validationCustom03" name="fin_begin"
-                                   required style="background-color: #2f516f;color: white;"
-                                   onkeypress="document.getElementById('books_begin').focus();">
-                            <div class="valid-feedback">Looks good!</div>
-                        </div>
-                        <div class="col-md-4 mt-3">
-                            <label for="validationCustom03">Books beginning from</label>
-                            <input id="books_begin" type="date" class="form-control" id="validationCustom03" name="books_begin"
-                                   required style="background-color: #2f516f;color: white;"
-                                   >
-                            <div class="valid-feedback">Looks good!</div>
-                        </div>
-                    </div>
-                    <hr>
-                    <!-- <div class="row">
+                </form>
+                </div>
+                </div>
+                </div>
+                </div> <!--end of modal-->
+                
+           
+            <div class="col-md-4 mt-3">
+                <label for="validationCustom03">Pincode</label>
+                <input id="pincode" type="text" class="form-control" id="validationCustom03" name="pincode"
+                required style="background-color: #2f516f;color: white;"
+                onkeypress="document.getElementById('telephone').focus();">
+            </div>
+            <div class="col-md-4 mt-3">
+                <label for="validationCustom03">Telephone</label>
+                <input id="telephone" type="text" class="form-control" id="validationCustom03" name="telephone"
+                required style="background-color: #2f516f;color: white;"
+                onkeypress="document.getElementById('mobile').focus();">
+            </div>
+            <div class="col-md-4 mt-3">
+                <label for="validationCustom03">Mobile</label>
+                <input id="mobile" type="text" class="form-control" id="validationCustom03" name="mobile"
+                required style="background-color: #2f516f;color: white;"
+                >
+            </div>
+            <div class="col-md-4 mt-3">
+                <label for="validationCustom03">Fax</label>
+                <input id="fax" type="text" class="form-control" id="validationCustom03" name="fax"
+                required style="background-color: #2f516f;color: white;"
+                >
+            </div>
+        
+        
+            <div class="col-md-4 mt-3">
+                <label for="validationCustom03">Email</label>
+                <input id="email" type="text" class="form-control" id="validationCustom03" name="email"
+                required style="background-color: #2f516f;color: white;"
+                >
+            </div>
+            <div class="col-md-4 mt-3">
+                <label for="validationCustom03">Website</label>
+                <input id="website" type="text" class="form-control" id="validationCustom03" name="website"
+                required style="background-color: #2f516f;color: white;">
+            </div>
+       
+            <div class="col-md-4 mt-3">
+                <label for="validationCustom03">Financial year begin from</label>
+                <input id="fin_year" type="date" class="form-control" id="validationCustom03" name="fin_begin"
+                required style="background-color: #2f516f;color: white;"
+                >
+            </div>
+            <div class="col-md-4 mt-3">
+                <label for="validationCustom03">Books beginning from</label>
+                <input id="books_begin" type="date" class="form-control" id="validationCustom03" name="books_begin"
+                required style="background-color: #2f516f;color: white;"
+               >
+            </div>
+            <div class="row container-fluid  p-2 m-0">
+                <div class="col-sm-4 m-0 p-0"> <label for="subled">Disabled</label></div>
+                <div class="col-sm-8 m-0 p-0">
+                    <select id="subled" name="subled" class=" form-control" hidden>
+                        <option value="True">Yes</option>
+                        <option value="False" selected>No</option>
+                    </select>
+                </div> 
+            </div>
+        </div>
+        <hr>
+        <!-- <div class="row">
                         <div class="col-md-4 mt-3">
                             <label for="validationCustom03">Base currency symbol</label>
                             <input id="currency_symbol" type="text" class="form-control" id="validationCustom03" name="currency_symbol"
@@ -187,10 +306,10 @@
                             <div class="valid-feedback">Looks good!</div>
                         </div>
                     </div> -->
-                    <div class="col text-center">
-                        <button onclick="javascript:alert('Created Successfully');" type="submit" class="btn btn-info" >Create</button>
-
-                      </div>
+            <div class="col text-center">
+                <button  onClick='save()' type="submit" class="btn btn-info" >Create</button>
+            <!-- <input  type="submit" value="create"> -->
+            </div>
             </form>
            
                 
