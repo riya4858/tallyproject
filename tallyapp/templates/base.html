@@ -53,7 +53,14 @@
                 $select2.html($options.filter('[text="' + this.value + '"]'));
                 $select3.html($options1.filter('[text="' + this.value + '"]'));
             }).trigger('change');
+
+            //alert(localStorage.getItem("compId"));
         });
+
+        function getVal(route){
+            window.location.href=route+"/"+localStorage.getItem("compId");
+                    
+         }
     </script>
 </head>
 <body style="background-color: #2f516f;">
@@ -127,14 +134,14 @@
                                   <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="bx bx-right-arrow-alt"></i>Accounting Masters</a>
                                   <ul>
                                       <li>
-                                          <a href="{% url 'group' %}">Group</a>
-                                          <a href="{% url 'ledger' %}">Ledger</a>
-                                          <a href="{% url 'costcentre' %}">Cost centre</a>
-                                          <a href="{% url 'currency' %}">Currency</a>
-                                          <a href="{% url 'ratesofexchange' %}">Rates of 
-                                            Exchange
-                                          </a>
-                                          <a href="{% url 'voucher' %}">Voucher Type</a>
+                                        <a onclick="getVal('group')">Group</a>
+                                        <a onclick="getVal('ledger')">Ledger</a>
+                                        <a onclick="getVal('costcentre')">Cost centre</a>
+                                        <a onclick="getVal('currency')">Currency</a>
+                                        <a href="{% url 'ratesofexchange' %}">Rates of 
+                                          Exchange
+                                        </a>
+                                        <a href="{% url 'voucher' %}">Voucher Type</a>
 
                                       </li>
                                   </ul>
@@ -145,7 +152,7 @@
                           </ul>
                       </li>
                         <li>
-                            <a href="{% url 'features' %}" class="has-arrow">
+                            <a  onclick="getVal('features')" class="has-arrow">
                                 <div class="parent-icon"><i class="bx bx-home-alt"></i>
                                 </div>
                                 <div class="menu-title">Features</div>
@@ -171,7 +178,7 @@
                         </li>
                         <li>
                             <a href="javascript:;" class="has-arrow">
-
+                                
                                 <div class="parent-icon"><i class='bx bx-briefcase-alt'></i>
                                 </div>
                                 <div class="menu-title">Print</div>

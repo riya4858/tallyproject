@@ -22,11 +22,7 @@
 
 </style>
 <script>
-    function disable() {
-        alert('pp');
-      document.getElementById("mySelect").disabled = true;
-      document.getElementById('mySelect').style.visibility= "hidden";
-    }
+    
     function confirm(){
         alert('Are you sure you want to shut this company??');
     }
@@ -42,7 +38,7 @@
            <div>
                <table>
                {% for i in com %}
-               {% if i.disabled == 0 %}
+               {% if i.active == 0 %}
 
                {% else %}
                <tr><a href="{% url 'disable' i.id %}"  onclick="confirm()" id='mySelect'>&nbsp;&nbsp;{{i.name}}</a>

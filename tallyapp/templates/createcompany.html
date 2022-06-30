@@ -33,7 +33,16 @@
         padding: 2px;
        
       }
-     
+      .close {
+        position: absolute;
+        top: 14px;
+        margin-left: 230px;
+        font-size: 25px;
+        color: rgb(6, 68, 139);
+        transform: rotate(45deg);
+        cursor: pointer;
+        text-decoration: none;
+    }
 </style>
 <script>
     function save(){
@@ -83,11 +92,18 @@
        
         
     })
-    
+    function copyName(){
+        document.getElementById("mailing_name").value = document.getElementById("companyname").value;
+    }
     
 
 </script>
-
+{% for msg in messages %}
+        <div  style="background-color: rgb(236, 194, 116);width:245px ;color:black";>
+            <a href="" onclick="history.go(-1)" class="close" style="margin-right:1100px; ">+</a>
+            {{msg}}
+        </div>
+        {% endfor %}
 <div class="page-content">
 <div class="card mx-auto " style="background-color: #243e54; width:75%;">
     <div class="card-body">
@@ -97,19 +113,19 @@
         <hr/>
         <form id="create" action="{% url 'companycreate' %}" method="post" class="needs-validation" novalidate>
         {% csrf_token %}
+        
         <div class="row">
             <div class="col-md-4 mt-3">
                 <label for="validationCustom02">Company name</label>
                 <input id="companyname" type="text" class="form-control" id="validationCustom02" name="name"
                 required style="background-color: #2f516f;color: white;" 
-                onkeypress="document.getElementById('mailing_name').focus();
-                document.getElementById('mailing_name').value=document.getElementById('companyname').value">
+                onkeypress="document.getElementById('mailing_name').focus()">
             </div>
             <div class="col-md-4 mt-3">
                 <label for="validationCustom02">Mailing name</label>
-                <input id="mailing_name" type="text" onclick="addressFunction()" class="form-control" id="validationCustom02" name="mailing_name"
+                <input id="mailing_name" type="text"  class="form-control" id="validationCustom02" name="mailing_name"
                 required style="background-color: #2f516f;color: white;"
-                 onkeypress="document.getElementById('address1').focus();">
+                 onclick="copyName()">
             </div>
             <div class="col-md-4 mt-3">
                 <label for="validationCustom03">Address1</label>
@@ -168,6 +184,7 @@
                 </form>
                
             </div>
+            
             <!--starting of modal-->
             <div class="modal fade" id="myModal" role="dialog" style="margin-top: 150px;">
             <div class="modal-dialog">
@@ -233,7 +250,7 @@
                 <label for="validationCustom03">Pincode</label>
                 <input id="pincode" type="text" class="form-control" id="validationCustom03" name="pincode"
                 required style="background-color: #2f516f;color: white;"
-                onkeypress="document.getElementById('telephone').focus();">
+                required pattern="^[0-9]{6}$">
             </div>
             <div class="col-md-4 mt-3">
                 <label for="validationCustom03">Telephone</label>
@@ -279,33 +296,27 @@
                 required style="background-color: #2f516f;color: white;"
                >
             </div>
-            <div class="row container-fluid  p-2 m-0">
-                <div class="col-sm-4 m-0 p-0"> <label for="subled">Disabled</label></div>
-                <div class="col-sm-8 m-0 p-0">
-                    <select id="subled" name="subled" class=" form-control" hidden>
-                        <option value="True">Yes</option>
-                        <option value="False" selected>No</option>
-                    </select>
-                </div> 
-            </div>
+            
         </div>
         <hr>
-        <!-- <div class="row">
+        <div class="row">
                         <div class="col-md-4 mt-3">
                             <label for="validationCustom03">Base currency symbol</label>
                             <input id="currency_symbol" type="text" class="form-control" id="validationCustom03" name="currency_symbol"
                                    required style="background-color: #2f516f;color: white;"
-                                   onkeypress="document.getElementById('formal_name').focus();">
+    
+                                   value="Rs">
                             <div class="valid-feedback">Looks good!</div>
                         </div>
                         <div class="col-md-4 mt-3">
                             <label for="validationCustom03">Formal name</label>
                             <input id="formal_name" type="text" class="form-control" id="validationCustom03" name="formal_name"
                                    required style="background-color: #2f516f;color: white;"
-                                   onkeypress="save()">
+                                   value="INR"
+                                   >
                             <div class="valid-feedback">Looks good!</div>
                         </div>
-                    </div> -->
+                    </div>
             <div class="col text-center">
                 <button  onClick='save()' type="submit" class="btn btn-info" >Create</button>
             <!-- <input  type="submit" value="create"> -->

@@ -51,100 +51,167 @@
                     <div class="row container-fluid  p-2">
                         <div class="col-sm-6 m-0 p-0"> <label for="empno">Maintain Accounts:</label></div>
                         <div class="col-sm-6 m-0 p-0">
-                            <select style="background-color: #2f516f;color: white;"  name="maintain_accounts" id="maintain_accounts" onchange="save()">
+                            <select style="background-color: #2f516f;color: white;"  name="maintain_accounts"
+                             id="maintain_accounts" onchange="save()">
                             {% if ft.maintain_accounts == 'True' %}
-                                <option value="Yes" selected>Yes</option>
-                                <option value="No">No</option>
+                                <option value="Yes" selected >Yes</option>
+                                <option value="No" >No</option>
                             {% else %}
-                                <option value="Yes">Yes</option>
+                                <option value="Yes" >Yes</option>
                                 <option value="No" selected>No</option>
                             {% endif %}
                              </select></div>
                     </div>
                     <div class="row container-fluid  p-2">
                         <div class="col-sm-6 m-0 p-0"> <label for="empno">Enable Bill-wise entry:</label></div>
-                        <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;"  name="" id="">
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
+                        <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;"
+                              name="bill_wise_entry" id="bill_wise_entry" onchange="save()" >
+                            {% if ft.bill_wise_entry == 'True' %}
+                              <option value="Yes" selected >Yes</option>
+                              <option value="No" >No</option>
+                            {% else %}
+                              <option value="Yes" >Yes</option>
+                              <option value="No" selected>No</option>
+                            {% endif %}
                              </select></div>
                     </div>
 
                     <div class="row container-fluid  p-2">
                         <div class="col-sm-6 m-0 p-0"> <label for="empno">Enable Cost Centres:</label></div>
-                        <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;"  name="" id="">
-                            <option value="Yes">Yes</option>
-                            <option value="No" selected>No</option>
+                        <div class="col-sm-6 m-0 p-0">
+                            <select style="background-color: #2f516f;color: white;"  name="cost_centres" id="cost_centres" onchange="save()">
+                            {% if ft.cost_centres == 'True' %}
+                              <option value="Yes" selected >Yes</option>
+                              <option value="No" >No</option>
+                            {% else %}
+                              <option value="Yes" >Yes</option>
+                              <option value="No" selected>No</option>
+                            {% endif %}
                              </select></div>
                     </div>
 
                     <div class="row container-fluid  p-2">
                         <div class="col-sm-6 m-0 p-0"> <label for="empno">Enable Interest Calculation:</label></div>
-                        <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;"  name="" id="">
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
+                        <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;"
+                              name="interest_calc" id="interest_calc" onchange="save()">
+                            {% if ft.interest_calc == 'True' %}
+                              <option value="Yes" selected >Yes</option>
+                              <option value="No" >No</option>
+                            {% else %}
+                              <option value="Yes" >Yes</option>
+                              <option value="No" selected>No</option>
+                            {% endif %}
                              </select></div>
                     </div>
                     <h6><b>Inventory</b></h6>
                     <div class="row container-fluid  p-2">
                         <div class="col-sm-6 m-0 p-0"> <label for="empno">Maintain Inventory:</label></div>
-                        <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;"  name="" id="">
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
+                        <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;"  
+                            name="maintain_inventory" id="maintain_inventory" onchange="save()">
+                            {% if ft.maintain_inventory == 'True' %}
+                            <option value="Yes" selected >Yes</option>
+                            <option value="No" >No</option>
+                          {% else %}
+                            <option value="Yes" >Yes</option>
+                            <option value="No" selected>No</option>
+                          {% endif %}
                              </select></div>
                     </div>
 
                     <div class="row container-fluid  p-2">
                         <div class="col-sm-6 m-0 p-0"> <label for="empno">Integrate Accounts with Inventory:</label></div>
-                        <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;"  name="" id="">
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
+                        <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;" 
+                             name="integrate_accounts" id="integrate_accounts" onchange="save()">
+                            {% if ft.integrate_accounts == 'True' %}
+                            <option value="Yes" selected >Yes</option>
+                            <option value="No" >No</option>
+                          {% else %}
+                            <option value="Yes" >Yes</option>
+                            <option value="No" selected>No</option>
+                          {% endif %}
                              </select></div>
                     </div>
 
                     <div class="row container-fluid  p-2">
                         <div class="col-sm-6 m-0 p-0"> <label for="empno">Enable Multiple Price Levels:</label></div>
-                        <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;"  name="" id="">
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
+                        <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;"
+                              name="multiple_price_level" id="multiple_price_level" onchange="save()">
+                            {% if ft.multiple_price_level == 'True' %}
+                            <option value="Yes" selected >Yes</option>
+                            <option value="No" >No</option>
+                          {% else %}
+                            <option value="Yes" >Yes</option>
+                            <option value="No" selected>No</option>
+                          {% endif %}
                              </select></div>
                     </div>
 
                     <div class="row container-fluid  p-2">
                         <div class="col-sm-6 m-0 p-0"> <label for="empno">Enable Batches:</label></div>
-                        <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;"  name="" id="">
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
+                        <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;" 
+                             name="batches" id="batches" onchange="save()">
+                            {% if ft.batches == 'True' %}
+                            <option value="Yes" selected >Yes</option>
+                            <option value="No" >No</option>
+                          {% else %}
+                            <option value="Yes" >Yes</option>
+                            <option value="No" selected>No</option>
+                          {% endif %}
                              </select></div>
                     </div>
 
                     <div class="row container-fluid  p-2">
                         <div class="col-sm-6 m-0 p-0"> <label for="empno">Maintain Expiry date for Batches:</label></div>
-                        <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;"  name="" id="">
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
+                        <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;"
+                              name="expirydate_batches" id="expirydate_batches" onchange="save()">
+                            {% if ft.expirydate_batches == 'True' %}
+                            <option value="Yes" selected >Yes</option>
+                            <option value="No" >No</option>
+                          {% else %}
+                            <option value="Yes" >Yes</option>
+                            <option value="No" selected>No</option>
+                          {% endif %}
                              </select></div>
                     </div>
 
                     <div class="row container-fluid  p-2">
                         <div class="col-sm-6 m-0 p-0"> <label for="empno">Enable Job Order Processing:</label></div>
-                        <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;"  name="" id="">
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
+                        <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;" 
+                             name="joborder_processing" id="joborder_processing" onchange="save()">
+                            {% if ft.joborder_processing == 'True' %}
+                            <option value="Yes" selected >Yes</option>
+                            <option value="No" >No</option>
+                          {% else %}
+                            <option value="Yes" >Yes</option>
+                            <option value="No" selected>No</option>
+                          {% endif %}
                              </select></div>
                     </div>
 
                     <div class="row container-fluid  p-2">
                         <div class="col-sm-6 m-0 p-0"> <label for="empno">Enable Cost Tracking:</label></div>
-                        <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;"  name="" id="">
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
+                        <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;"  
+                            name="cost_tracking" id="cost_tracking" onchange="save()">
+                            {% if ft.cost_tracking == 'True' %}
+                            <option value="Yes" selected >Yes</option>
+                            <option value="No" >No</option>
+                          {% else %}
+                            <option value="Yes" >Yes</option>
+                            <option value="No" selected>No</option>
+                          {% endif %}
                              </select></div>
                     </div>
                     <div class="row container-fluid  p-2">
                         <div class="col-sm-6 m-0 p-0"> <label for="empno">Enable Job Costing:</label></div>
-                        <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;"  name="" id="">
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
+                        <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;" 
+                             name="job_costing" id="job_costing" onchange="save()">
+                            {% if ft.job_costing == 'True' %}
+                            <option value="Yes" selected >Yes</option>
+                            <option value="No" >No</option>
+                          {% else %}
+                            <option value="Yes" >Yes</option>
+                            <option value="No" selected>No</option>
+                          {% endif %}
                              </select></div>
                     </div>
                     <div class="row container-fluid  p-2">

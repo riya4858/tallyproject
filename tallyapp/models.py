@@ -2,8 +2,8 @@ from django.db import models
 
 class Countries(models.Model):
     name=models.CharField(max_length=225)
-    currency_symbol=models.CharField(max_length=225,default='')
-    formal_name=models.CharField(max_length=225,default='')
+    currency_symbol=models.CharField(max_length=225,default='र')
+    formal_name=models.CharField(max_length=225,default='INR')
 
     
 class States(models.Model):
@@ -17,7 +17,7 @@ class Companies(models.Model):
     address2=models.CharField(max_length=225)
     address3=models.CharField(max_length=225)
     address4=models.CharField(max_length=225)
-    pincode=models.CharField(max_length=225)
+    pincode=models.CharField(max_length=6)
     telephone=models.CharField(max_length=225)
     mobile=models.CharField(max_length=225)
     fax=models.CharField(max_length=225)
@@ -27,7 +27,8 @@ class Companies(models.Model):
     books_begin=models.DateField(null=True)
     country=models.ForeignKey(Countries,on_delete=models.CASCADE,blank=True,null=True)
     state=models.ForeignKey(States,on_delete=models.CASCADE,blank=True,null=True)
-    disabled=models.BooleanField(default=True)
+    active=models.BooleanField(default=True)
+    
     
 class Group(models.Model):
     name = models.CharField(max_length=225)
@@ -38,7 +39,7 @@ class Group(models.Model):
     calculation = models.BooleanField(default=False)
     used_purchase = models.CharField(max_length=225,null=True,blank=True)
     company=models.ForeignKey(Companies,on_delete=models.CASCADE,blank=True,null=True)
-
+    nature_of_group=models.CharField(max_length=225)
 
 class Features(models.Model):
     maintain_accounts = models.BooleanField(default=True)
@@ -56,7 +57,6 @@ class Features(models.Model):
     job_costing = models.BooleanField(default=True)
     discount_invoices = models.BooleanField(default=True)
     Billed_Quantity = models.BooleanField(default=True)
-    sub_ledger = models.BooleanField(default=True)
     gst = models.BooleanField(default=False)
     tds = models.BooleanField(default=False)
     tcs = models.BooleanField(default=False)
@@ -67,4 +67,7 @@ class Features(models.Model):
     multiple_addrss = models.BooleanField(default=True)
     vouchers = models.BooleanField(default=True)
     company=models.ForeignKey(Companies,on_delete=models.CASCADE,blank=True,null=True)
+
+    
+
 

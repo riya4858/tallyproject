@@ -1,6 +1,5 @@
 from django.shortcuts import render,redirect
 from .models import *
-from tallyapp.models import Companies
 from django.contrib import messages
 from django.http import JsonResponse
 def index(request):
@@ -37,8 +36,6 @@ def companycreate(request):
             #print('fghj')
             
             state=States.objects.get(name=state) 
-            #countryId=request.POST['countryhidden']
-            #print(countryId)
             country=Countries.objects.get(name=country) 
             pincode=request.POST['pincode']
             telephone=request.POST['telephone']
@@ -48,29 +45,34 @@ def companycreate(request):
             website=request.POST['website']
             fin_begin=request.POST['fin_begin']
             books_begin=request.POST['books_begin']
-            # maintain_accounts=request.POST['maintain_accounts']
             # currency_symbol=request.POST['currency_symbol']
             # formal_name=request.POST['formal_name']
-            
-            ctg=Companies(name=name,mailing_name=mailing_name,address1=address1,address2=address2,address3=address3,
-                          address4=address4,
-                          state=state,country=country,
-                          pincode=pincode,
-                          telephone=telephone,mobile=mobile,fax=fax,email=email,website=website,fin_begin=fin_begin,
-                          books_begin=books_begin)
-            ctg.save()
+            cmp=Companies.objects.filter(name=name)
+            if cmp:
+                messages.info(request,'Company name already exists!!')
+                return redirect('createcompany')
+            else:
+                ctg=Companies(name=name,mailing_name=mailing_name,address1=address1,address2=address2,address3=address3,
+                    address4=address4,
+                    state=state,country=country,
+                    pincode=pincode,
+                    telephone=telephone,mobile=mobile,fax=fax,email=email,website=website,fin_begin=fin_begin,
+                    books_begin=books_begin)
+                ctg.save()
             
             
              
-            messages.info(request,'Company added')
+            
             
             demo1(request, ctg.id)
             
             # return redirect('companycreated')
-            return render(request,'companycreated.html',{'ctg':ctg})
+            return render(request,'features.html',{'ctg':ctg})
     return render(request,'createcompany.html')
 
-def group(request):
+def group(request,pk):
+    # feature=Features.objects.get(company_id=pk)
+    # cmp=Companies.objects.get(id=pk)
     return render(request,'group.html')
 def ledger(request):
     return render(request,'ledger.html')
@@ -86,38 +88,35 @@ def voucher(request):
 def currency(request):
     return render(request,'currency.html')
 
-def companycreated(request):
-    # com=Companies.objects.get(id=pk)
-    return render(request,'companycreated.html')
+
 
 def create_group(request):
     if request.method == 'POST':
+        # com=Companies.objects.get(id=pk)
         gname = request.POST['gname']
         alia = request.POST['alia']
-        
-
-        under = request.POST['und']
-        gp = request.POST['subled']
+        under = request.POST['under']
+        sub_ledger = request.POST['sub_ledger']
         nett = request.POST['nee']
         calc = request.POST['cal']
         meth = request.POST['meth']
-
+        
         mdl = Group(
             name=gname,
             alias=alia,
             under=under,
-            sub_ledger=gp,
+            sub_ledger=sub_ledger,
             debit_credit=nett,
             calculation=calc,
             used_purchase=meth,
+            
         )
         mdl.save()
         return redirect('group')
         
     return render(request,'group.html')
 
-def features(request):
-    return render(request,'features.html')
+
 def altercompanyview(request):
     com=Companies.objects.all()
     return render(request,'altercompanyview.html',{'com':com})
@@ -184,7 +183,7 @@ def demo1(request, pk):
         ctg.save()
     return render(request,'company.html')
 
-def demo2(request, pk):
+def features(request, pk):
     feature=Features.objects.get(company_id=pk)
     c=Companies.objects.get(id=pk)
     if request.method == 'POST':
@@ -192,8 +191,12 @@ def demo2(request, pk):
             feature.maintain_accounts= 'True'
         else:
             feature.maintain_accounts= 'False'
+        if request.POST['bill_wise_entry'] == 'Yes':
+            feature.bill_wise_entry= 'True'
+        else:
+            feature.bill_wise_entry= 'False'
         feature.save()
-    return render(request,'companycreated.html',{'ctg':c, 'ft':feature})
+    return render(request,'features.html',{'ctg':c, 'ft':feature})
 
 
 def shutcompany(request):
@@ -202,13 +205,13 @@ def shutcompany(request):
 
 def disable(request,pk):
     c=Companies.objects.get(id=pk)
-    c.disabled=False
+    c.active=False
     c.save()
     return redirect('shutcompany')
 
 
 def enable(request,pk):
     c=Companies.objects.get(id=pk)
-    c.disabled=True
+    c.active=True
     c.save()
     return redirect('shutcompany')

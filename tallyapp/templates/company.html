@@ -17,7 +17,7 @@
            <div>
                <table>
                {% for i in com %}
-               {% if i.disabled == 1 %}
+               {% if i.active == 1 %}
                <tr>
                 {{i.name}}<br></tr>
                 {% endif %}
