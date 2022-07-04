@@ -51,16 +51,16 @@ alert(compId);
                     <div class="row container-fluid  p-2">
                         <div class="col-sm-6 m-0 p-0"> <label for="empno">Maintain Accounts:</label></div>
                         <div class="col-sm-6 m-0 p-0">
-                            <select style="background-color: #2f516f;color: white;"  name="maintain_accounts"
-                             id="maintain_accounts" onchange="save()">
-                            {% if ft.maintain_accounts == 'True' %}
-                                <option value="Yes" selected >Yes</option>
-                                <option value="No" >No</option>
-                            {% else %}
-                                <option value="Yes" >Yes</option>
-                                <option value="No" selected>No</option>
-                            {% endif %}
-                             </select></div>
+                          <select style="background-color: #2f516f;color: white;"
+                          name="maintain_accounts" id="maintain_accounts" onchange="save()" >
+                        {% if ft.maintain_accounts != 'False' %}
+                          <option value="Yes" selected >Yes</option>
+                          <option value="No" >No</option>
+                        {% else %}
+                          <option value="Yes" >Yes</option>
+                          <option value="No" selected>No</option>
+                        {% endif %}
+                         </select></div>
                     </div>
                     <div class="row container-fluid  p-2">
                         <div class="col-sm-6 m-0 p-0"> <label for="empno">Enable Bill-wise entry:</label></div>

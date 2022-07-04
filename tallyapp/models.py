@@ -68,6 +68,24 @@ class Features(models.Model):
     vouchers = models.BooleanField(default=True)
     company=models.ForeignKey(Companies,on_delete=models.CASCADE,blank=True,null=True)
 
+class Costcentre(models.Model):
+    cname = models.CharField(max_length=225)
+    alias = models.CharField(max_length=225,null=True)
+    under = models.CharField(max_length=225)
+    company=models.ForeignKey(Companies,on_delete=models.CASCADE,blank=True,null=True)
+    
+class Currency(models.Model):
+    symbol = models.CharField(max_length=225)
+    formal_name = models.CharField(max_length=225)
+    currency_code = models.CharField(max_length=225)
+    decimal_places = models.CharField(max_length=225)
+    show_in_millions = models.BooleanField(default=False)
+    suffix_symbol = models.BooleanField(default=False)
+    symbol_and_amount = models.BooleanField(default=False)
+    after_decimal = models.CharField(max_length=225)
+    amount_in_words = models.CharField(max_length=225)
+    company=models.ForeignKey(Companies,on_delete=models.CASCADE,blank=True,null=True)
+    
     
 
 

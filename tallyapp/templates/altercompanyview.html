@@ -2,23 +2,27 @@
 {% block body %}
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<div class="card-deck flex-column flex-lg-row" style="width: 400px;height:500px; margin-left:500px;">
-    <div class="card radius-5 " >
-        <div class="card-body"  >
-            <div class="card-title">
-                <h6><u>List of Companies</u> </h6>
-            </div>
+<div class="row container-fluid p-0 mx-0">
+    <div class="col-sm-4 m-0 p-0"></div>
+    <div class="col-sm-4 m-0 p-0" style=" background-color:rgba(0,0,0,0.2);height: 400px;">
+        <!-- <a href="javascript:history.go(-1);" class="close">+</a> -->
+    <div  class="bg-info text-light">List of Companies</div>
+    
             
            
 
            <div>
                <table>
-               {% for i in com %}
-               {% if i.disabled == 0 %}
-               <tr><a href="{% url 'altercompany' i.id %}">{{i.name}}</a>
-                <br></tr>
+                <br>
+                {% for i in com %}
+                {% if i.active == 1 %}
+                
+                <tr>
+                    
+                <div style="margin-left: 15px;"><a href="{% url 'altercompany' i.id %}">{{i.name}}</a></div>
+                </tr>
                 {% endif %}
-               {% endfor %}
+                {% endfor %}
                </table>
            </div>
         </div>

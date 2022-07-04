@@ -72,27 +72,64 @@ def companycreate(request):
 
 def group(request,pk):
     # feature=Features.objects.get(company_id=pk)
-    # cmp=Companies.objects.get(id=pk)
-    return render(request,'group.html')
-def ledger(request):
-    return render(request,'ledger.html')
+    cmp=Companies.objects.get(id=pk)
+    return render(request,'group.html',{'cmp':cmp})
+def ledger(request,pk):
+    cmp=Companies.objects.get(id=pk)
+    return render(request,'ledger.html',{'cmp':cmp})
 
-def costcentre(request):
-    return render(request,'costcentre.html')
+def costcentre(request,pk):
+    cmp=Companies.objects.get(id=pk)
+    if request.method == 'POST':
+        cmp=Companies.objects.get(id=pk)
+        cname = request.POST['cname']
+        alia = request.POST['alia']
+        under = request.POST['under']
+        costc=Costcentre.objects.filter(cname=cname)
+        if costc:
+            # messages.info(request,'Company name already exists!!')
+            pass
+        else:
+            
+            data = Costcentre(cname=cname,alias=alia,under=under,company=cmp)
+            data.save()
+        # return redirect('costcentre')
+    ccentre=Costcentre.objects.filter(company_id=cmp)
+    return render(request,'costcentre.html',{'cmp':cmp,'ccentre':ccentre})
+
 
 def ratesofexchange(request):
     return render(request,'ratesofexchange.html')
 def voucher(request):
     return render(request,'voucher.html')
 
-def currency(request):
-    return render(request,'currency.html')
-
-
-
-def create_group(request):
+def currency(request,pk):
+    cmp=Companies.objects.get(id=pk)
     if request.method == 'POST':
-        # com=Companies.objects.get(id=pk)
+        cmp=Companies.objects.get(id=pk)
+        symbol = request.POST['symbol']
+        formal_name = request.POST['formal_name']
+        currency_code = request.POST['currency_code']
+        decimal_places = request.POST['decimal_places']
+        show_in_millions = request.POST['show_in_millions']
+        suffix_symbol = request.POST['suffix_symbol']
+        symbol_and_amount = request.POST['symbol_and_amount']
+        after_decimal = request.POST['after_decimal']
+        amount_in_words = request.POST['amount_in_words']
+        data = Currency(symbol=symbol,formal_name=formal_name,currency_code=currency_code,
+                        decimal_places=decimal_places,show_in_millions=show_in_millions,
+                        suffix_symbol=suffix_symbol,symbol_and_amount=symbol_and_amount,
+                        after_decimal=after_decimal,amount_in_words=amount_in_words,company=cmp)
+        data.save()
+        # return redirect('costcentre')
+    return render(request,'currency.html',{'cmp':cmp})
+
+
+
+def creategroup(request,pk):
+    cmp=Companies.objects.get(id=pk)
+    if request.method == 'POST':
+        cmp=Companies.objects.get(id=pk)
         gname = request.POST['gname']
         alia = request.POST['alia']
         under = request.POST['under']
@@ -109,12 +146,12 @@ def create_group(request):
             debit_credit=nett,
             calculation=calc,
             used_purchase=meth,
-            
+            company=cmp
         )
         mdl.save()
-        return redirect('group')
-        
-    return render(request,'group.html')
+        # return redirect('index')
+    return render(request,'group.html',{'cmp':cmp})
+    
 
 
 def altercompanyview(request):
@@ -153,15 +190,25 @@ def selectcompany(request):
 def addstate(request):
     if request.method=='POST':
         name=request.POST['name']
-        data=States(name=name)
-        data.save()
-        return redirect('createcompany')
+        st=States.objects.filter(name=name)
+        if st:
+            # messages.info(request,'Company name already exists!!')
+            return redirect('createcompany')
+        else:
+            data=States(name=name)
+            data.save()
+            return redirect('createcompany')
     return render(request,'createcompany.html')
 def addcountry(request):
     if request.method=='POST':
         name=request.POST['name']
-        data=Countries(name=name)
-        data.save()
+        con=Countries.objects.filter(name=name)
+        if con:
+            # messages.info(request,'Company name already exists!!')
+            return redirect('createcompany')
+        else:
+            data=Countries(name=name)
+            data.save()
         return redirect('createcompany')
     return render(request,'createcompany.html')
 

@@ -33,20 +33,18 @@
 
 </script>
 
-<div class="page-content">
- 
-    <div class="card mx-auto " style="background-color: #243e54; width:75%;">
-        <div class="card-body">
-            <div class="card-title">
-                <h4 class="mb-0">Company Alteration</h4>
-            </div>
-            <hr/>
-            
+<div class="row container-fluid p-0 mx-0">
+    <div class="col-sm-1 m-0 p-0"></div>
+    <div class="col-sm-10 m-0 p-0" style=" background-color:rgba(0,0,0,0.2); width:50%">
+        <!-- <a href="javascript:history.go(-1);" class="close">+</a> -->
+    <div  class="bg-info text-light">Company Alteration</div>
+    
+           
+            <div class="container" style="padding:40px;">
             <form  action="" method="post" class="needs-validation" novalidate>
                 {% csrf_token %}
                 
                     <div class="row">
-                        
                         <div class="col-md-4 mt-3">
                             <label for="validationCustom02">Company name</label>
                             <input id="companyname" value="{{comp.name}}" type="text" class="form-control" id="validationCustom02" name="name"
@@ -192,15 +190,16 @@
 
                       </div>
             </form>
-           
+            </div>
                 
             
         </div>
     </div>
+    
+    
 </div>
 
-
-
+<div class="col-sm-2 m-0 p-0"></div>
 
 
 {% endblock %}
