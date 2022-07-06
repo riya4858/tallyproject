@@ -9,22 +9,29 @@
             justify-content: center;
             
         }
+        .hide{
+            display:none;
+        }
     </style>
+   
 
   <div class="m-0">
     <h6 style="" class="bg-info text-light p-2 m-0 text-center">Create Voucher type</h6>
-            <form class="p-5" style="background-color:rgba(0,0,0,.4);">
+    
+            <form class="p-5" action="{% url 'voucher' cmp.id %}" method="post" style="background-color:rgba(0,0,0,.4);">
+                {% csrf_token %}
+
                 
                 <div class="p-3">
                 <div class="row container-fluid  p-2 m-0">
                     <div class="col-sm-2 m-0 p-0"> <label for="a">Name</label></div>
-                    <div class="col-sm-3 m-0 p-0"><input type="text" class="form-control" id="a" placeholder=""></div>
+                    <div class="col-sm-3 m-0 p-0"><input type="text" class="form-control" id="a" placeholder="" name="nam"></div>
                     <div class="col-sm-7 m-0 p-0"></div>
                 </div>
                 <div class="row container-fluid  p-2 m-0">
                     <div class="col-sm-2 m-0 p-0"> <label for="b">Alias</label></div>
                     <div class="col-sm-3 m-0 p-0"> 
-                    <input type="text" class="form-control" id="b" placeholder=""></div>
+                    <input type="text" class="form-control" id="b" placeholder="" name="alias"></div>
                     <div class="col-sm-7 m-0 p-0"></div>
                 </div>
             </div>
@@ -43,68 +50,74 @@
                         <div class="row container-fluid  p-2">
                             <div class="col-sm-6 m-0 p-0"> <label for="c">Select type of voucher</label></div>
                             <div class="col-sm-6 m-0 p-0">
-                                <select required onchange="h()" name="vtype" id="" class=" form-control">
-                                    <option onclick="typ_of_voucher(this.value)" value="" selected disabled>select type</option>
-                                    <option onclick="typ_of_voucher(this.value)" value="Attendence">Attendence</option>
-                                    <option onclick="typ_of_voucher(this.value)" value="contra">Contra</option>
-                                    <option onclick="typ_of_voucher(this.value)" value="Credit Note">Credit Note</option>
-                                    <option onclick="typ_of_voucher(this.value)" value="Debit Note">Debit Note</option>
-                                    <option onclick="typ_of_voucher(this.value)" value="Delivery Note">Delivery Note</option>
-                                    <option onclick="typ_of_voucher(this.value)" value="Job Work in Order">Job work in Order
-                                    </option>
-                                    <option onclick="typ_of_voucher(this.value)" value="Job Work Out Order">Job Work Out Order
-                                    </option>
-                                    <option onclick="typ_of_voucher(this.value)" value="Journal">Journal</option>
-                                    <option onclick="typ_of_voucher(this.value)" value="Material In">Material In</option>
-                                    <option onclick="typ_of_voucher(this.value)" value="Material Out">Material Out</option>
-                                    <option onclick="typ_of_voucher(this.value)" value="Memorandum">Memorandum</option>
-                                    <option onclick="typ_of_voucher(this.value)" value="Payment">Payment</option>
-                                    <option onclick="typ_of_voucher(this.value)" value="Payroll">Payroll</option>
-                                    <option onclick="typ_of_voucher(this.value)" value="Physical Stock">Physical Stock</option>
-                                    <option onclick="typ_of_voucher(this.value)" value="Purchase">Purchase</option>
-                                    <option onclick="typ_of_voucher(this.value)" value="Purchase Order">Purchase Order</option>
-                                    <option onclick="typ_of_voucher(this.value)" value="Receipt">Receipt</option>
-                                    <option onclick="typ_of_voucher(this.value)" value="Receipt Note">Receipt Note</option>
-                                    <option onclick="typ_of_voucher(this.value)" value="Rejection In">Rejection In</option>
-                                    <option onclick="typ_of_voucher(this.value)" value="Rejection Out">Rejection Out</option>
-                                    <option onclick="typ_of_voucher(this.value)" value="Reversing Journal">Reversing Journal
-                                    </option>
-                                    <option onclick="typ_of_voucher(this.value)" value="Sales">Sales</option>
-                                    <option onclick="typ_of_voucher(this.value)" value="Sales Order">Sales Order</option>
-                                    <option onclick="typ_of_voucher(this.value)" value="Stock Journal">Stock Journal</option>
+
+                                <select required onchange="hi()" name="vtype" id="aa" class=" form-control">
+                                    <option value="" selected disabled>select type</option>
+                                    <option value="Attendence" >Attendence</option>
+                                    <option  value="contra">Contra</option>
+                                    <option value="CreditNote">Credit Note</option>
+                                    <option  value="CreditNote">Credit Note</option>
+                                    <option value="DebitNote">Debit Note</option>
+                                    <option  value="DeliveryNote">Delivery Note</option>
+                                    <option value="JobWorkinOrder">Job work in Order</option>
+                                    <option  value="JobWorkOutOrder">Job Work Out Order</option>
+                                    <option  value="Journal">Journal</option>
+                                    <option  value="MaterialIn">Material In</option>
+                                    <option value="MaterialOut">Material Out</option>
+                                    <option  value="Memorandum">Memorandum</option>
+                                    <option  value="Payment">Payment</option>
+                            `       <option value="Payroll">Payroll</option>
+                                    <option  value="PhysicalStock">Physical Stock</option>
+                                    <option  value="Purchase">Purchase</option>
+                                    <option value="PurchaseOrder">Purchase Order</option>
+                                    <option  value="Receipt">Receipt</option>
+                                    <option  value="ReceiptNote">Receipt Note</option>
+                                    <option value="RejectionIn">Rejection In</option>
+                                    <option value="RejectionOut">Rejection Out</option>
+                                    <option  value="ReversingJournal">Reversing Journal</option>
+                                    <option value="Sales">Sales</option>
+                                    <option value="SalesOrder">Sales Order</option>
+                                    <option value="StockJournal">Stock Journal</option>
+                                                            
                                 </select>
                             </div>
                         </div>
 
                         <div class="row container-fluid  p-2">
                             <div class="col-sm-6 m-0 p-0"> <label for="d">Abbreviation</label></div>
-                            <div class="col-sm-6 m-0 p-0"><input type="text" class="form-control" id="d" placeholder=""></div>
+                            <div class="col-sm-6 m-0 p-0"><input type="text" class="form-control" id="ab" placeholder=""  name="abbre"></div>
                         </div>
                         <div class="row container-fluid  p-2">
-                            <div class="col-sm-6 m-0 p-0"> <label for="e">Activate this voucher typeS</label></div>
+                            <div class="col-sm-6 m-0 p-0"> <label for="e">Activate this voucher type</label></div>
                             <div class="col-sm-6 m-0 p-0">
-                                <select name="Activate" id="e" class="form-control">
+                                <select name="avtyp" id="e" class="form-control">
                                     <option value="No">Yes</option> 
                                     <option value="Yes">No</option>
                                 </select>
                             </div>
                         </div>
 
+                        
+                        <hr>
                         <div class="row container-fluid  p-2">
                             <div class="col-sm-6 m-0 p-0"> <label for="f">Method of voucher numbering</label></div>
-                            <div class="col-sm-6 m-0 p-0"><select name="method" id="f" class="form-control">
+                            <div class="col-sm-6 m-0 p-0"><select onchange="shw()"  name="meth_vou_num" id="mtdvhr" class="form-control">
+                                <option value="">----select---</option>
                                 <option value="auto">Automatic</option> 
                                 <option value="manu">Manual</option>
-                                <option value="overd">Automatic(Override)</option> 
-                                <option value="multi">Multiuser Auto</option>
+                                <option value="overd">Automatic(Manual Override)</option> 
                                 <option value="none">None</option>
                             </select>
                             </div>
                         </div>
+                    
+
+                        
+<hr>
                         <div class="row container-fluid  p-2">
                             <div class="col-sm-6 m-0 p-0"> <label for="g">use effective dates  for vouchers</label></div>
                             <div class="col-sm-6 m-0 p-0">
-                                <select name="usedate" id="g" class="form-control">
+                                <select name="uefftdate" id="g" class="form-control">
                                     <option value="no">No</option>
                                     <option value="yes">Yes</option> 
                                    
@@ -114,7 +127,7 @@
                         <div class="row container-fluid  p-2">
                             <div class="col-sm-6 m-0 p-0"> <label for="h">Allow zero valued transactions</label></div>
                             <div class="col-sm-6 m-0 p-0">
-                                <select name="zeroval" id="" class="form-control">
+                                <select name="allow_zero_trans" id="" class="form-control">
                                     <option value="no">No</option>
                                     <option value="yes">Yes</option> 
                                    
@@ -135,7 +148,7 @@
                         <div class="row container-fluid  p-2">
                             <div class="col-sm-6 m-0 p-0"> <label for="j">Allow narration in voucher</label></div>
                             <div class="col-sm-6 m-0 p-0">
-                                <select name="allownr" id="j" class="form-control">
+                                <select name="allow_naration_in_vou" id="j" class="form-control">
                                     <option value="no">No</option>
                                     <option value="yes">Yes</option> 
                                    
@@ -161,7 +174,7 @@
                         <div class="row container-fluid  p-2">
                             <div class="col-sm-6 m-0 p-0"> <label for="l">Print voucher after saving</label></div>
                             <div class="col-sm-6 m-0 p-0">
-                                <select name="providenr" id="l" class="form-control">
+                                <select name="print" id="l" class="form-control">
                                     <option value="no">No</option>
                                     <option value="yes">Yes</option> 
                                    
@@ -178,55 +191,116 @@
                 
             </form>
         </div>
+        <script>
+
+            
         
+
+
+            function hi(){
+                var status = document.getElementById("aa");
+                var a = status.value
+                console.log(a);
+                if( a == "Attendence" )
+                {
+                    document.getElementById("ab").value = "Attd";
+                    // document.getElementById('dd').style.display = "block";
+    
+                }
+                else if( a == "contra" ){
+                    document.getElementById("ab").value = "ctra";
+    
+                }
+                else if( a == "CreditNote" ){
+                    document.getElementById("ab").value = "C/Note";
+    
+                }
+                else if( a == "DebitNote" ){
+                    document.getElementById("ab").value = "D/Note";
+    
+                }
+                else if( a == "DeliveryNote" ){
+                    document.getElementById("ab").value = "Dely Note";
+    
+                }
+                else if( a == "JobWorkinOrder" ){
+                    document.getElementById("ab").value = "Job Wrk in Ordr";
+    
+                }
+                else if( a == "JobWorkOutOrder" ){
+                    document.getElementById("ab").value = "Job Wrk out Ordr";
+    
+                }
+                else if( a == "Journal" ){
+                    document.getElementById("ab").value = "Jrnl";
+    
+                }
+                else if( a == "MaterialIn" ){
+                    document.getElementById("ab").value = "Mat in";
+    
+                }
+                else if( a == "MaterialOut" ){
+                    document.getElementById("ab").value = "Mat out";
+    
+                }
+                else if( a == "Memorandum" ){
+                    document.getElementById("ab").value = "Memo";
+    
+                }
+                else if( a == "Payment" ){
+                    document.getElementById("ab").value = "Pymt";
+    
+                }
+                else if( a == "Payroll" ){
+                    document.getElementById("ab").value = "Pyrl";
+    
+                }
+                else if( a == "PhysicalStock" ){
+                    document.getElementById("ab").value = "Phy stk";
+    
+                }
+                else if( a == "Purchase" ){
+                    document.getElementById("ab").value = "Purc";
+    
+                }
+                else if( a == "PurchaseOrder" ){
+                    document.getElementById("ab").value = "Pruc Order";
+    
+                }
+                else if( a == "Receipt" ){
+                    document.getElementById("ab").value = "Rcpt";
+    
+                }
+                else if( a == "ReceiptNote" ){
+                    document.getElementById("ab").value = "Rcpt Note";
+    
+                }
+                else if( a == "RejectionIn" ){
+                    document.getElementById("ab").value = "Rej In";
+    
+                }
+                else if( a == "RejectionOut" ){
+                    document.getElementById("ab").value = "Rej Out ";
+    
+                }
+                else if( a == "ReversingJournal" ){
+                    document.getElementById("ab").value = "Rev jrnl";
+    
+                }
+                else if( a == "Sales" ){
+                    document.getElementById("ab").value = "Sale";
+    
+                }
+                else if( a == "SalesOrder" ){
+                    document.getElementById("ab").value = "Sales Ordr";
+    
+                }
+                else if( a == "StockJournal" ){
+                    document.getElementById("ab").value = "Stk jrnl";
+    
+                }
+    
+            }
+        </script>
         
     {% endblock %}
-    <option value="Attendance">Attendance</option>
-    <option value="Contra">Contra</option>
-    <option value="Credit Note">Credit Note</option>
-    <option value="Debit Note">Debit Note</option>
-    <option value="Delivery Note">Delivery Note</option>
-    <option value="jobinoder">Job Work In Order</option>
-    <option value="joboutoder">Job Work Out Order</option>
-    <option value="Journal">Journal</option>
-    <option value="Material In">Material In</option>
-    <option value="Material Out">Material Out</option>
-    <option value="Memorandum">Memorandum</option>
-    <option value="Payment">Payment</option>
-    <option value="Payroll">Payroll</option>
-    <option value="Physical Stock">Physical Stock</option>
-    <option value="Purchase">Purchase</option>
-    <option value="Purchase Order">Purchase Order</option>
-    <option value="Receipt">Receipt</option>
-    <option value="Receipt Note">Receipt Note</option>
-    <option value="Rejections In">Rejections In</option>
-    <option value="Rejections Out">Rejections Out</option>
-    <option value="Reversing Journal">Reversing Journal</option>
-    <option value="Sales">Sales</option>
-    <option value="Sales Order">Sales Order</option>
-    <option value="Stock Journal">Stock Journal</option>
-
-    <a href="vouchpage"><button  class="btns_prnt" id="create"><h5>Attendance</h5></button></a>
-    <a href="vouchpage"><button  class="btns_prnt" id="create"><h5>Contra</h5></button></a>
-    <a href="branch"> <button  class="btns_prnt" id="create"><h5>Credit Note</h5></button></a>
-    <a href="branch"><button  class="btns_prnt" id="create"><h5>Debit Note</h5></button></a>
-    <a href="branch"><button  class="btns_prnt" id="create"><h5>Delivery Note</h5></button></a>
-    <a href="branch"><button  class="btns_prnt" id="create"><h5>Delivery Note</h5></button></a>
-    <a href="branch"><button  class="btns_prnt" id="create"><h5>Job Work Out Order</h5></button></a>
-    <a href="branch"><button  class="btns_prnt" id="create"><h5>Journal</h5></button></a>
-    <a href="branch"><button  class="btns_prnt" id="create"><h5>Material In</h5></button></a>
-    <a href="branch"><button  class="btns_prnt" id="create"><h5>Material Out</h5></button></a>
-    <a href="branch"><button  class="btns_prnt" id="create"><h5>Memorandum</h5></button></a>
-    <a href="branch"><button  class="btns_prnt" id="create"><h5>Payment</h5></button></a>
-    <a href="branch"><button  class="btns_prnt" id="create"><h5>Payroll</h5></button></a>
-    <a href="branch"><button  class="btns_prnt" id="create"><h5>Physical Stock</h5></button></a>
-    <a href="branch"><button  class="btns_prnt" id="create"><h5>Purchase</h5></button></a>
-    <a href="branch"><button  class="btns_prnt" id="create"><h5>Purchase Order</h5></button></a>
-    <a href="branch"><button  class="btns_prnt" id="create"><h5>Receipt</h5></button></a>
-    <a href="branch"><button  class="btns_prnt" id="create"><h5>Receipt Note</h5></button></a>
-    <a href="branch"><button  class="btns_prnt" id="create"><h5>Rejections In</h5></button></a>
-    <a href="branch"><button  class="btns_prnt" id="create"><h5>Rejections Out</h5></button></a>
-    <a href="branch"><button  class="btns_prnt" id="create"><h5>Reversing Journal</h5></button></a>
-    <a href="branch"><button  class="btns_prnt" id="create"><h5>Sales</h5></button></a>
-    <a href="branch"><button  class="btns_prnt" id="create"><h5>Sales Order</h5></button></a>
-    <a href="branch"><button  class="btns_prnt" id="create"><h5>Stock Journal</h5></button></a>

@@ -49,6 +49,7 @@
     function setData(){
         document.getElementById('under').value= '*Primary';
         document.getElementById('under').value= 'Bank Accounts';
+       //
         document.getElementById('underForm').style.visibility= "hidden";
         }
 
@@ -76,63 +77,55 @@
                     <div class="row container-fluid  p-2 m-0">
                         <div class="col-sm-4 m-0 p-0"> <label for="under">Under :</label></div>
                         <div class="col-sm-8 m-0 p-0">
-                            <input type="text" id="under" value="*Primary" name="under" class="form-control w-75" placeholder="" 
-                            onclick="showGroup();" >
+                            <select name="under" id="under" class="form-control" >
+                                
+                                <option value="*Primary">*Primary</option>
+                                <option value="Bank Account">Bank Accounts</option>
+                                <option value="Bank OCC A/c">Bank OCC A/c</option>
+                                <option value="Bank OD A/c">Bank OD A/c</option>
+                                <option value="Branch Divisions">Branch Divisions</option>
+                                <option value="Capital Amount">Capital Amount</option>
+                                <option value="Cash in Hand">Cash in Hand</option>
+                                <option value="Current Assets">Current Assets</option>
+                                <option value="Current Liabilities">Current Liabilities</option>
+                                <option value="Deposits (Asset)">Deposits (Asset)</option>
+                                <option value="Direct Expenses">Direct Expenses</option>
+                                <option value="Direct Incomes">Direct Incomes</option>
+                                <option value="Duties and Taxes">Duties and Taxes</option>
+                                <option value="Expenses(Direct)">Expenses(Direct)</option>
+                                <option value="Expenses(Indirect)">Expenses(Indirect)</option>
+                                <option value="Fixed Assets">Fixed Assets</option>
+                                <option value="Income (Direct)">Income (Direct)</option>
+                                <option value="Income (Indirect)">Income (Indirect)</option>
+                                <option value="Investments">Investments</option>
+                                <option value="Loans & Advances (Asset)">Loans & Advances (Asset)</option>
+                                <option value="Loans (Liability)">Loans (Liability)</option>
+                                <option value="Misc. Expenses (Asset)">Misc. Expenses (Asset)</option>
+                                <option value="Provisions">Provisions</option>
+                                <option value="Purchase Accounts">Purchase Accounts</option>
+                                <option value="Reserves & Surplus">Reserves & Surplus</option>
+                                <option value="Retained Earnings">Retained Earnings</option>
+                                <option value="Sales Accounts">Sales Accounts</option>
+                                <option value="Secured Loans">Secured Loans</option>
+                                <option value="Stock-in-Hand">Stock-in-Hand</option>
+                                <option value="Sundry Creditors">Sundry Creditors</option>
+                                <option value="Sundry Debtors">Sundry Debtors</option>
+                                <option value="Suspence A/c">Suspence A/c</option>
+                                <option value="Unsecured Loans">Unsecured Loans</option>  
+                                {% for i in grup %} 
+                                <option >{{i.name}}</option>  
+                                {% endfor %} 
 
+                            </select>
                         </div> 
                     </div>
                     
-                            <!-- <select id="under" name="under" class="form-control ">
-                                <option value="primary" selected>*Primary</option>
-                                <option value="Bank Account">Bank Accouts</option>
-                <option value="Bank OCC A/c">Bank OCC A/c</option>
-                <option value="Bank OD A/c">Bank OD A/c</option>
-                <option value="Bank_Account">Branch Divisions</option>
-                <option value="Bank_Account">Capital Amount</option>
-                <option value="Bank_Account">Cash in Hand</option>
-                <option value="Bank_Account">Current Assets</option>
-                <option value="Bank_Account">Current Liabilities</option>
-                <option value="Bank_Account">Deposits (Asset)</option>
-                <option value="Bank_Account">Direct Expenses</option>
-                <option value="Bank_Account">Direct Incomes</option>
-                <option value="Bank_Account">Duties and Taxes</option>
-                <option value="Bank_Account">Expenses(Direct)</option>
-                <option value="Bank_Account">Expenses(Indirect)</option>
-                <option value="Bank_Account">Fixed Assets</option>
-                <option value="Bank_Account">Income (Direct)</option>
-                <option value="Bank_Account">Income (Indirect)</option>
-                <option value="Bank_Account">Investments</option>
-                <option value="Bank_Account">Loans & Advances (Asset)</option>
-                <option value="Bank_Account">Loans (Liability)</option>
-                <option value="Bank_Account">Misc. Expenses (Asset)</option>
-                <option value="Bank_Account">provisions</option>
-                <option value="Bank_Account">Purchase Accounts</option>
-                <option value="Bank_Account">Reserves & Surplus</option>
-                <option value="Bank_Account">Retained Earnings</option>
-                <option value="Bank_Account">Sales Accounts</option>
-                <option value="Bank_Account">Secured Loans</option>
-                <option value="Bank_Account">Stock-in-Hand</option>
-                <option value="Bank_Account">Sundry Creditors</option>
-                <option value="Bank_Account">Sundry Debtors</option>
-                <option value="Bank_Account">Suspence A/c</option>
-                <option value="Bank_Account">Unsecured Loans</option>   
-        
-                                {% comment %} {% for i in grp %}
-        
-                                <option value="{{i.name}}">{{i.name}}</option>
-        
-                                {% if i.alias is not none %}
-                                <option value="{{i.alias}}">{{i.alias}}</option>
-        
-                                {% endif %}
-        
-                                {% endfor %} {% endcomment %}
-                            </select> -->
+                           
 
                     <div class="row container-fluid  p-2 m-0">
                         <div class="col-sm-4 m-0 p-0"> <label for="subled">Groups behaves like a sub-ledger:</label></div>
                         <div class="col-sm-8 m-0 p-0">
-                            <select id="subled" name="sub_ledger" class=" form-control">
+                            <select id="subled" name="sub_ledger" class=" form-control w-25">
                                 <option value="True">Yes</option>
                                 <option value="False" selected>No</option>
                             </select>
@@ -143,7 +136,7 @@
                     <div class="row container-fluid  p-2 m-0">
                         <div class="col-sm-4 m-0 p-0"> <label for="nett">Nett Debit/Credit Balance for Reporting:</label></div>
                         <div class="col-sm-8 m-0 p-0">
-                            <select id="nett" name="nee" class=" form-control">
+                            <select id="nett" name="nee" class=" form-control w-25">
                                 <option value="True">Yes</option>
                                 <option value="False" selected>No</option>
                             </select>
@@ -156,7 +149,7 @@
                             <br><small style="font-size: 10px;">(for example:taxes,discounts,Sales invoice
                                 entries)</small>:</label></div>
                         <div class="col-sm-8 m-0 p-0">
-                            <select id="cal" name="cal" class=" form-control">
+                            <select id="cal" name="cal" class=" form-control w-25">
                                 <option value="True">Yes</option>
                                 <option value="False" selected>No</option>
                             </select>
@@ -185,39 +178,6 @@
 
 </div> 
 
-<div class="form-popup" id="underForm" style="background-color: rgb(216, 232, 238);" >
-    <form action="" class="form-container1" >
-        <h6 style="background-color:rgb(17, 169, 240) ;color:white">List of Groups</h6>
-    <hr >
-    <div>
-        <table >
-        <tr >
-            <a onclick="setData()" style="color:black;cursor:pointer">&nbsp;&nbsp;*Primary</a><br>
-            <a onclick="setData()" style="color:black;cursor:pointer">&nbsp;&nbsp;Bank Accounts</a><br>
-            <a onclick="setData()" style="color:black;cursor:pointer">&nbsp;&nbsp;Bank OCC A/c</a><br>
-            <a onclick="setData()" style="color:black;cursor:pointer">&nbsp;&nbsp;Bank OD Account</a><br>
-            <a onclick="setData()" style="color:black;cursor:pointer">&nbsp;&nbsp;Branch/Divisions</a><br>
-            <a onclick="setData()" style="color:black;cursor:pointer">&nbsp;&nbsp;Capital Account</a><br>
-            <a onclick="setData()" style="color:black;cursor:pointer">&nbsp;&nbsp;Cash-in-hand</a><br>
-            <a onclick="setData()" style="color:black;cursor:pointer">&nbsp;&nbsp;Current Assets</a><br>
-            <a onclick="setData()" style="color:black;cursor:pointer">&nbsp;&nbsp;Current Liabilities<br>
-            <a onclick="setData()" style="color:black;cursor:pointer">&nbsp;&nbsp;Deposits(Assets)</a><br>
-            <a onclick="setData()" style="color:black;cursor:pointer">&nbsp;&nbsp;Bank Account</a><br>
-            <a onclick="setData()" style="color:black;cursor:pointer">&nbsp;&nbsp;Bank Account</a><br>
-            <a onclick="setData()" style="color:black;cursor:pointer">&nbsp;&nbsp;Bank Account</a><br>
-            <a onclick="setData()" style="color:black;cursor:pointer">&nbsp;&nbsp;Bank Account</a><br>
-            
-        <!-- {% for i in ccentre %}
-       
-    
-        <a onclick="setCostcentre('{{i.cname}}','{{i.id}}')"  class="content" 
-        style="cursor:pointer;color:black;">&nbsp;&nbsp;{{i.cname}}</a><br>
-        {% endfor %} -->
-        </tr>
-        </table>
-    </div>
-    <input type="text" name="underhidden" hidden value="{{i.id}}">
-    </form>
-</div>
+
 
 {% endblock body %}

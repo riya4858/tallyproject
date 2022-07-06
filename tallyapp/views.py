@@ -45,8 +45,8 @@ def companycreate(request):
             website=request.POST['website']
             fin_begin=request.POST['fin_begin']
             books_begin=request.POST['books_begin']
-            # currency_symbol=request.POST['currency_symbol']
-            # formal_name=request.POST['formal_name']
+            currency_symbol=request.POST['currency_symbol']
+            formal_name=request.POST['formal_name']
             cmp=Companies.objects.filter(name=name)
             if cmp:
                 messages.info(request,'Company name already exists!!')
@@ -57,7 +57,7 @@ def companycreate(request):
                     state=state,country=country,
                     pincode=pincode,
                     telephone=telephone,mobile=mobile,fax=fax,email=email,website=website,fin_begin=fin_begin,
-                    books_begin=books_begin)
+                    books_begin=books_begin,currency_symbol=currency_symbol,formal_name=formal_name)
                 ctg.save()
             
             
@@ -98,10 +98,54 @@ def costcentre(request,pk):
     return render(request,'costcentre.html',{'cmp':cmp,'ccentre':ccentre})
 
 
-def ratesofexchange(request):
-    return render(request,'ratesofexchange.html')
-def voucher(request):
-    return render(request,'voucher.html')
+def ratesofexchange(request,pk):
+    cmp=Companies.objects.get(id=pk)
+    cur=Currency.objects.filter(company_id=cmp)
+    return render(request,'ratesofexchange.html',{'cmp':cmp,'cur':cur})
+
+def voucher(request,pk):
+    cmp=Companies.objects.get(id=pk)
+    if request.method == 'POST':
+        cmp=Companies.objects.get(id=pk)
+        Vname = request.POST['nam']
+        alias = request.POST['alias']
+        vtype = request.POST['vtype']
+        abbre = request.POST['abbre']
+        activ_vou_typ = request.POST['avtyp']  # bool
+        meth_vou_num = request.POST['meth_vou_num']
+        useadv = request.POST.get('useadvc', False)
+        prvtdp = request.POST.get('prvtdp', False)
+        use_effct_date = request.POST['uefftdate']  # bool
+        allow_zero_trans = request.POST['allow_zero_trans']  # bool
+        allow_naration_in_vou = request.POST['allow_naration_in_vou']  # bool
+        optional = request.POST['optional'] 
+        provide_narr = request.POST['providenr']  # bool
+        print = request.POST['print']  # bool
+
+        if Voucher.objects.filter(voucher_name=Vname).exists():
+               pass
+        
+        mdl = Voucher(
+
+            voucher_name=Vname,
+            alias=alias,
+            voucher_type=vtype,
+            abbreviation=abbre,
+            active_this_voucher_type=activ_vou_typ,
+            method_voucher_numbering=meth_vou_num,
+            use_effective_date=use_effct_date,
+            use_adv_conf = useadv,
+            prvnt_duplictes =prvtdp,
+            allow_zero_value_trns=allow_zero_trans,
+            allow_naration_in_voucher=allow_naration_in_vou,
+            make_optional=optional,
+            provide_naration=provide_narr,
+            print_voucher=print,
+            company=cmp
+
+        )
+        mdl.save()
+    return render(request,'voucher.html',{'cmp':cmp})
 
 def currency(request,pk):
     cmp=Companies.objects.get(id=pk)
@@ -137,20 +181,25 @@ def creategroup(request,pk):
         nett = request.POST['nee']
         calc = request.POST['cal']
         meth = request.POST['meth']
-        
-        mdl = Group(
-            name=gname,
-            alias=alia,
-            under=under,
-            sub_ledger=sub_ledger,
-            debit_credit=nett,
-            calculation=calc,
-            used_purchase=meth,
-            company=cmp
-        )
-        mdl.save()
+        grp=Group.objects.filter(name=gname)
+        if grp:
+            # messages.info(request,'Company name already exists!!')
+            pass
+        else:
+            mdl = Group(
+                name=gname,
+                alias=alia,
+                under=under,
+                sub_ledger=sub_ledger,
+                debit_credit=nett,
+                calculation=calc,
+                used_purchase=meth,
+                company=cmp
+            )
+            mdl.save()
         # return redirect('index')
-    return render(request,'group.html',{'cmp':cmp})
+    grup=Group.objects.filter(company_id=cmp)
+    return render(request,'group.html',{'cmp':cmp,'grup':grup})
     
 
 

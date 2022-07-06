@@ -2,8 +2,7 @@ from django.db import models
 
 class Countries(models.Model):
     name=models.CharField(max_length=225)
-    currency_symbol=models.CharField(max_length=225,default='र')
-    formal_name=models.CharField(max_length=225,default='INR')
+    
 
     
 class States(models.Model):
@@ -25,8 +24,10 @@ class Companies(models.Model):
     website=models.CharField(max_length=225)
     fin_begin=models.DateField(null=True)
     books_begin=models.DateField(null=True)
-    country=models.ForeignKey(Countries,on_delete=models.CASCADE,blank=True,null=True)
     state=models.ForeignKey(States,on_delete=models.CASCADE,blank=True,null=True)
+    country=models.ForeignKey(Countries,on_delete=models.CASCADE,blank=True,null=True)
+    currency_symbol=models.CharField(max_length=225)
+    formal_name=models.CharField(max_length=225)
     active=models.BooleanField(default=True)
     
     
@@ -39,7 +40,7 @@ class Group(models.Model):
     calculation = models.BooleanField(default=False)
     used_purchase = models.CharField(max_length=225,null=True,blank=True)
     company=models.ForeignKey(Companies,on_delete=models.CASCADE,blank=True,null=True)
-    nature_of_group=models.CharField(max_length=225)
+    
 
 class Features(models.Model):
     maintain_accounts = models.BooleanField(default=True)
@@ -84,6 +85,23 @@ class Currency(models.Model):
     symbol_and_amount = models.BooleanField(default=False)
     after_decimal = models.CharField(max_length=225)
     amount_in_words = models.CharField(max_length=225)
+    company=models.ForeignKey(Companies,on_delete=models.CASCADE,blank=True,null=True)
+    
+class Voucher(models.Model):
+    voucher_name = models.CharField(max_length=225)
+    alias = models.CharField(max_length=225)
+    voucher_type = models.CharField(max_length=225)
+    abbreviation = models.CharField(max_length=225)
+    active_this_voucher_type =  models.CharField(max_length=225)
+    method_voucher_numbering = models.CharField(max_length=225)
+    use_adv_conf = models.CharField(max_length=225,blank=True)
+    prvnt_duplictes = models.CharField(max_length=225,default="Null",blank=True)
+    use_effective_date =  models.CharField(max_length=225,default="Null")
+    allow_zero_value_trns =  models.CharField(max_length=225)
+    allow_naration_in_voucher =  models.CharField(max_length=225)
+    make_optional =  models.CharField(max_length=225)
+    provide_naration =  models.CharField(max_length=225)
+    print_voucher = models.CharField(max_length=225)
     company=models.ForeignKey(Companies,on_delete=models.CASCADE,blank=True,null=True)
     
     

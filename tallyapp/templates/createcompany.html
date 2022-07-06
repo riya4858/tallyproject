@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block body %}
 <script src="https://code.jquery.com/jquery-git.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <style>
     table.one {
         position:relative;
@@ -43,6 +44,32 @@
         cursor: pointer;
         text-decoration: none;
     }
+    .scrollbar {
+        margin-left: 30px;
+        float: left;
+        height: 300px;
+        width: 269px;
+        background: rgb(216, 232, 238);
+        overflow-y: scroll;
+        margin-bottom: 25px;
+      }
+      
+      
+      .scrollbar-primary::-webkit-scrollbar {
+        width: 50px;
+        background-color: #0b7534;
+      }
+      
+      .scrollbar-primary::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 4px rgba(214, 57, 9, 0.1);
+        background-color: #dd9078;
+      }
+      
+      .scrollbar-primary {
+        scrollbar-color: #86d5f5 #f1f3f3;
+      }
+      
 </style>
 <script>
     function save(){
@@ -62,9 +89,10 @@
     }
     
     function showCountry(){
-        
+        document.getElementById('myForm1').style.visibility= "visible";
         document.getElementById("myForm1").style.display = "block";
         
+
         
     }
     function setState(state,stateId){
@@ -78,8 +106,9 @@
     function setCountry(country,countryId){
         document.getElementById('country').value= country;
         document.getElementById('myForm1').style.visibility= "hidden";
+        document.getElementById('currency_symbol').value = 'Rs'
+        document.getElementById('formal_name').value = 'INR'
         document.getElementById('pincode').focus();
-       
         document.getElementsByName('countryhidden').value= countryId;
        
     }
@@ -95,7 +124,18 @@
     function copyName(){
         document.getElementById("mailing_name").value = document.getElementById("companyname").value;
     }
-    
+    function otherCountry(country,countryId){
+        document.getElementById('country').value= country;
+        document.getElementById('myForm1').style.visibility= "hidden";
+        
+        document.getElementById('currency_symbol').value = ''
+        document.getElementById('currency_symbol').focus();
+        document.getElementById('formal_name').value = ''
+        
+       // document.getElementById('formal_name').focus();
+       
+        document.getElementsByName('countryhidden').value= countryId;
+    }
 
 </script>
 {% for msg in messages %}
@@ -109,7 +149,7 @@
             <div class="col-sm-10 m-0 p-0" style=" background-color:rgba(0,0,0,0.2); width:50%">
                 <!-- <a href="javascript:history.go(-1);" class="close">+</a> -->
             <div  class="bg-info text-light">Company Creation</div>
-            
+            <div  style="text-align: center;margin-top:-35px;font-weight:900">{{cmp.name}}</div>
                    
                     <div class="container" style="padding:40px;">
         <form id="create" action="{% url 'companycreate' %}" method="post" class="needs-validation" novalidate>
@@ -119,8 +159,7 @@
             <div class="col-md-4 mt-3">
                 <label for="validationCustom02">Company name</label>
                 <input id="companyname" type="text" class="form-control" id="validationCustom02" name="name"
-                required style="background-color: #2f516f;color: white;" 
-                onkeypress="document.getElementById('mailing_name').focus()">
+                required style="background-color: #2f516f;color: white;" >
             </div>
             <div class="col-md-4 mt-3">
                 <label for="validationCustom02">Mailing name</label>
@@ -131,26 +170,26 @@
             <div class="col-md-4 mt-3">
                 <label for="validationCustom03">Address1</label>
                 <input type="text" id="address1" class="form-control" id="validationCustom03" name="address1"
-                required style="background-color: #2f516f;color: white;"
-                onkeypress="document.getElementById('address2').focus();">
+                required style="background-color: #2f516f;color: white;">
+                
             </div>
             <div class="col-md-4 mt-3">
                 <label for="validationCustom03">Address2</label>
                 <input type="text" id="address2" class="form-control" id="validationCustom03" name="address2"
                 required style="background-color: #2f516f;color: white;"
-                onkeypress="document.getElementById('address3').focus();">
+                >
             </div>
             <div class="col-md-4 mt-3">
                 <label for="validationCustom03">Address3</label>
                 <input type="text" id="address3" class="form-control" id="validationCustom03" name="address3"
                 required style="background-color: #2f516f;color: white;"
-                onkeypress="document.getElementById('address4').focus();">
+                >
             </div>
             <div class="col-md-4 mt-3">
                 <label for="validationCustom03">Address4</label>
                 <input type="text" id="address4" class="form-control" id="validationCustom03" name="address4"
                 required style="background-color: #2f516f;color: white;"
-                onkeypress="document.getElementById('state').focus();">
+                >
             </div>
             <div class="col-md-4 mt-3">
                 <label for="validationCustom03">State</label>
@@ -159,28 +198,16 @@
                 required style="background-color: #2f516f;color: white;"
                 onclick="showState(document.getElementById('country').value);">
             </div>
-            <div class="form-popup" id="myForm" style="background-color: rgb(216, 232, 238);" >
+            <div class="form-popup " id="myForm" style="background-color: rgb(216, 232, 238);" >
                 <form action="" class="form-container" id="countryform" >
                     <h6 style="background-color:rgb(17, 169, 240) ;color:white">List of states</h6>
                     <a data-toggle="modal" data-target="#myModal" href="" style="margin-left:218px; color:black;">New State</a>
                     <a  onclick="showCountry();" style="margin-left:180px;color:black;cursor:pointer" >Change Country</a>  
                 <hr >
-                <div>
-                   
-                    <!-- <table >
-                    <tr >
-                                 
-                    {% for i in com %}
-                
-                    {% if i.country.name == "India" %}
+                <div class="scrollbar scrollbar-primary">
                     
-                    <a onclick="setState('{{i.name}}','{{i.id}}')" class="content" style="cursor:pointer;color:black;">&nbsp;&nbsp;{{i.name}}</a><br>
-                   {% endif %}
                    
-                    {% endfor %}
-                    </tr>
-                    </table> -->
-                    <table >
+                    <table  >
                         <tr >
                         {% for i in com %}
                        
@@ -229,8 +256,11 @@
                     <tr >
                     {% for i in country %}
                    
-                
+                        {% if i.name == 'India' %}
                     <a onclick="setCountry('{{i.name}}','{{i.id}}')"  class="content" style="cursor:pointer;color:black;">&nbsp;&nbsp;{{i.name}}</a><br>
+                    {% else %}
+                    <a onclick="otherCountry('{{i.name}}','{{i.id}}')"  class="content" style="cursor:pointer;color:black;">&nbsp;&nbsp;{{i.name}}</a><br>
+                    {% endif %}
                     {% endfor %}
                     </tr>
                     </table>
@@ -270,8 +300,8 @@
             </div>
             <div class="col-md-4 mt-3">
                 <label for="validationCustom03">Mobile</label>
-                <input id="mobile" type="text" class="form-control" id="validationCustom03" name="mobile"
-                required style="background-color: #2f516f;color: white;"
+                <input id="mobile" type="text" class="form-control" id="validationCustom03" pattern= "[0-9]" name="mobile"
+                required style="background-color: #2f516f;color: white;  "
                 >
             </div>
             <div class="col-md-4 mt-3">
@@ -284,7 +314,7 @@
         
             <div class="col-md-4 mt-3">
                 <label for="validationCustom03">Email</label>
-                <input id="email" type="text" class="form-control" id="validationCustom03" name="email"
+                <input id="email" type="email" class="form-control" id="validationCustom03" name="email"
                 required style="background-color: #2f516f;color: white;"
                 >
             </div>
@@ -296,37 +326,36 @@
        
             <div class="col-md-4 mt-3">
                 <label for="validationCustom03">Financial year begin from</label>
-                <input id="fin_year" type="date" class="form-control" id="validationCustom03" name="fin_begin"
+                <input id="fin_year" value="1-Apr-22" type="date" class="form-control" id="validationCustom03" name="fin_begin"
                 required style="background-color: #2f516f;color: white;"
                 >
             </div>
             <div class="col-md-4 mt-3">
                 <label for="validationCustom03">Books beginning from</label>
-                <input id="books_begin" type="date" class="form-control" id="validationCustom03" name="books_begin"
+                <input id="books_begin" value="1-Apr-22" type="date" class="form-control" id="validationCustom03" name="books_begin"
+                required style="background-color: #2f516f;color: white;"
+               >
+            </div>
+            <div class="col-md-4 mt-3">
+                <label for="validationCustom03">Base currency symbol </label>
+                <input id="currency_symbol" value="Rs" type="text" class="form-control" id="validationCustom03" 
+                name="currency_symbol"
+                required style="background-color: #2f516f;color: white;"
+               >
+            </div>
+            <div class="col-md-4 mt-3">
+                <label for="validationCustom03">Formal name</label>
+                <input id="formal_name" value="INR" type="text" class="form-control" id="validationCustom03"
+                 name="formal_name"
                 required style="background-color: #2f516f;color: white;"
                >
             </div>
             
         </div>
         <hr>
-        <div class="row">
-                        <div class="col-md-4 mt-3">
-                            <label for="validationCustom03">Base currency symbol</label>
-                            <input id="currency_symbol" type="text" class="form-control" id="validationCustom03" name="currency_symbol"
-                                   required style="background-color: #2f516f;color: white;"
-    
-                                   value="Rs">
-                            <div class="valid-feedback">Looks good!</div>
-                        </div>
-                        <div class="col-md-4 mt-3">
-                            <label for="validationCustom03">Formal name</label>
-                            <input id="formal_name" type="text" class="form-control" id="validationCustom03" name="formal_name"
-                                   required style="background-color: #2f516f;color: white;"
-                                   value="INR"
-                                   >
-                            <div class="valid-feedback">Looks good!</div>
-                        </div>
-                    </div><br>
+        
+                        
+                    <br>
             <div class="col text-center" >
                 <button  onClick='save()' type="submit" class="btn btn-info" >Create</button>
             <!-- <input  type="submit" value="create"> -->
@@ -338,7 +367,12 @@
         </div>
     </div>
 </div>
-
+<!-- <script>
+    $("#otherCountry").click(function() {
+        $("#currency_symbol").show();
+        $("#formal_name").show();
+      });
+</script> -->
 
 
 

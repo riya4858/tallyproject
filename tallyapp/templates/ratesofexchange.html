@@ -50,23 +50,24 @@
         }
     </style>
         <div>
-            <h6 style="" class="bg-info text-light m-0 p-2">Multi Currency Alteration</h6>
-            
-            <div class="col-sm-2   m-0 p-0">
-                <h6>For 1-Apr-22</h6>
+            <h6 style="" class="bg-info text-light p-1">Multi-Currency Alteration</h6>
+            <div  style="text-align: center;margin-top:-35px;font-weight:900">{{cmp.name}}</div><br>
+            <div class="row container-fluid  p-2 m-0">
+                <div class="col-sm-4 m-0 p-0"> <label for="gname">Date for rate of exchange :</label>
+                 <a id="dateperiod2" style="font-weight: 900;">1-Apr-22</a> 
             </div>
 
            
 
-            <div style="overflow: scroll ;max-height: 70vh; width: 100%;background-color:rgba(0,0,0,0.4); ">
+            <div style="max-height: 100vh; width: 100%;background-color:rgba(0,0,0,0.4); ">
                 <Table class="w-100 table text-center" border="1">
                     <tr>
-                        <th rowspan="2">Sl.no</th>
-                        <th rowspan="2">currency</th>
+                        <th width="20px" rowspan="2">S.No</th>
+                        <th class="text-left" width="400px" rowspan="2">Currency</th>
                         <th rowspan="2">Std.rate</th>
                         <th colspan="2">Selling rate</th>
                         <th colspan="2">Buying rate</th>
-                        <th rowspan="2">Action</th>
+                        
         
                     </tr>
                     <tr>
@@ -80,22 +81,27 @@
                     <tr>
                         <form action="save_currency_data" method="post">
                             {% csrf_token %}
-                      <td> <input type="text" class="w-100 from-control" name="slno"></td>
-                      <td> <select name="curname" id="" class="form-control">
-                        {% for i in grp2 %}
-                        <option value="{{i.formal_name}}">{{i.formal_name}} ( {{i.ISO_code}} )</option>
+                            <!-- slno -->
+                      <td> 1</td>
+                      <!-- currencylist -->
+                      <td class="text-left"> 
+                        {% for i in cur %}
+                        <a  >{{i.symbol}} ( {{i.formal_name}})</a><br>
                         {% endfor %}
         
         
-                      </select></td>
-                      <td> <input type="text" class="w-100 from-control" name="stdr"></td>
-                      <td> <input type="text" class="w-100 from-control" name="lvr"></td>
-                      <td> <input type="text" class="w-100 from-control" name="sr"></td>
-                      <td> <input type="text" class="w-100 from-control" name="lvr2"></td>
-                      <td> <input type="text" class="w-100 from-control" name="sr2"></td>
-                      <td> <button class="btn btn-success">Enter</button></td> 
+                     </td>
+                     <!-- standard_rate -->
+                      <td> </td>
+                      <td> </td>
+                      <td> </td>
+                      <td> </td>
+                      <td> </td>
+                      
+                      
                     </form>
                     </tr>
+
                     {% for i in obj %}
                     <tr>
                        
@@ -112,8 +118,12 @@
                     </tr>
                     
                     {% endfor %}
+                    
                 </Table>
-
+                <div class="col text-center" >
+                    
+                <!-- <input  type="submit" value="create"> -->
+                </div>
             </div>
        
         </div> 

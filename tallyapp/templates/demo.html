@@ -1,268 +1,95 @@
-{% extends 'base.html' %}
-{% block body %}
-<script src="https://code.jquery.com/jquery-git.js"></script>
-<style>
-    .close {
-        position: absolute;
-        top: 3px;
-        right: 8px;
-        font-size: 25px;
-        color: rgb(255, 255, 255);
-        transform: rotate(45deg);
-        cursor: pointer;
-        text-decoration: none;
-    }
-    .flexy{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .form-popup {
-        display: none;
-        position: fixed;
-        top: 200px;
-        right: 15px;
-        border: 1px solid #f1f1f1;
-        z-index: 9;
-        width: 300px;
-        height: 400px;
-      }
+class Companies(models.Model):
+    name=models.CharField(max_length=225)
+    mailing_name=models.CharField(max_length=225)
+    address1=models.CharField(max_length=225)
+    address2=models.CharField(max_length=225)
+    address3=models.CharField(max_length=225)
+    address4=models.CharField(max_length=225)
+    pincode=models.CharField(max_length=6)
+    telephone=models.CharField(max_length=225)
+    mobile=models.CharField(max_length=225)
+    fax=models.CharField(max_length=225)
+    email=models.EmailField()
+    website=models.CharField(max_length=225)
+    fin_begin=models.DateField(null=True)
+    books_begin=models.DateField(null=True)
+    state=models.ForeignKey(States,on_delete=models.CASCADE,blank=True,null=True)
+    country=models.ForeignKey(Countries,on_delete=models.CASCADE,blank=True,null=True)
+    currency_symbol=models.CharField(max_length=225)
+    formal_name=models.CharField(max_length=225)
+    active=models.BooleanField(default=True)
     
-      .content a:hover {background-color: rgb(238, 167, 75);}
-      
-      /* Add styles to the form container */
-      .form-container {
-        max-width: 50px;
-        height: 500px;
-        padding: 10px;
-      }
-      .form-container1 {
-        max-width: 350px;
-        height: 500px;
-        padding: 2px;
-       
-      }
+    class Group(models.Model):
+    name = models.CharField(max_length=225)
+    alias = models.CharField(max_length=225,null=True)
+    under = models.CharField(max_length=225)
+    sub_ledger = models.BooleanField(default=False)
+    debit_credit = models.BooleanField(default=False)
+    calculation = models.BooleanField(default=False)
+    used_purchase = models.CharField(max_length=225,null=True,blank=True)
+    company=models.ForeignKey(Companies,on_delete=models.CASCADE,blank=True,null=True)
+    nature_of_group=models.CharField(max_length=225)
 
-      #scrollbar {
-        background: rgb(216, 232, 238);
-        color: white;
-        padding: 15px;
-        width: 100%;
-        height: 100%;
-       
-        overflow: scroll;
-        border: 1px solid #ccc;
-      }
+class Features(models.Model):
+    maintain_accounts = models.BooleanField(default=True)
+    bill_wise_entry = models.BooleanField(default=True)
+    cost_centres = models.BooleanField(default=False)
+    interest_calc = models.BooleanField(default=True)
+    maintain_inventory = models.BooleanField(default=True)
+    integrate_accounts = models.BooleanField(default=True)
+    multiple_price_level = models.BooleanField(default=True)
+    batches = models.BooleanField(default=True)
+    expirydate_batches = models.BooleanField(default=True)
+    joborder_processing = models.BooleanField(default=True)
+    sub_ledger = models.BooleanField(default=True)
+    cost_tracking= models.BooleanField(default=True)
+    job_costing = models.BooleanField(default=True)
+    discount_invoices = models.BooleanField(default=True)
+    Billed_Quantity = models.BooleanField(default=True)
+    gst = models.BooleanField(default=False)
+    tds = models.BooleanField(default=False)
+    tcs = models.BooleanField(default=False)
+    vat = models.BooleanField(default=False)
+    excise = models.BooleanField(default=True)
+    servicetax = models.BooleanField(default=True)
+    payroll = models.BooleanField(default=False)
+    multiple_addrss = models.BooleanField(default=True)
+    vouchers = models.BooleanField(default=True)
+    company=models.ForeignKey(Companies,on_delete=models.CASCADE,blank=True,null=True)
 
+class Costcentre(models.Model):
+    cname = models.CharField(max_length=225)
+    alias = models.CharField(max_length=225,null=True)
+    under = models.CharField(max_length=225)
+    company=models.ForeignKey(Companies,on_delete=models.CASCADE,blank=True,null=True)
     
-      
-</style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script>
-    $(document).ready(function() {
-        document.getElementById("compName").innerHTML = localStorage.getItem("compName");
-        //document.getElementById("compId").innerHTML = localStorage.getItem("compId");
-        
-
-    });
+class Currency(models.Model):
+    symbol = models.CharField(max_length=225)
+    formal_name = models.CharField(max_length=225)
+    currency_code = models.CharField(max_length=225)
+    decimal_places = models.CharField(max_length=225)
+    show_in_millions = models.BooleanField(default=False)
+    suffix_symbol = models.BooleanField(default=False)
+    symbol_and_amount = models.BooleanField(default=False)
+    after_decimal = models.CharField(max_length=225)
+    amount_in_words = models.CharField(max_length=225)
+    company=models.ForeignKey(Companies,on_delete=models.CASCADE,blank=True,null=True)
     
-    function showData(){
-        
-        document.getElementById("myForm1").style.display = "block";
-    }
-
-    function showunder(that){
-        var status = document.getElementById("under");
-        var a = status.value
-        console.log(a);
-        if( a == "Primary" ){
-            console.log(a);
-
-            document.getElementById('nog').style.display = "block";
-        }
-    }
-    function save(route){
-        window.location.href=route+"/"+localStorage.getItem("compId");
-                
-     }
-   
-
-     function myFunc() {
-        compId= document.getElementById('compId').innerHTML
-        
-    }
-</script>
-
-<body onload="myFunc()"></body>
-<div class="row container-fluid p-0 mx-0">
-    <div class="col-sm-3 m-0 p-0"></div>
+class Voucher(models.Model):
+    voucher_name = models.CharField(max_length=225)
+    alias = models.CharField(max_length=225)
+    voucher_type = models.CharField(max_length=225)
+    abbreviation = models.CharField(max_length=225)
+    active_this_voucher_type =  models.CharField(max_length=225)
+    method_voucher_numbering = models.CharField(max_length=225)
+    use_adv_conf = models.CharField(max_length=225,blank=True)
+    prvnt_duplictes = models.CharField(max_length=225,default="Null",blank=True)
+    use_effective_date =  models.CharField(max_length=225,default="Null")
+    allow_zero_value_trns =  models.CharField(max_length=225)
+    allow_naration_in_voucher =  models.CharField(max_length=225)
+    make_optional =  models.CharField(max_length=225)
+    provide_naration =  models.CharField(max_length=225)
+    print_voucher = models.CharField(max_length=225)
+    company=models.ForeignKey(Companies,on_delete=models.CASCADE,blank=True,null=True)
     
-    <div class="col-sm-6 m-0 p-0" style=" background-color:rgba(0,0,0,0.2);">
-        <a href="javascript:history.go(-1);" class="close">+</a>
-        
-
-    <h6  class="bg-info text-light p-2">Group Creation</h6>
-    <div id="compName"  style="text-align: center;margin-top:-35px;font-weight:900"></div>
     
-
-<form id="myForm" action="" method="post" class="p-5">
-        {% csrf_token %}
-   
-        
-      
-        <script>
-            function myfunction(){
-            if(document.getElementById('under').value= '*Primary')
-            {
-            
-            document.getElementById("myform").style.display = "block";
-            document.getElementById('myform1').style.visibility= "hidden";
-            }
-            else{
-                document.getElementById("myform").style.visibility = "hidden";
-            }
-            }
-        </script>
-        
-       
-
-
-                    <div class="row container-fluid  p-2 m-0">
-                        <div class="col-sm-4 m-0 p-0"> <label for="gname">Name :</label></div>
-                        <div class="col-sm-8 m-0 p-0"><input type="text" id="gname" onfocus="this.value=''" name="gname" class="form-control" placeholder=""></div> 
-                    </div>
-
-                    <div class="row container-fluid  p-2 m-0">
-                        <div class="col-sm-4 m-0 p-0"> <label for="alia">(Alias) :</label></div>
-                        <div class="col-sm-8 m-0 p-0"><input type="text" id="alia" name="alia"class="form-control" placeholder=""></div> 
-                    </div>
-                    <div class="row container-fluid  p-2 m-0">
-                        <div class="col-sm-4 m-0 p-0"> <label for="alia">Under  :</label></div>
-                        <div class="col-sm-8 m-0 p-0"><input type="text" id="under" name="under"class="form-control" placeholder="" 
-                            required  onclick="showData();"
-                            value="Capital Amount"></div> 
-                    </div>       
-                    <!-- <div class="row container-fluid  p-2 m-0" id="myform" style="display:none">
-                        <div class="col-sm-4 m-0 p-0"> <label for="meth">Nature of Group :</label></div>
-                        <div class="col-sm-8 m-0 p-0">
-                            <select  name="nature_of_group" class=" form-control ">
-                                <option value="" selected>Assets</option>
-                                <option value="Appropriate by Qty">Expense</option>
-                                <option value="Appropriate by Value">Income</option>
-                                <option value="Appropriate by Value">Liability</option>
-                            </select>
-                        </div> 
-                    </div> -->
-                
-                    <div class="row container-fluid  p-2 m-0">
-                        <div class="col-sm-4 m-0 p-0"> <label for="subled">Groups behaves like a sub-ledger:</label></div>
-                        <div class="col-sm-8 m-0 p-0">
-                            <select id="sub_ledger" name="sub_ledger" class=" form-control w-25">
-                                <option value="True">Yes</option>
-                                <option value="False" selected>No</option>
-                            </select>
-                        </div> 
-                    </div>
-
-
-                    <div class="row container-fluid  p-2 m-0">
-                        <div class="col-sm-4 m-0 p-0"> <label for="nett">Nett Debit/Credit Balance for Reporting:</label></div>
-                        <div class="col-sm-8 m-0 p-0">
-                            <select id="nett" name="nee" class=" form-control w-25">
-                                <option value="True">Yes</option>
-                                <option value="False" selected>No</option>
-                            </select>
-                        </div> 
-                    </div>
-
-                    <div class="row container-fluid  p-2 m-0">
-                        <div class="col-sm-4 m-0 p-0"> <label for="cal">Used for
-                            calculation
-                            <br><small style="font-size: 10px;">(for example:taxes,discounts,Sales invoice
-                                entries)</small>:</label></div>
-                        <div class="col-sm-8 m-0 p-0">
-                            <select id="cal" name="cal" class=" form-control w-25">
-                                <option value="True">Yes</option>
-                                <option value="False" selected>No</option>
-                            </select>
-                        </div> 
-                    </div>
-
-                    <div class="row container-fluid  p-2 m-0">
-                        <div class="col-sm-4 m-0 p-0"> <label for="meth"> Method to allocate when used in purchase invoice :</label></div>
-                        <div class="col-sm-8 m-0 p-0">
-                            <select id="meth" name="meth" class=" form-control ">
-                                <option value="" selected>Not Applicable</option>
-                                <option value="Appropriate by Qty">Appropriate by Qty</option>
-                                <option value="Appropriate by Value">Appropriate by Value</option>
-                            </select>
-                        </div> 
-                    </div>
-
-                    <div class="col text-center">
-                        <button  onClick="save('create_group')" type="submit" class="btn btn-info" >Create</button>
-                    <!-- <input  type="submit" value="create"> -->
-                    </div>
-                    <div class="form-popup" id="myForm1" style="background-color: rgb(216, 232, 238);" >
-                        <form action="" class="form-container1" >
-                            <a href="javascript:history.go(1);" class="close">+</a>
-                            <h6 style="background-color:rgb(17, 169, 240) ;color:white">List of Groups</h6>
-                            
-                             
-                        <hr >
-                        <div  id="scrollbar">
-                                                              
-                        
-            <a onclick="document.getElementById('under').value= '*Primary'"  class="content" style="cursor:pointer;color:black;">&nbsp;&nbsp;*Primary</a><br>
-            <a onclick="document.getElementById('under').value= 'Bank Accounts'"  class="content" style="cursor:pointer;color:black;">&nbsp;&nbsp;Bank Accounts</a><br>
-            <a onclick="document.getElementById('under').value= 'Bank OCC A/c'"  class="content" style="cursor:pointer;color:black;">&nbsp;&nbsp;Bank OCC A/c</a><br>
-            <a onclick="document.getElementById('under').value= 'Bank OD A/c'"  class="content" style="cursor:pointer;color:black;">&nbsp;&nbsp;Bank OD A/c</a><br>
-            <a onclick="document.getElementById('under').value= 'Branch Divisions'"  class="content" style="cursor:pointer;color:black;">&nbsp;&nbsp;Branch Divisions</a><br>
-            <a onclick="document.getElementById('under').value= 'Capital Amount'"  class="content" style="cursor:pointer;color:black;">&nbsp;&nbsp;Capital Amount</a><br>
-            <a onclick="document.getElementById('under').value= 'Cash in Hand'"  class="content" style="cursor:pointer;color:black;">&nbsp;&nbsp;Cash in Hand</a><br>
-            <a onclick="document.getElementById('under').value= 'Current Assets'"  class="content" style="cursor:pointer;color:black;">&nbsp;&nbsp;Current Assets</a><br>
-            <a onclick="document.getElementById('under').value= 'Current Liabilities'"  class="content" style="cursor:pointer;color:black;">&nbsp;&nbsp;Current Liabilities</a><br>
-            <a onclick="document.getElementById('under').value= 'Deposits (Asset)'"  class="content" style="cursor:pointer;color:black;">&nbsp;&nbsp;Deposits (Asset)</a><br>
-            <a onclick="document.getElementById('under').value= 'Direct Expenses'"  class="content" style="cursor:pointer;color:black;">&nbsp;&nbsp;Direct Expenses</a><br>
-            <a onclick="document.getElementById('under').value= 'Direct Incomes'"  class="content" style="cursor:pointer;color:black;">&nbsp;&nbsp;Direct Incomes</a><br>
-            <a onclick="document.getElementById('under').value= 'Duties and Taxes'"  class="content" style="cursor:pointer;color:black;">&nbsp;&nbsp;Duties and Taxes</a><br>
-            <a onclick="document.getElementById('under').value= 'Expenses(Direct)'"  class="content" style="cursor:pointer;color:black;">&nbsp;&nbsp;Expenses(Direct)</a><br>
-            <a onclick="document.getElementById('under').value= 'Expenses(Indirect)'"  class="content" style="cursor:pointer;color:black;">&nbsp;&nbsp;Expenses(Indirect)</a><br>
-            <a onclick="document.getElementById('under').value= 'Fixed Assets'"  class="content" style="cursor:pointer;color:black;">&nbsp;&nbsp;Fixed Assets</a><br>
-            <a onclick="document.getElementById('under').value= 'Income (Direct)'"  class="content" style="cursor:pointer;color:black;">&nbsp;&nbsp;Income (Direct)</a><br>
-            <a onclick="document.getElementById('under').value= 'Income (Indirect)'"  class="content" style="cursor:pointer;color:black;">&nbsp;&nbsp;Income (Indirect)</a><br>
-            <a onclick="document.getElementById('under').value= 'Investments'"  class="content" style="cursor:pointer;color:black;">&nbsp;&nbsp;Investments</a><br>
-            <a onclick="document.getElementById('under').value= 'Loans & Advances (Asset)'"  class="content" style="cursor:pointer;color:black;">&nbsp;&nbsp;Loans & Advances (Asset)</a><br>
-            <a onclick="document.getElementById('under').value= 'Loans (Liability)'"  class="content" style="cursor:pointer;color:black;">&nbsp;&nbsp;Loans (Liability)</a><br>
-            <a onclick="document.getElementById('under').value= 'Misc. Expenses (Asset)'"  class="content" style="cursor:pointer;color:black;">&nbsp;&nbsp;Misc. Expenses (Asset)</a><br>
-            <a onclick="document.getElementById('under').value= 'Provisions'"  class="content" style="cursor:pointer;color:black;">&nbsp;&nbsp;Provisions</a><br>
-            <a onclick="document.getElementById('under').value= 'Purchase Accounts'"  class="content" style="cursor:pointer;color:black;">&nbsp;&nbsp;Purchase Accounts</a><br>
-            <a onclick="document.getElementById('under').value= 'Reserves & Surplus'"  class="content" style="cursor:pointer;color:black;">&nbsp;&nbsp;Reserves & Surplus</a><br>
-            <a onclick="document.getElementById('under').value= 'Retained Earnings'"  class="content" style="cursor:pointer;color:black;">&nbsp;&nbsp;Retained Earnings</a><br>
-            <a onclick="document.getElementById('under').value= 'Sales Accounts'"  class="content" style="cursor:pointer;color:black;">&nbsp;&nbsp;Sales Accounts</a><br>
-            <a onclick="document.getElementById('under').value= 'Secured Loans'"  class="content" style="cursor:pointer;color:black;">&nbsp;&nbsp;Secured Loans</a><br>
-            <a onclick="document.getElementById('under').value= '*Stock-in-Hand'"  class="content" style="cursor:pointer;color:black;">&nbsp;&nbsp;Stock-in-Hand</a><br>
-            <a onclick="document.getElementById('under').value= 'Sundry Creditors'"  class="content" style="cursor:pointer;color:black;">&nbsp;&nbsp;Sundry Creditors</a><br>
-            <a onclick="document.getElementById('under').value= 'Sundry Debtors'"  class="content" style="cursor:pointer;color:black;">&nbsp;&nbsp;Sundry Debtors</a><br>
-            <a onclick="document.getElementById('under').value= 'Suspence A/c'"  class="content" style="cursor:pointer;color:black;">&nbsp;&nbsp;Suspence A/c</a><br>
-            <a onclick="document.getElementById('under').value= 'Unsecured Loans'"  class="content" style="cursor:pointer;color:black;">&nbsp;&nbsp;Unsecured Loans</a><br>
-                         
-                            
-                        </div>
-                       
-                        </form>
-                    </div>
-                    <!-- <div class="flexy w-100 py-4"><button id="cbtn" type="button" class="btn btn-info w-50">Create</button></div> -->
-    
-</form>
-
-</div>
-</div>
-<div class="col-sm-3  m-0 p-0"></div>
-
-</div> 
-
-
-
-
-{% endblock %}
