@@ -61,7 +61,7 @@
                 $select3.html($options1.filter('[text="' + this.value + '"]'));
             }).trigger('change');
 
-            var today = new Date();           
+                     
             document.getElementById("currentDate").innerHTML=new Date().toDateString();
 
             var table = document.getElementById("table");
@@ -88,6 +88,14 @@
         function getVal(route){
            window.location.href=route+"/"+document.getElementById('cid').innerHTML;
                    
+        }
+
+        function setDate(){
+            document.getElementById("currentDate").innerHTML= document.getElementById('enterDate').value;
+        }
+        function setPeriod(){
+            document.getElementById("dateP1").innerHTML= document.getElementById('dateperiod1').value;
+            document.getElementById("dateP2").innerHTML= document.getElementById('dateperiod2').value;
         }
     </script>
 </head>
@@ -202,10 +210,10 @@
                             <ul>
                                 <li>
                                     <a data-toggle="modal" data-target="#myModal" href="">Date</a>
-                                            <a data-toggle="modal" data-target="#myModal1" href="">Date-Period</a>
+                                            <a data-toggle="modal" data-target="#myModal1" href="">Period</a>
                                    
                                 </li>
-                                </li>
+                               
                                 
                                 
                             </ul>
@@ -276,8 +284,8 @@
                         <div hidden id="cid" ></div>
                     <div style="margin-left:18px;font-size:11px;margin-top:25px">CURRENT PERIOD</div>
                     <div id=""></div>
-                    <a id="dateperiod1" style="font-weight: 900;margin-left:18px;">Apr 1 2022</a>&nbsp;to
-                    <a id="dateperiod2" style="font-weight: 900;">Mar 1 2023</a>
+                    <a id="dateP1" style="font-weight: 900;margin-left:18px;">Apr 1 2022</a>&nbsp;to
+                    <a id="dateP2" style="font-weight: 900;">Mar 1 2023</a>
                         <div style="text-align: right; margin-top:-35px;margin-right:18px;font-size:11px">CURRENT DATE</div>
                         <div style="text-align: right;margin-top:-3px;margin-right:18px;font-weight:900" id="currentDate"></div>
                         
@@ -334,8 +342,8 @@
         <form action="" method="POST" >
         {% csrf_token %}
             <div class="form-group" align="center">
-                <input type="date" name="currentdate" placeholder="Date" class="form-control w-50"><br>
-                <input type="submit"  value="Submit" class="form-control w-25 btn btn-info"><br>
+                <input type="date" name="currentdate" id="enterDate" placeholder="Date" class="form-control w-50"><br>
+                <input onclick="setDate()" type="submit"  value="Submit" class="form-control w-25 btn btn-info"><br>
             </div>
         </form>
         </div>
@@ -350,10 +358,10 @@
         <form action="" method="POST" >
         {% csrf_token %}
             <div class="form-group" align="center">
-                <input type="date" name="dateperiod1"  class="form-control w-50"><br>
+                <input type="date" name="dateperiod1"  id="dateperiod1" class="form-control w-50"><br>
                 <label>to</label><br>
-                <input type="date" name="dateperiod2"  class="form-control w-50"><br>
-                <input type="submit"  value="Submit" class="form-control w-25 btn btn-info"><br>
+                <input type="date" name="dateperiod2" id="dateperiod2" class="form-control w-50"><br>
+                <input type="submit" onclick="setPeriod()"  value="Submit" class="form-control w-25 btn btn-info"><br>
             </div>
         </form>
         </div>

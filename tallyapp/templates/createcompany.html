@@ -12,7 +12,7 @@
       .form-popup {
         display: none;
         position: fixed;
-        top: 250px;
+        top: 180px;
         right: 15px;
         border: 1px solid #f1f1f1;
         z-index: 9;
@@ -106,11 +106,25 @@
     function setCountry(country,countryId){
         document.getElementById('country').value= country;
         document.getElementById('myForm1').style.visibility= "hidden";
+        document.getElementById('myForm').style.visibility= "visible";
         document.getElementById('currency_symbol').value = 'Rs'
         document.getElementById('formal_name').value = 'INR'
         document.getElementById('pincode').focus();
         document.getElementsByName('countryhidden').value= countryId;
+       }
+       function otherCountry(country,countryId){
+           //alert(countryId);
+        document.getElementById('country').value= country;
+        document.getElementById('myForm1').style.visibility= "hidden";
+        document.getElementById('myForm').style.visibility= "visible";
+        document.getElementById('state').value = ''
+        document.getElementById('currency_symbol').value = ''
+        document.getElementById('currency_symbol').focus();
+        document.getElementById('formal_name').value = ''
+        
+       // document.getElementById('formal_name').focus();
        
+        document.getElementsByName('countryhidden').value= countryId;
     }
 
     $(document).ready(function(){
@@ -124,18 +138,7 @@
     function copyName(){
         document.getElementById("mailing_name").value = document.getElementById("companyname").value;
     }
-    function otherCountry(country,countryId){
-        document.getElementById('country').value= country;
-        document.getElementById('myForm1').style.visibility= "hidden";
-        
-        document.getElementById('currency_symbol').value = ''
-        document.getElementById('currency_symbol').focus();
-        document.getElementById('formal_name').value = ''
-        
-       // document.getElementById('formal_name').focus();
-       
-        document.getElementsByName('countryhidden').value= countryId;
-    }
+    
 
 </script>
 {% for msg in messages %}
@@ -210,10 +213,12 @@
                     <table  >
                         <tr >
                         {% for i in com %}
-                       
-                    
+                      <a style="cursor:pointer;color:black;" >{{i.country.id}}{{i.country_id}}</a>
+                       {% if i.country.id == i.country_id %}
                         <a onclick="setState('{{i.name}}','{{i.id}}')"  class="content" style="cursor:pointer;color:black;">&nbsp;&nbsp;{{i.name}}</a><br>
-                        {% endfor %}
+                      {% else %}
+                            {% endif %}
+                      {% endfor %}
                         </tr>
                         </table>
                 </div>
@@ -326,13 +331,13 @@
        
             <div class="col-md-4 mt-3">
                 <label for="validationCustom03">Financial year begin from</label>
-                <input id="fin_year" value="1-Apr-22" type="date" class="form-control" id="validationCustom03" name="fin_begin"
+                <input id="fin_year" data-date-format="DD/MM/YYYY" value="2022-04-01" type="date" class="form-control" id="validationCustom03" name="fin_begin"
                 required style="background-color: #2f516f;color: white;"
                 >
             </div>
             <div class="col-md-4 mt-3">
                 <label for="validationCustom03">Books beginning from</label>
-                <input id="books_begin" value="1-Apr-22" type="date" class="form-control" id="validationCustom03" name="books_begin"
+                <input id="books_begin" value="2022-04-01" type="date" class="form-control" id="validationCustom03" name="books_begin"
                 required style="background-color: #2f516f;color: white;"
                >
             </div>

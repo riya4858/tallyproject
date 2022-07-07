@@ -76,7 +76,8 @@ def group(request,pk):
     return render(request,'group.html',{'cmp':cmp})
 def ledger(request,pk):
     cmp=Companies.objects.get(id=pk)
-    return render(request,'ledger.html',{'cmp':cmp})
+    grup=Group.objects.filter(company_id=cmp)
+    return render(request,'ledger.html',{'cmp':cmp,'grup':grup})
 
 def costcentre(request,pk):
     cmp=Companies.objects.get(id=pk)
