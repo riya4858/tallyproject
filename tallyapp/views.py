@@ -1,3 +1,4 @@
+from re import A
 from django.shortcuts import render,redirect
 from .models import *
 from django.contrib import messages
@@ -76,6 +77,79 @@ def group(request,pk):
     return render(request,'group.html',{'cmp':cmp})
 def ledger(request,pk):
     cmp=Companies.objects.get(id=pk)
+    if request.method == 'POST':
+        cmp=Companies.objects.get(id=pk)
+        #ledger
+        name = request.POST['name']
+        alias = request.POST['alias']
+        under = request.POST['under']
+        provide_banking_details = request.POST['provide_banking_details']
+        pan_no = request.POST['pan_no']
+        
+        #mailing_details
+        mailingname = request.POST['mailingname']
+        address = request.POST['address']
+        state = request.POST['state']
+        country = request.POST['country']
+        pincode = request.POST['pincode']
+        
+        #banking_details
+        od_limit= request.POST['od_limit']
+        holder_name = request.POST['holder_name']
+        acc_no = request.POST['acc_no']
+        ifsc = request.POST['ifsc']
+        swift_code = request.POST['swift_code']
+        bank_name = request.POST['bank_name']
+        branch = request.POST['branch']
+        set_cheque = request.POST['set_cheque']
+        ch_printing = request.POST['ch_printing']
+        ch_config = request.POST['ch_config']
+        
+        #Asset_rounding
+        rounding_method=request.POST['rounding_method']
+        round_limit=request.POST['round_limit']
+        
+        #Asset_statutory
+        assessable_calculation=request.POST['assessable_calculation']
+        appropriate_to=request.POST['appropriate_to']
+        gst_applicable=request.POST['gst_applicable']
+        set_alter_GST=request.POST['set_alter_GST']
+        type_of_supply=request.POST['type_of_supply']
+        method_of_calc=request.POST['method_of_calc']
+        
+        
+        led=Ledger.objects.filter(name=name)
+        if led:
+            # messages.info(request,'Company name already exists!!')
+            pass
+        else:
+            data = Ledger(name=name,alias=alias,under=under,provide_banking_details=provide_banking_details,
+                            pan_no=pan_no,company=cmp)
+            data.save()
+            
+            #mailing_details
+            data1=Ledger_Mailing_Details(mailingname=mailingname,address=address,state=state,country=country,pincode=pincode,
+                                        company=cmp,ledger=data)
+            data1.save()
+            
+            #banking_details
+            data2=Ledger_Banking_Details(od_limit=od_limit,holder_name=holder_name,acc_no=acc_no,ifsc=ifsc,swift_code=swift_code,bank_name=bank_name,
+                                        branch=branch,set_cheque=set_cheque,ch_printing=ch_printing,ch_config=ch_config,
+                                        company=cmp,ledger=data)
+            data2.save()
+            
+            #Asset_rounding
+            data3=Ledger_Asset_Rounding(rounding_method=rounding_method,round_limit=round_limit,
+                                        company=cmp,ledger=data)
+            data3.save()
+            
+            #Asset_statutory
+            data4=Ledger_Asset_Statutory(assessable_calculation=assessable_calculation,appropriate_to=appropriate_to,
+                                         gst_applicable=gst_applicable,set_alter_GST=set_alter_GST,type_of_supply=type_of_supply,
+                                         method_of_calc=method_of_calc,company=cmp,ledger=data)
+            data4.save()
+            
+            
     grup=Group.objects.filter(company_id=cmp)
     return render(request,'ledger.html',{'cmp':cmp,'grup':grup})
 

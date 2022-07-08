@@ -12,8 +12,10 @@
     </style>
 
   <div class="m-0">
-    <h6 style="" class="bg-info text-light p-2 m-0 text-center">Create ledger</h6>
-            <form  style="background-color:rgba(0,0,0,.4);" method="post" action="save_ledger">
+    <h6 style="" class="bg-info text-light p-1 m-1 text-left">Create ledger</h6>
+    <div  style="text-align: center;margin-top:-35px;font-weight:900">{{cmp.name}}</div>
+
+            <form  style="background-color:rgba(0,0,0,.4);" method="post" action="{% url 'ledger' cmp.id %}">
                 {% csrf_token %}
                 
                 <div class="row container-fluid p-0 m-0" >
@@ -21,14 +23,14 @@
                     <div class="col-sm-6 m-0 p-4">
 
                         <div class="row container-fluid  p-2 m-0">
-                            <div class="col-sm-4 m-0 p-0"> <label for="a" >Name</label></div>
-                            <div class="col-sm-8 m-0 p-0"><input required type="text" class="form-control" id="ledger_name" oninput="addname()" placeholder="" name="ledger_name"></div>
+                            <div class="col-sm-4 m-0 p-0"> <label >Name</label></div>
+                            <div class="col-sm-8 m-0 p-0"><input onchange="showname()" required type="text" class="form-control" id="name"  placeholder="" name="name"></div>
                         </div>
 
                         <div class="row container-fluid  p-2 m-0">
-                            <div class="col-sm-4 m-0 p-0"> <label for="b">Alias</label></div>
+                            <div class="col-sm-4 m-0 p-0"> <label >Alias</label></div>
                             <div class="col-sm-8 m-0 p-0"> 
-                            <input type="text" class="form-control" id="b" placeholder="" name="ledger_alias"></div>
+                            <input type="text" class="form-control" id="" placeholder="" name="alias"></div>
                         </div>
 
 
@@ -51,7 +53,7 @@
                             <div class="col-sm-6 m-0 p-0"> <label for="c">Under</label></div>
                             
                             <div class="col-sm-6 m-0 p-0">
-                                <select name="group_under" id="under" class="form-control" onchange="showunder()" required>
+                                <select name="under" id="under" class="form-control" onchange="showunder()" required>
                                     <option value="">----Select-----</option>
                                     <option value="BankAccount1">BankAccounts</option>
                                     <option value="Bank_OCC_AC">Bank OCC A/c</option>
@@ -97,14 +99,14 @@
         <h6 class="p-3">Bank Account Details</h6>
 
         <div class="row container-fluid  p-2 m-0">
-            <div class="col-sm-6 m-0 p-0"> <label for="pan">A/c Holders Name</label></div>
-            <div class="col-sm-6 m-0 p-0"><input type="text" class="form-control" id="acna" placeholder="" name="holder_name"></div>
+            <div class="col-sm-6 m-0 p-0"> <label for="pan">A/c Holder's Name</label></div>
+            <div class="col-sm-6 m-0 p-0"><input type="text" value="{{cmp.name}}" class="form-control" id="acna" placeholder="" name="holder_name"></div>
             
         </div>
 
         <div class="row container-fluid  p-2 m-0">
-            <div class="col-sm-6 m-0 p-0"> <label for="pan">A/c Number</label></div>
-            <div class="col-sm-6 m-0 p-0"><input type="text" class="form-control" id="acno" placeholder="" name="ac_number"></div>
+            <div class="col-sm-6 m-0 p-0"> <label for="pan">A/c No.</label></div>
+            <div class="col-sm-6 m-0 p-0"><input type="text" class="form-control" id="acno" placeholder="" name="acc_no"></div>
             
         </div>
 
@@ -115,7 +117,7 @@
         </div>
 
         <div class="row container-fluid  p-2 m-0">
-            <div class="col-sm-6 m-0 p-0"> <label for="pan">SWIfT Code</label></div>
+            <div class="col-sm-6 m-0 p-0"> <label for="pan">SWIFT Code</label></div>
             <div class="col-sm-6 m-0 p-0"><input type="text" class="form-control" id="swift" placeholder="" name="swift_code"></div>
             
         </div>
@@ -132,14 +134,14 @@
 
         <div class="row container-fluid  p-2 m-0">
             <div class="col-sm-6 m-0 p-0"> <label for="pan">Branch</label></div>
-            <div class="col-sm-6 m-0 p-0"><input type="text" class="form-control" id="branch" placeholder="" name="branch_name"></div>
+            <div class="col-sm-6 m-0 p-0"><input type="text" class="form-control" id="branch" placeholder="" name="branch"></div>
             
         </div>
-
+        <h6 class="p-3">Bank Configuration</h6>
         <div class="row container-fluid   p-2 m-0">
-            <div class="col-sm-6 m-0 p-0"> <label for="rgtype" >Set/Alter Range of cheque Books</label></div>
+            <div class="col-sm-6 m-0 p-0"> <label for="rgtype" >Set/Alter range for Cheque Books</label></div>
             <div class="col-sm-6 m-0 p-0">
-                <select name="alter_chk_bks" id="chqrng" class="form-control">
+                <select name="set_cheque" id="chqrng" class="form-control">
                     <option value="No">No</option>
                     <option value="Yes">Yes</option>  
                     
@@ -150,9 +152,9 @@
         <div class="row container-fluid   p-2 m-0">
             <div class="col-sm-6 m-0 p-0"> <label for="rgtype" >Enable Cheque printing</label></div>
             <div class="col-sm-6 m-0 p-0">
-                <select name="enbl_chk_printing" id="chqprnt" class="form-control">
+                <select name="ch_printing" id="chqprnt" class="form-control">
                     <option value="No">No</option>
-                    <option value="Yes">Yes</option>  
+                    <option value="Yes" selected>Yes</option>  
                     
                 </select>
             </div>
@@ -161,7 +163,7 @@
         <div class="row container-fluid   p-2 m-0">
             <div class="col-sm-6 m-0 p-0"> <label for="rgtype" >Set/Alter Cheque Printing Configuration</label></div>
             <div class="col-sm-6 m-0 p-0">
-                <select name="" id="chqconfg" class="form-control">
+                <select name="ch_config" id="ch_config" class="form-control">
                     <option value="No">No</option>
                     <option value="Yes">Yes</option>  
                     
@@ -172,12 +174,12 @@
 
     </div>
 
-
+<!-- bank occ and od -->
 <div class="bankod hide p-0 py-sm-3 m-0 w-100"id="bankod">
 
     <div class="row container-fluid  p-2 m-0" >
         <div class="col-sm-6 m-0 p-0"> <label for="pan">Set OD limit</label></div>
-        <div class="col-sm-6 m-0 p-0"><input type="text" class="form-control" id="odlimit" placeholder="" name="odlimit"></div>
+        <div class="col-sm-6 m-0 p-0"><input type="text" class="form-control" id="odlimit" placeholder="" name="od_limit"></div>
         
     </div>
 
@@ -185,7 +187,7 @@
 
         <div class="row container-fluid  p-2 m-0">
             <div class="col-sm-6 m-0 p-0"> <label for="pan">A/c Holders Name</label></div>
-            <div class="col-sm-6 m-0 p-0"><input type="text" class="form-control" id="acna" placeholder="" name="holder_name"></div>
+            <div class="col-sm-6 m-0 p-0"><input type="text" value="{{cmp.name}}" class="form-control" id="acna" placeholder="" name="holder_name"></div>
             
         </div>
 
@@ -305,14 +307,13 @@
             }
         }
     
-
-        function showunder(){
+        function showname(){
             
-            var name = document.getElementById("ledger_name");
-            var mail_name = name.value;
-            document.getElementById("mailname").value= mail_name;
-
-
+            var name = document.getElementById("name");
+            var mailingname = name.value;
+            document.getElementById("mailingname").value= mailingname;
+        }
+        function showunder(){
             var status = document.getElementById("under");
             var a = status.value;
             console.log(a);
@@ -321,6 +322,7 @@
 
                 document.getElementById('bankac').style.display = "flex";
                 document.getElementById('bankod').style.display = "none";
+                document.getElementById('bankdetails').style.display = "none";
                 document.getElementById('curntasts').style.display = "none";
                 document.getElementById('direct_expences').style.display = "none";
                 document.getElementById('bank2').style.display = "none";
@@ -336,6 +338,7 @@
                 
                 document.getElementById('bankod').style.display = "flex";
                 document.getElementById('bankac').style.display = "none";
+                document.getElementById('bankdetails').style.display = "none";
                 document.getElementById('Statutory_Details').style.display = "none";
                 document.getElementById('direct_expences').style.display = "none";
                 document.getElementById('bank2').style.display = "none";
@@ -364,6 +367,7 @@
                 document.getElementById('roundmd20').style.display = "flex";
                 document.getElementById('Statutory_Details').style.display = "flex";
                 document.getElementById('bankod').style.display = "none";
+                document.getElementById('bankdetails').style.display = "none";
                 document.getElementById('bankac').style.display = "none";
                 document.getElementById('direct_expences').style.display = "none";
                 document.getElementById('applicablegst0').style.display = "none";
@@ -608,7 +612,7 @@ function rounding(){
     <div class="row container-fluid   p-2 m-0 hide w-100" id="roundmd0">
         <div class="col-sm-6 m-0 p-0 "> <label for="">Rounding Method</label></div>
         <div class="col-sm-6 m-0 p-0">
-            <select name="Rounding_Method" id="roundmd" class="form-control">
+            <select name="rounding_method" id="roundmd" class="form-control">
                 <option value="Down_Rounding">Down Rounding</option>
                 <option value="Normal_Rounding">Normal Rounding</option>
                 <option value="Up_Rounding">Up Rounding</option>
@@ -618,7 +622,7 @@ function rounding(){
     
     <div class="row container-fluid  p-2 m-0 hide w-100"  id="rndlmt0" >
         <div class="col-sm-6 m-0 p-0"> <label for="pan">Round limit</label></div>
-        <div class="col-sm-6 m-0 p-0"><input type="text" class="form-control" id="rndlmt" placeholder="" name="Round_limit" value="1"></div>
+        <div class="col-sm-6 m-0 p-0"><input type="text" class="form-control" id="rndlmt" placeholder="" name="round_limit" value="1"></div>
     </div>
 
 
@@ -676,7 +680,7 @@ function rounding(){
         <div class="row container-fluid   p-2 m-0 hide" id="Approp01">
             <div class="col-sm-6 m-0 p-0"> <label for="rgtype" >Appropriate to</label></div>
             <div class="col-sm-6 m-0 p-0">
-                <select name="Appropriate_to" id="Approp1" class="form-control" onchange="showbased()">
+                <select name="appropriate_to" id="Approp1" class="form-control" onchange="showbased()">
                     <option value="Both">Both</option>
                     <option value="Goods">Goods</option>
                     <option value="Services">Services</option>   
@@ -688,7 +692,7 @@ function rounding(){
         <div class="row container-fluid   p-2 m-0 hide " id="mtdcalc01">
             <div class="col-sm-6 m-0 p-0 "> <label for="mtdcalc">Method of Calculation</label></div>
             <div class="col-sm-6 m-0 p-0">
-                <select name="Method_of_calc" id="mtdcalc1" class="form-control">
+                <select name="method_of_calc" id="mtdcalc1" class="form-control">
                     <option value="Based_on_Value" >Based on value</option>
                     <option value="Based_on_Quntity" id="qlty">Based on quantity</option>    
                 </select>
@@ -958,7 +962,7 @@ function showdutiesandtax4(){
 <div class="row container-fluid   p-2 m-0 hide w-100" id="roundmd20">
     <div class="col-sm-6 m-0 p-0 "> <label for="">Rounding Method</label></div>
     <div class="col-sm-6 m-0 p-0">
-        <select name="Rounding_Method" id="roundmd2" class="form-control" onchange="rounding()">
+        <select name="rounding_method" id="roundmd2" class="form-control" onchange="rounding()">
             <option value="null">Not Applicable</option>
             <option value="Down_Rounding">Down Rounding</option>
             <option value="Normal_Rounding">Normal Rounding</option>
@@ -969,7 +973,7 @@ function showdutiesandtax4(){
 
 <div class="row container-fluid  p-2 m-0 hide w-100"  id="rndlmt20" >
     <div class="col-sm-6 m-0 p-0"> <label for="pan">Round limit</label></div>
-    <div class="col-sm-6 m-0 p-0"><input type="text" class="form-control" id="rndlmt2" placeholder="" name="Round_limit" value="1"></div>
+    <div class="col-sm-6 m-0 p-0"><input type="text" class="form-control" id="rndlmt2" placeholder="" name="round_limit" value="1"></div>
 </div>
 
 <div class="dirctexpns4 hide py-3 m-0 w-100" id="dirctexpns4">
@@ -978,7 +982,7 @@ function showdutiesandtax4(){
     <div class="row container-fluid   p-2 m-0 " id="applicablegst20">
         <div class="col-sm-6 m-0 p-0 "> <label for="">Is GST applicable</label></div>
         <div class="col-sm-6 m-0 p-0">
-            <select name="is_gst_applicable" id="applicablegst2" class="form-control" onchange="showdirctexp4()">
+            <select name="gst_applicable" id="applicablegst2" class="form-control" onchange="showdirctexp4()">
                 <option value="">----Select----</option>
                 <option value="Not_Applicable"> Not Applicable</option>
                 <option value="Applicable">Applicable</option>
@@ -990,7 +994,7 @@ function showdutiesandtax4(){
     <div class="row container-fluid  p-2 m-0 hide" id="stgst20">
         <div class="col-sm-6 m-0 p-0"> <label for="pan">Set/Alter GST details </label></div>
         <div class="col-sm-6 m-0 p-0">
-            <select name="Set_alter_GST" id="stgst2" class="form-control">
+            <select name="set_alter_GST" id="stgst2" class="form-control">
                 <option value="No">No</option>
                 <option value="Yes">Yes</option>  
                 
@@ -1157,11 +1161,11 @@ function bill(){
 
 
                     <div class="col-sm-6 m-0 p-4" >
-                        <h5 class="text-center">Mailing Address</h5>
+                        <h5 class="text-center">Mailing Details</h5>
 
                         <div class="row container-fluid  p-2 m-0">
                             <div class="col-sm-6 m-0 p-0"> <label for="a">Name</label></div>
-                            <div class="col-sm-6 m-0 p-0"><input name="name" type="text" id="mailname" class="form-control" placeholder=""></div>
+                            <div class="col-sm-6 m-0 p-0"><input name="mailingname" type="text" id="mailingname" class="form-control" placeholder=""></div>
                             
                         </div>
                         <div class="row container-fluid   p-2 m-0">
@@ -1172,7 +1176,7 @@ function bill(){
                         <div class="row container-fluid   p-2 m-0">
                             <div class="col-sm-6 m-0 p-0"> <label for="ctry">Country</div>
                             <div class="col-sm-6 m-0 p-0">
-                                <input name="name" type="text" id="country" value="{{cmp.country.name}}" class="form-control" placeholder=""> 
+                                <input name="country" type="text" id="country" value="{{cmp.country.name}}" class="form-control" placeholder=""> 
                             </div>
                         </div>
 
@@ -1188,12 +1192,12 @@ function bill(){
                             
                         </div>
                     
-                        <div class="row container-fluid   p-2 m-0" >
+                        <div class="row container-fluid   p-2 m-0" id="bankdetails">
                             <h6 id="bank2">Banking Details</h6>
-                            <div class="row container-fluid   p-2 m-0" id="bank3" >
+                            <div class="row container-fluid   p-2 m-0"  >
                                 <div class="col-sm-6 m-0 p-0"> <label for="bank">Provide bank details</label></div>
                                 <div class="col-sm-6 m-0 p-0">
-                                    <select name="Activate" id="bank" class="form-control">
+                                    <select name="provide_banking_details" id="bank" class="form-control">
                                         <option value="No">No</option> 
                                         <option value="Yes">Yes</option>
                                     </select>
@@ -1204,11 +1208,11 @@ function bill(){
 
                             <div class="row container-fluid  p-2 m-0">
                                 <div class="col-sm-6 m-0 p-0"> <label for="pan">PAN/IT No.</label></div>
-                                <div class="col-sm-6 m-0 p-0"><input type="text" class="form-control" id="pan" placeholder=""></div>
+                                <div class="col-sm-6 m-0 p-0"><input type="text" name="pan_no" class="form-control" id="pan" placeholder=""></div>
                                 
                             </div>
 
-                            <div class="row container-fluid   p-2 m-0">
+                            <!-- <div class="row container-fluid   p-2 m-0">
                                 <div class="col-sm-6 m-0 p-0"> <label for="rgtype" >registration Type</label></div>
                                 <div class="col-sm-6 m-0 p-0">
                                     <select name="register_type" id="regtype" class="form-control">
@@ -1239,7 +1243,7 @@ function bill(){
                                 
                             </div>
 
-                        
+                         -->
                     
                         </div>
                 </div>

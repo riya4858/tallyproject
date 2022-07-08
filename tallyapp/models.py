@@ -86,7 +86,6 @@ class Currency(models.Model):
     after_decimal = models.CharField(max_length=225)
     amount_in_words = models.CharField(max_length=225)
     company=models.ForeignKey(Companies,on_delete=models.CASCADE,blank=True,null=True)
-    
 class Voucher(models.Model):
     voucher_name = models.CharField(max_length=225)
     alias = models.CharField(max_length=225)
@@ -104,6 +103,48 @@ class Voucher(models.Model):
     print_voucher = models.CharField(max_length=225)
     company=models.ForeignKey(Companies,on_delete=models.CASCADE,blank=True,null=True)
     
+class Ledger(models.Model):
+    name = models.CharField(max_length=225)
+    alias = models.CharField(max_length=225)
+    under =  models.CharField(max_length=225)
+    provide_banking_details =  models.CharField(max_length=225)
+    pan_no=models.CharField(max_length=225)
+    company=models.ForeignKey(Companies,on_delete=models.CASCADE,blank=True,null=True)
+class Ledger_Mailing_Details(models.Model):
+    mailingname = models.CharField(max_length=225)
+    address = models.CharField(max_length=225)
+    state = models.CharField(max_length=225)
+    country =models.CharField(max_length=225)
+    pincode =models.CharField(max_length=225)
+    ledger = models.ForeignKey(Ledger, on_delete=models.CASCADE, blank=True,null=True)
+    company=models.ForeignKey(Companies,on_delete=models.CASCADE,blank=True,null=True)
+
+class Ledger_Banking_Details(models.Model):
+    od_limit = models.CharField(max_length=225)
+    holder_name =models.CharField(max_length=225)
+    acc_no =models.CharField(max_length=225)
+    ifsc =models.CharField(max_length=225)
+    swift_code =models.CharField(max_length=225)
+    bank_name = models.CharField(max_length=225)
+    branch = models.CharField(max_length=225)
+    set_cheque =  models.CharField(max_length=225)
+    ch_printing =  models.CharField(max_length=225)
+    ch_config= models.CharField(max_length=225)
+    ledger = models.ForeignKey(Ledger, on_delete=models.CASCADE, blank=True,null=True)
+    company=models.ForeignKey(Companies,on_delete=models.CASCADE,blank=True,null=True)
+
+class Ledger_Asset_Rounding(models.Model):
+    rounding_method =models.CharField(max_length=225)
+    round_limit = models.CharField(max_length=225)
+    ledger = models.ForeignKey(Ledger, on_delete=models.CASCADE, blank=True,null=True)
+    company=models.ForeignKey(Companies,on_delete=models.CASCADE,blank=True,null=True)
     
-
-
+class Ledger_Asset_Statutory(models.Model):
+    assessable_calculation = models.CharField(max_length=225)
+    appropriate_to =models.CharField(max_length=225)
+    gst_applicable = models.CharField(max_length=225)
+    set_alter_GST =models.CharField(max_length=225)
+    type_of_supply = models.CharField(max_length=225)
+    method_of_calc=models.CharField(max_length=225)
+    ledger = models.ForeignKey(Ledger, on_delete=models.CASCADE, blank=True,null=True)
+    company=models.ForeignKey(Companies,on_delete=models.CASCADE,blank=True,null=True)
