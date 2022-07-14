@@ -148,3 +148,11 @@ class Ledger_Asset_Statutory(models.Model):
     method_of_calc=models.CharField(max_length=225)
     ledger = models.ForeignKey(Ledger, on_delete=models.CASCADE, blank=True,null=True)
     company=models.ForeignKey(Companies,on_delete=models.CASCADE,blank=True,null=True)
+
+class Ledger_Sundry(models.Model):
+    maintain_balance_bill_by_bill =models.CharField(max_length=225,default="Null",blank=True)
+    default_credit_period=models.CharField(max_length=225,default="Null",blank=True)
+    check_for_credit_days=models.CharField(max_length=225,default="Null",blank=True)
+    ledger = models.ForeignKey(Ledger, on_delete=models.CASCADE, blank=True,null=True)
+    company=models.ForeignKey(Companies,on_delete=models.CASCADE,blank=True,null=True)
+    

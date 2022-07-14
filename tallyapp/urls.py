@@ -2,8 +2,8 @@ from django.urls import path
 from . import views
 urlpatterns = [
     path('',views.index,name='index'),
+    path('basepage',views.basepage,name='basepage'),
     path('company',views.company,name='company'),
-    path('index1',views.index1,name='index1'),
     path('createcompany',views.createcompany,name='createcompany'),
     path('companycreate',views.companycreate,name='companycreate'),
     path('group/<int:pk>',views.group,name='group'),
@@ -17,6 +17,7 @@ urlpatterns = [
     path('selectcompany',views.selectcompany,name='selectcompany'),
     path('shutcompany',views.shutcompany,name='shutcompany'),
     path('addstate',views.addstate,name='addstate'),
+    path('addstatenew',views.addstatenew,name='addstatenew'),
     path('addcountry',views.addcountry,name='addcountry'),
     path('altercompany/<int:pk>',views.altercompany,name='altercompany'),
     path('ratesofexchange/<int:pk>',views.ratesofexchange,name='ratesofexchange'),

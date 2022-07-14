@@ -56,11 +56,17 @@
 
             //alert(localStorage.getItem("compId"));
         });
-
         function getVal(route){
-            window.location.href=route+"/"+localStorage.getItem("compId");
+            window.location.href=route+"/"+document.getElementById('cid').innerHTML;
+           
                     
          }
+         function setName(comp, id){
+            document.getElementById('compName').innerHTML=comp;
+           
+            document.getElementById('cid').innerHTML= id;
+           
+        }
     </script>
 </head>
 <body style="background-color: #2f516f;" >
@@ -134,7 +140,7 @@
                                   <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="bx bx-right-arrow-alt"></i>Accounting Masters</a>
                                   <ul>
                                       <li>
-                                        <a onclick="getVal('group')">Group</a>
+                                        <a onclick="getVal('creategroup')">Group</a>
                                         <a onclick="getVal('ledger')">Ledger</a>
                                           <a onclick="getVal('costcentre')">Cost centre</a>
                                           <a onclick="getVal('currency')">Currency</a>
@@ -196,7 +202,15 @@
                   <div class="container pt-3">
                       
                   </div>
+                 
                   {% block body %} {% endblock %}
+
+                  <div hidden id="cid" ></div>
+                  <table id="table">
+                   
+                  
+                    </table>
+
 
               </div>
           </div>

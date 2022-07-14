@@ -76,11 +76,23 @@
         document.getElementById("create").submit();
     }
     function showState(country){
-        
+       
         document.getElementById('myForm').style.visibility= "visible";
         document.getElementById("myForm").style.display = "block";
-        
-        
+        document.getElementById('cname').value= country;
+     
+        var table = document.getElementById("table");
+            
+        for (let row of table.rows) 
+        {
+            
+               if(row.innerText=="Kerala")
+               {
+                   alert('as');
+                document.getElementById("table").deleteRow(0);
+               }
+            
+        }
     }
 
     function getValue(){
@@ -100,6 +112,7 @@
         document.getElementById('myForm').style.visibility= "hidden";
         document.getElementById('country').focus();
         document.getElementsByName('statehidden').value= stateId;
+  
         
  
     }
@@ -111,16 +124,19 @@
         document.getElementById('formal_name').value = 'INR'
         document.getElementById('pincode').focus();
         document.getElementsByName('countryhidden').value= countryId;
+        
+        
        }
        function otherCountry(country,countryId){
            //alert(countryId);
         document.getElementById('country').value= country;
         document.getElementById('myForm1').style.visibility= "hidden";
-        document.getElementById('myForm').style.visibility= "visible";
+        document.getElementById('myForm').style.visibility= "hidden";
         document.getElementById('state').value = ''
         document.getElementById('currency_symbol').value = ''
         document.getElementById('currency_symbol').focus();
         document.getElementById('formal_name').value = ''
+       
         
        // document.getElementById('formal_name').focus();
        
@@ -128,6 +144,7 @@
     }
 
     $(document).ready(function(){
+        document.getElementById('cname').value='India';
         document.getElementById('tblState').style.visibility= "hidden";
         document.getElementById('tblCountry').style.visibility= "hidden";
         finYear();
@@ -138,6 +155,30 @@
     function copyName(){
         document.getElementById("mailing_name").value = document.getElementById("companyname").value;
     }
+
+    function SaveState(){
+        alert($('#stateName').val());
+        $.ajax({
+            type: "POST",
+            url: "addstatenew",
+            data: {
+              'name': $('#stateName').val() // from form
+            },
+            contentType: "application/json; charset=utf-8",
+            async: false, //add this
+            success: function () {
+                alert('saved')
+              $('#message').html("<h2>Contact Form Submitted!</h2>")
+            },
+            error: function (errorThrown) {
+                alert(errorThrown);
+            }
+            
+          });
+          return false;
+    }
+
+    btnState
     
 
 </script>
@@ -210,15 +251,17 @@
                 <div class="scrollbar scrollbar-primary">
                     
                    
-                    <table  >
+                    <table  id="table">
                         <tr >
+                          
                         {% for i in com %}
-                      <a style="cursor:pointer;color:black;" >{{i.country.id}}{{i.country_id}}</a>
-                       {% if i.country.id == i.country_id %}
+                        
+                        
+                  
                         <a onclick="setState('{{i.name}}','{{i.id}}')"  class="content" style="cursor:pointer;color:black;">&nbsp;&nbsp;{{i.name}}</a><br>
-                      {% else %}
-                            {% endif %}
+                     
                       {% endfor %}
+                     
                         </tr>
                         </table>
                 </div>
@@ -232,12 +275,14 @@
             <div class="modal-dialog">
             <div class="modal-content">
             <div class="modal-body">
-            <form action="{% url 'addstate' %}" method="POST" >
-            {% csrf_token %}
+            <form id="frmState" action="{% url 'addstate'  %}" method="POST" >
+            {% csrf_token %} 
                 <div class="form-group" align="center">
-                    <input type="text" name="name" placeholder="New state name" class="form-control w-75"><br>
-                    <input type="submit"  value="Submit" class="form-control w-25 btn btn-dark"><br>
+                    <input type="text" id ="cname" name="cname" hidden>
+                    <input type="text" id ="stateName" name="name" placeholder="New state name" class="form-control w-75"><br>
+                    <input   type="submit"  value="Submit" class="form-control w-25 btn btn-dark"><br>
                 </div>
+                
             </form>
             </div>
             </div>
@@ -257,7 +302,7 @@
                     <a   style="margin-left:250px;color:black;cursor:pointer" >Back</a>  
                 <hr >
                 <div>
-                    <table >
+                    <table id="statetbl">
                     <tr >
                     {% for i in country %}
                    

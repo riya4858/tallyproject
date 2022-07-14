@@ -6,13 +6,14 @@ from django.http import JsonResponse
 def index(request):
     comp=Companies.objects.all()
     return render(request,'index.html',{'comp':comp})
+def basepage(request):
+    comp=Companies.objects.all()
+    return render(request,'base.html',{'comp':comp})
 
 def company(request):
     com=Companies.objects.all()
     return render(request,'company.html',{'com':com})
 
-def index1(request):
-    return render(request,'basepage.html')
 
 def getStates(request):
     return States.objects.all()
@@ -117,6 +118,11 @@ def ledger(request,pk):
         type_of_supply=request.POST['type_of_supply']
         method_of_calc=request.POST['method_of_calc']
         
+         #Sundry
+        maintain_balance_bill_by_bill=request.POST['maintain_balance_bill_by_bill']
+        default_credit_period=request.POST['default_credit_period']
+        check_for_credit_days=request.POST['check_for_credit_days']
+        
         
         led=Ledger.objects.filter(name=name)
         if led:
@@ -148,6 +154,11 @@ def ledger(request,pk):
                                          gst_applicable=gst_applicable,set_alter_GST=set_alter_GST,type_of_supply=type_of_supply,
                                          method_of_calc=method_of_calc,company=cmp,ledger=data)
             data4.save()
+            
+            #Sundry
+            data5=Ledger_Sundry(maintain_balance_bill_by_bill=maintain_balance_bill_by_bill,default_credit_period=default_credit_period,
+                                        check_for_credit_days=check_for_credit_days,company=cmp,ledger=data)
+            data5.save()
             
             
     grup=Group.objects.filter(company_id=cmp)
@@ -283,6 +294,8 @@ def altercompanyview(request):
     return render(request,'altercompanyview.html',{'com':com})
 
 def altercompany(request,pk):
+    com=States.objects.all()
+    cntry=Countries.objects.all()
     comp=Companies.objects.get(id=pk)
     if request.method == 'POST':
         comp.name=request.POST['name']
@@ -291,8 +304,10 @@ def altercompany(request,pk):
         comp.address2=request.POST['address2']
         comp.address3=request.POST['address3']
         comp.address4=request.POST['address4']
-            # state=request.POST['state']
-            # country=request.POST['country']
+        state=request.POST['state']
+        country=request.POST['country']
+        comp.state=States.objects.get(name=state) 
+        comp.country=Countries.objects.get(name=country) 
         comp.pincode=request.POST['pincode']
         comp.telephone=request.POST['telephone']
         comp.mobile=request.POST['mobile']
@@ -301,11 +316,11 @@ def altercompany(request,pk):
         comp.website=request.POST['website']
         comp.fin_begin=request.POST['fin_begin']
         comp.books_begin=request.POST['books_begin']
-            # currency_symbol=request.POST['currency_symbol']
-            # formal_name=request.POST['formal_name']
+        comp.currency_symbol=request.POST['currency_symbol']
+        comp.formal_name=request.POST['formal_name']
         comp.save()
         return redirect('altercompanyview')
-    return render(request,'editcompany.html',{'comp':comp})
+    return render(request,'editcompany.html',{'comp':comp,'com':com,'country':cntry})
 
 def selectcompany(request):
     com=Companies.objects.all()
@@ -314,15 +329,21 @@ def selectcompany(request):
 def addstate(request):
     if request.method=='POST':
         name=request.POST['name']
+        cntryid=request.POST['cname']
         st=States.objects.filter(name=name)
+        countr=Countries.objects.get(name=cntryid)
         if st:
             # messages.info(request,'Company name already exists!!')
             return redirect('createcompany')
         else:
-            data=States(name=name)
+            data=States(name=name, country=countr)
             data.save()
             return redirect('createcompany')
     return render(request,'createcompany.html')
+
+def addstatenew(name):
+    return "";
+
 def addcountry(request):
     if request.method=='POST':
         name=request.POST['name']
