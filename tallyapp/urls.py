@@ -28,5 +28,7 @@ urlpatterns = [
     path('featurecompany/<int:pk>',views.featurecompany,name='featurecompany'),
     path('disable/<int:pk>',views.disable,name='disable'),
     path('enable/<int:pk>',views.enable,name='enable'),
+    path('gst/<int:pk>',views.gst,name='gst'),
+    path('gstcreate/<int:pk>',views.gstcreate,name='gstcreate'),
     
 ]

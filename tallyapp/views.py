@@ -387,6 +387,92 @@ def features(request, pk):
             feature.bill_wise_entry= 'True'
         else:
             feature.bill_wise_entry= 'False'
+        if request.POST['cost_centres'] == 'Yes':
+            feature.bill_wise_entry= 'True'
+        else:
+            feature.bill_wise_entry= 'False'
+        if request.POST['interest_calc'] == 'Yes':
+            feature.bill_wise_entry= 'True'
+        else:
+            feature.bill_wise_entry= 'False'
+        if request.POST['maintain_inventory'] == 'Yes':
+                feature.bill_wise_entry= 'True'
+        else:
+            feature.bill_wise_entry= 'False'
+        if request.POST['integrate_accounts'] == 'Yes':
+                feature.bill_wise_entry= 'True'
+        else:
+            feature.bill_wise_entry= 'False'
+        if request.POST['multiple_price_level'] == 'Yes':
+                feature.bill_wise_entry= 'True'
+        else:
+            feature.bill_wise_entry= 'False'
+        if request.POST['batches'] == 'Yes':
+                feature.bill_wise_entry= 'True'
+        else:
+            feature.bill_wise_entry= 'False'
+        if request.POST['expirydate_batches'] == 'Yes':
+                feature.bill_wise_entry= 'True'
+        else:
+            feature.bill_wise_entry= 'False'
+        if request.POST['joborder_processing'] == 'Yes':
+                feature.bill_wise_entry= 'True'
+        else:
+            feature.bill_wise_entry= 'False'
+        
+        if request.POST['cost_tracking'] == 'Yes':
+                feature.bill_wise_entry= 'True'
+        else:
+            feature.bill_wise_entry= 'False'
+        if request.POST['job_costing'] == 'Yes':
+                feature.bill_wise_entry= 'True'
+        else:
+            feature.bill_wise_entry= 'False'
+        if request.POST['discount_invoices'] == 'Yes':
+                feature.bill_wise_entry= 'True'
+        else:
+            feature.bill_wise_entry= 'False'
+        if request.POST['Billed_Quantity'] == 'Yes':
+                feature.bill_wise_entry= 'True'
+        else:
+            feature.bill_wise_entry= 'False'
+        if request.POST['gst'] == 'Yes':
+                feature.bill_wise_entry= 'True'
+        else:
+            feature.bill_wise_entry= 'False'
+        if request.POST['tds'] == 'Yes':
+                feature.bill_wise_entry= 'True'
+        else:
+            feature.bill_wise_entry= 'False'
+        if request.POST['tcs'] == 'Yes':
+                feature.bill_wise_entry= 'True'
+        else:
+            feature.bill_wise_entry= 'False'
+        if request.POST['vat'] == 'Yes':
+                feature.bill_wise_entry= 'True'
+        else:
+            feature.bill_wise_entry= 'False'
+        if request.POST['excise'] == 'Yes':
+                feature.bill_wise_entry= 'True'
+        else:
+            feature.bill_wise_entry= 'False'
+        if request.POST['servicetax'] == 'Yes':
+                feature.bill_wise_entry= 'True'
+        else:
+            feature.bill_wise_entry= 'False'
+        if request.POST['payroll'] == 'Yes':
+                feature.bill_wise_entry= 'True'
+        else:
+            feature.bill_wise_entry= 'False'
+        if request.POST['multiple_addrss'] == 'Yes':
+                feature.bill_wise_entry= 'True'
+        else:
+            feature.bill_wise_entry= 'False'
+        if request.POST['vouchers'] == 'Yes':
+                feature.bill_wise_entry= 'True'
+        else:
+            feature.bill_wise_entry= 'False'
+        
         feature.save()
     return render(request,'features.html',{'ctg':c, 'ft':feature})
 
@@ -407,3 +493,50 @@ def enable(request,pk):
     c.active=True
     c.save()
     return redirect('shutcompany')
+def gst(request,pk):
+    cm=Companies.objects.get(id=pk)
+    return render(request,'gstpage.html',{'cm':cm})
+
+def gstcreate(request,pk):
+    cm=Companies.objects.get(id=pk)
+    if request.method == 'POST':
+        cm=Companies.objects.get(id=pk)
+        state = request.POST['state']
+        reg_type = request.POST['reg_type']
+        assessee = request.POST['assessee']
+        app_form = request.POST['app_form']
+        gstin = request.POST['gstin']
+        gstr1 = request.POST['gstr1']
+        flood = request.POST['flood']
+        rate_details = request.POST['rate_details']
+        advance_receipts = request.POST['advance_receipts']
+        reverse_charge = request.POST['reverse_charge']
+        classifications = request.POST['classifications']
+        bend_details = request.POST['bend_details']
+        eway_bill = request.POST['eway_bill']
+        applicable_form = request.POST['applicable_form']
+        threshold_includes = request.POST['threshold_includes']
+        threshold_limit = request.POST['threshold_limit']
+        intrastate = request.POST['intrastate']
+        threshold_limit1 = request.POST['threshold_limit1']
+        print_eway = request.POST['print_eway']
+        e_invoice = request.POST['e_invoice']
+        
+       
+        mdl = Gst_Details(
+            state=state,
+            reg_type=reg_type,
+            assessee=assessee,
+            app_form=app_form,
+            gstin=gstin,
+            gstr1=gstr1,
+            flood=flood,rate_details=rate_details,advance_receipts=advance_receipts,
+            reverse_charge=reverse_charge,classifications=classifications,bend_details=bend_details,
+            eway_bill=eway_bill,applicable_form=applicable_form,threshold_includes=threshold_includes,
+            threshold_limit=threshold_limit,intrastate=intrastate,threshold_limit1=threshold_limit1,
+            print_eway=print_eway,e_invoice=e_invoice,
+            company=cm
+        )
+        mdl.save()
+        return redirect('index')
+    return render(request,'features.html',{'ctg':cm})

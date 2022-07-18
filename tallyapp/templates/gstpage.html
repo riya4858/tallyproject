@@ -1,0 +1,270 @@
+{% extends 'base.html' %}
+{% block body %}
+<script src="https://code.jquery.com/jquery-git.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<style>
+    table.one {
+        position:relative;
+        float:right;
+        border:solid 1px green;
+      }
+      
+      .form-popup {
+        display: none;
+        position: fixed;
+        top: 180px;
+        right: 15px;
+        border: 1px solid #f1f1f1;
+        z-index: 9;
+        width: 300px;
+        height: 600px;
+      }
+    
+      .content a:hover {background-color: rgb(238, 167, 75);}
+      
+      /* Add styles to the form container */
+      .form-container {
+        max-width: 50px;
+        height: 500px;
+        padding: 10px;
+      }
+      .form-container1 {
+        max-width: 350px;
+        height: 500px;
+        padding: 2px;
+       
+      }
+      .close {
+        position: absolute;
+        top: 14px;
+        margin-left: 230px;
+        font-size: 25px;
+        color: rgb(6, 68, 139);
+        transform: rotate(45deg);
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+</style>
+<script>
+    function save(){
+        document.getElementById("create").submit();
+    }
+
+    $(document).ready(function(){
+        document.getElementById('cname').value='India';
+        document.getElementById('tblState').style.visibility= "hidden";
+        document.getElementById('tblCountry').style.visibility= "hidden";
+        finYear();
+        document.getElementById('fin').value = new date();
+       
+        
+    })
+  
+
+ 
+
+</script>
+{% for msg in messages %}
+        <div  style="background-color: rgb(236, 194, 116);width:245px ;color:black";>
+            <a href="" onclick="history.go(-1)" class="close" style="margin-right:1100px; ">+</a>
+            {{msg}}
+        </div>
+        {% endfor %}
+        <div class="row container-fluid p-0 mx-0">
+            <!-- <div class="col-sm-1 m-0 p-0"></div> -->
+            <div class="col-sm-12 m-0 p-0" style=" background-color:rgba(0,0,0,0.2); width:50%">
+                <!-- <a href="javascript:history.go(-1);" class="close">+</a> -->
+            <div  class="bg-info text-light">GST Details</div>
+            <div  style="text-align: center;margin-top:-25px;font-weight:900">{{cm.name}}</div>
+                   
+                    <div class="container" style="padding:40px;">
+        <form id="create" action="{% url 'gstcreate' cm.id %}" method="post" class="needs-validation" novalidate>
+        {% csrf_token %}
+        <h6><u>GST Registration Details</u></h6>
+
+        <div class="row">
+            <div class="col-md-3 mt-3">
+                <label for="validationCustom02">State</label>
+                <input id="companyname" type="text" class="form-control" id="validationCustom02" value="{{cm.state.name}}" name="state"
+                required style="background-color: #2f516f;color: white;" >
+            </div>
+            <div class="col-md-3 mt-3">
+                <label for="validationCustom02">Registration Type </label>
+                <select style="background-color: #2f516f;color: white;"  id="subled" name="reg_type" class=" form-control">
+                    <option value="Composition">Composition</option>
+                    <option value="Regular" selected>Regular</option>
+                </select>
+            </div>
+            <div class="col-md-3 mt-3">
+                <label for="validationCustom03">Assessee of Other Territory</label>
+                <select style="background-color: #2f516f;color: white;"  id="subled" name="assessee" class=" form-control">
+                    <option value="Yes">Yes</option>
+                    <option value="No" selected>No</option>
+                </select>
+                
+            </div>
+            <div class="col-md-3 mt-3">
+                <label for="validationCustom03">GST Application Form</label>
+                <input type="date" value="2022-04-01" id="address2" class="form-control" id="validationCustom03" name="app_form"
+                required style="background-color: #2f516f;color: white;"
+                >
+            </div>
+            <div class="col-md-3 mt-3">
+                <label for="validationCustom03">GSTIN/UIN</label>
+                <input type="text" id="address3" class="form-control" id="validationCustom03" name="gstin"
+                required style="background-color: #2f516f;color: white;"
+                >
+            </div>
+            <div class="col-md-3 mt-3">
+                <label for="validationCustom03">Periodicity of GSTR1</label>
+                <select style="background-color: #2f516f;color: white;" id="meth" name="gstr1" class=" form-control">
+                    <!-- <option value="" selected>Not Applicable</option> -->
+                    <option value="Composition" selected >Monthly</option>
+                    <option value="Regular" >Quarterly</option>
+                </select>
+            </div>
+            
+        <hr>
+        
+               </div><br>
+               <h6><u>Additional Features</u></h6>  
+               <div class="row">
+               <div class="col-md-3 mt-3">
+                <label for="validationCustom03">Kerala Flood Case applicable</label>
+                <select style="background-color: #2f516f;color: white;"  id="subled" name="flood" class=" form-control">
+                    <option value="Yes">Yes</option>
+                    <option value="No" selected>No</option>
+                </select>
+                
+            </div> 
+            <div class="col-md-3 mt-3">
+                <label for="validationCustom03">Set/Alter GST rate details</label>
+                <select style="background-color: #2f516f;color: white;"  id="subled" name="rate_details" class=" form-control">
+                    <option value="Yes">Yes</option>
+                    <option value="No" selected>No</option>
+                </select>
+                
+            </div> 
+            <div class="col-md-3 mt-3">
+                <label for="validationCustom03">Enable tax liability on advance receipt</label>
+                <select style="background-color: #2f516f;color: white;"  id="subled" name="advance_receipts" class=" form-control">
+                    <option value="Yes">Yes</option>
+                    <option value="No" selected>No</option>
+                </select>
+                
+            </div> 
+            <div class="col-md-3 mt-3">
+                <label for="validationCustom03">Enable tax liability on reverse charge</label>
+                <select style="background-color: #2f516f;color: white;"  id="subled" name="reverse_charge" class=" form-control">
+                    <option value="Yes">Yes</option>
+                    <option value="No" selected>No</option>
+                </select>
+                
+            </div>
+            <div class="col-md-3 mt-3">
+                <label for="validationCustom03">Enable GST Classifications</label>
+                <select style="background-color: #2f516f;color: white;"  id="subled" name="classifications" class=" form-control">
+                    <option value="Yes">Yes</option>
+                    <option value="No" selected>No</option>
+                </select>
+                
+            </div>
+            <div class="col-md-3 mt-3">
+                <label for="validationCustom03">Provide LUT/Bend details</label>
+                <select style="background-color: #2f516f;color: white;"  id="subled" name="bend_details" class=" form-control">
+                    <option value="Yes">Yes</option>
+                    <option value="No" selected>No</option>
+                </select>
+                
+            </div>
+
+
+            
+              </div>
+              <br>
+               <h6><u>Invoice Features</u></h6>  
+               <div class="row">
+               <div class="col-md-3 mt-3">
+                <label for="validationCustom03">e-Way Bill applicable</label>
+                <select style="background-color: #2f516f;color: white;"  id="subled" name="eway_bill" class=" form-control">
+                    <option value="Yes" selected>Yes</option>
+                    <option value="No" >No</option>
+                </select>
+                
+            </div> 
+            <div class="col-md-3 mt-3">
+                <label for="validationCustom03">Applicable Form</label>
+                <input type="date" value="2022-04-01" id="address2" class="form-control" id="validationCustom03" name="applicable_form"
+                required style="background-color: #2f516f;color: white;"
+                >
+            </div> 
+            <div class="col-md-3 mt-3">
+                <label for="validationCustom03">Threshold limit includes</label>
+                <select style="background-color: #2f516f;color: white;"  id="subled" name="threshold_includes" class=" form-control">
+                    <option value="Invoice value" selected>Invoice value</option>
+                    <option value="Taxable and exempt goods value" >Taxable and exempt goods value</option>
+                    <option value="Taxable goods value" >Taxable goods value</option>
+                </select>
+                
+            </div> 
+            <div class="col-md-3 mt-3">
+                <label for="validationCustom03">Threshold limit</label>
+                <input type="text" id="gname" style="background-color: #2f516f;color: white;" value="50000" name="threshold_limit" class="form-control" placeholder="">
+                
+            </div>
+            <div class="col-md-3 mt-3">
+                <label for="validationCustom03">Applicable for intrastate</label>
+                <select style="background-color: #2f516f;color: white;"  id="subled" name="intrastate" class=" form-control">
+                    <option value="Yes" selected>Yes</option>
+                    <option value="No" >No</option>
+                </select>
+                
+            </div>
+            <div class="col-md-3 mt-3">
+                <label for="validationCustom03">Threshold limit</label>
+                <input type="text" id="gname" value="50000" style="background-color: #2f516f;color: white;" name="threshold_limit1" class="form-control" placeholder="">
+                
+            </div>
+            <div class="col-md-3 mt-3">
+                <label for="validationCustom03">Print e-Way bill with invoice</label>
+                <select style="background-color: #2f516f;color: white;"  id="subled" name="print_eway" class=" form-control">
+                    <option value="Yes" >Yes</option>
+                    <option value="No" selected>No</option>
+                </select>
+                
+            </div>
+            <div class="col-md-3 mt-3">
+                <label for="validationCustom03">e-Invoicing applicable</label>
+                <select style="background-color: #2f516f;color: white;"  id="subled" name="e_invoice" class=" form-control">
+                    <option value="Yes" selected>Yes</option>
+                    <option value="No" selected >No</option>
+                </select>
+                
+            </div>
+
+            
+              </div>
+                    <br>
+            <div class="col text-center" >
+                <button  onClick='save()' type="submit" class="btn btn-info" >Create</button>
+            <!-- <input  type="submit" value="create"> -->
+            </div>
+            </form>
+           
+                
+            
+        </div>
+    </div>
+</div>
+<!-- <script>
+    $("#otherCountry").click(function() {
+        $("#currency_symbol").show();
+        $("#formal_name").show();
+      });
+</script> -->
+
+
+
+
+{% endblock %}
