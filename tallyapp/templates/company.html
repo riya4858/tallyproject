@@ -2,7 +2,28 @@
 {% block body %}
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<style>
+    body
+{
+    counter-reset: Serial;           /* Set the Serial counter to 0 */
+}
 
+table
+{
+    border-collapse: separate;
+}
+
+tr td:first-child:before
+{
+  counter-increment: Serial;      /* Increment the Serial counter */
+  content: counter(Serial); /* Display the counter */
+}
+</style>
+<script>
+    $(document).ready(function() {
+        
+     });
+    </script>
 
 <div class="row container-fluid p-0 mx-0">
     <div class="col-sm-3 m-0 p-0"></div>
@@ -21,7 +42,10 @@
                {% for i in com %}
                {% if i.active == 1 %}
                <tr>
-                <div style="margin-left: 20px;">{{i.name}}</div></tr>
+                <div style="margin-left: 20px;">{{i.name}}</div>
+                <!-- <td style="margin-left: 320px;margin-top:10px;"></td> -->
+            </tr>
+                
                 {% endif %}
                {% endfor %}
                </table>

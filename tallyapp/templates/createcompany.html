@@ -107,7 +107,7 @@
 
         
     }
-    function setState(state,stateId){
+    function setState(){
         document.getElementById('state').value= state;
         document.getElementById('myForm').style.visibility= "hidden";
         document.getElementById('country').focus();
@@ -116,14 +116,18 @@
         
  
     }
-    function setCountry(country,countryId){
-        document.getElementById('country').value= country;
-        document.getElementById('myForm1').style.visibility= "hidden";
-        document.getElementById('myForm').style.visibility= "visible";
-        document.getElementById('currency_symbol').value = 'Rs'
-        document.getElementById('formal_name').value = 'INR'
-        document.getElementById('pincode').focus();
-        document.getElementsByName('countryhidden').value= countryId;
+    function setCountry(){
+        var status = document.getElementById("under");
+            var a = status.value;
+            console.log(a);
+            if( a == "India" ){
+                console.log(a);
+
+               // document.getElementById('country').style.display = "flex";
+            document.getElementById('country').value= 'India';}
+        else if( a == "USA" ){
+        document.getElementById('country').value= 'USA';
+        }
         
         
        }
@@ -131,10 +135,10 @@
            //alert(countryId);
         document.getElementById('country').value= country;
         document.getElementById('myForm1').style.visibility= "hidden";
-        document.getElementById('myForm').style.visibility= "hidden";
+        document.getElementById('myForm').style.visibility= "visible";
         document.getElementById('state').value = ''
+        document.getElementById('state').focus();
         document.getElementById('currency_symbol').value = ''
-        document.getElementById('currency_symbol').focus();
         document.getElementById('formal_name').value = ''
        
         
@@ -143,15 +147,18 @@
         document.getElementsByName('countryhidden').value= countryId;
     }
 
-    $(document).ready(function(){
-        document.getElementById('cname').value='India';
-        document.getElementById('tblState').style.visibility= "hidden";
-        document.getElementById('tblCountry').style.visibility= "hidden";
-        finYear();
-        document.getElementById('fin').value = new date();
-       
-        
-    })
+    $(document).ready(function() {
+       var a = 1;
+       var b = a.value
+      
+    });
+    $(function(){
+        $("fin_begin").datetimepicker({
+            format:'DD/MM/YYYY HH:mm',
+        });
+    });
+
+    
     function copyName(){
         document.getElementById("mailing_name").value = document.getElementById("companyname").value;
     }
@@ -251,17 +258,38 @@
                 <div class="scrollbar scrollbar-primary">
                     
                    
-                    <table  id="table">
+                    <table  id="india">
                         <tr >
-                          
-                        {% for i in com %}
-                        
-                        
-                  
-                        <a onclick="setState('{{i.name}}','{{i.id}}')"  class="content" style="cursor:pointer;color:black;">&nbsp;&nbsp;{{i.name}}</a><br>
-                     
-                      {% endfor %}
-                     
+                       <a>Kerala</a>
+                       <a>Tamilnadu</a>
+                       <a>Karnataka</a>
+                       <a>Andhra Pradesh</a>
+                       <a>Arunachal Pradesh</a>
+                       <a>Assam </a>
+                       <a>Bihar </a>
+                       <a>Chhattisgarh </a>
+                       <a>Goa </a>
+                       <a>Gujarat </a>
+                       <a>Haryana </a>
+                       <a>Himachal Pradesh</a>
+                       <a>Jammu Kashmir </a>
+                       <a>Jharkhand </a>
+                       <a>Madhya Pradesh </a>
+                       <a>Maharashtra </a>
+                       <a>Manipur </a>
+                       <a>Meghalaya </a>
+                       <a>Mizoram </a>
+                       <a>Nagaland </a>
+                       <a>Odisha </a>
+                       <a>Punjab </a>
+                       <a>Rajasthan </a>
+                       <a>Sikkim </a>
+                       <a>Telengana </a>
+                       <a>Tripura </a>
+                       <a>Uttar Pradesh </a>
+                       <a>Uttarakhand </a>
+                       <a>West Bengal </a>
+
                         </tr>
                         </table>
                 </div>
@@ -302,16 +330,17 @@
                     <a   style="margin-left:250px;color:black;cursor:pointer" >Back</a>  
                 <hr >
                 <div>
-                    <table id="statetbl">
+<                    <table >
                     <tr >
-                    {% for i in country %}
-                   
-                        {% if i.name == 'India' %}
-                    <a onclick="setCountry('{{i.name}}','{{i.id}}')"  class="content" style="cursor:pointer;color:black;">&nbsp;&nbsp;{{i.name}}</a><br>
-                    {% else %}
-                    <a onclick="otherCountry('{{i.name}}','{{i.id}}')"  class="content" style="cursor:pointer;color:black;">&nbsp;&nbsp;{{i.name}}</a><br>
-                    {% endif %}
-                    {% endfor %}
+                        <div onclick="setCountry()" id="under">
+                   <a  style="cursor:pointer;color: black;">India</a><br>
+                   <a  id="under" style="cursor:pointer;color: black;">USA</a><br>
+                   <a onchange="setCountry()" id="under" style="cursor:pointer;color: black;">UAE</a><br>
+                </div>
+                   <!-- <select id="under" onchange="setCountry()">
+                       <option value="India" style="cursor:pointer;color: black;">India</option>
+                       <option  value="USA" style="cursor:pointer;color: black;">USA</option>
+                   </select> -->
                     </tr>
                     </table>
                 </div>
@@ -376,7 +405,7 @@
        
             <div class="col-md-4 mt-3">
                 <label for="validationCustom03">Financial year begin from</label>
-                <input id="fin_year" data-date-format="DD/MM/YYYY" value="2022-04-01" type="date" class="form-control" id="validationCustom03" name="fin_begin"
+                <input id="fin_year" data-date-format="DD/MM/YYYY" value="2022-04-01" type="date" class="form-control" id="fin_begin" name="fin_begin"
                 required style="background-color: #2f516f;color: white;"
                 >
             </div>

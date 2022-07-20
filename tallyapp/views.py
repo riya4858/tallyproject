@@ -183,6 +183,25 @@ def costcentre(request,pk):
     ccentre=Costcentre.objects.filter(company_id=cmp)
     return render(request,'costcentre.html',{'cmp':cmp,'ccentre':ccentre})
 
+def costcentre2(request,pk):
+    cmp=Companies.objects.get(id=pk)
+    if request.method == 'POST':
+        cmp=Companies.objects.get(id=pk)
+        cname = request.POST['cname']
+        alia = request.POST['alia']
+        under = request.POST['under']
+        costc=Costcentre.objects.filter(cname=cname)
+        if costc:
+            # messages.info(request,'Company name already exists!!')
+            pass
+        else:
+            
+            data = Costcentre(cname=cname,alias=alia,under=under,company=cmp)
+            data.save()
+        # return redirect('costcentre')
+    ccentre=Costcentre.objects.filter(company_id=cmp)
+    return render(request,'costcentre2.html',{'cmp':cmp,'ccentre':ccentre})
+
 
 def ratesofexchange(request,pk):
     cmp=Companies.objects.get(id=pk)

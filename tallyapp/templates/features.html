@@ -37,6 +37,10 @@
     function save(){
         document.getElementById("frmfeature").submit();
     }
+    function savegst(){
+      document.getElementById("frmfeature").submit();
+      window.location.href="{% url 'gst' ctg.id %}";
+  }
 
     function myFunction() {
         compId= document.getElementById('compId').innerHTML
@@ -45,12 +49,7 @@ alert(compId);
 
         //document.getElementById('maintain_accounts').value='No'
     }
-    function gstForm(){
-      window.location.href="{% url 'gst' ctg.id %}";
-      //document.getElementById('myForm').style.visibility= "visible";
-      
-      //alert('asd');
-    }
+    
 </script>
 <body >
 <div class="page-content">
@@ -77,7 +76,8 @@ alert(compId);
                         <div class="col-sm-6 m-0 p-0">
                           <select style="background-color: #2f516f;color: white;"
                           name="maintain_accounts" id="maintain_accounts" onchange="save()" >
-                        {% if ft.maintain_accounts == 1 %}
+                          
+                        {% if ft.maintain_accounts %}
                           <option value="Yes" selected >Yes</option>
                           <option value="No" >No</option>
                         {% else %}
@@ -90,7 +90,7 @@ alert(compId);
                         <div class="col-sm-6 m-0 p-0"> <label for="empno">Enable Bill-wise entry:</label></div>
                         <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;"
                               name="bill_wise_entry" id="bill_wise_entry" onchange="save()" >
-                            {% if ft.bill_wise_entry == 1 %}
+                            {% if ft.bill_wise_entry %}
                               <option value="Yes" selected >Yes</option>
                               <option value="No" >No</option>
                             {% else %}
@@ -104,7 +104,7 @@ alert(compId);
                         <div class="col-sm-6 m-0 p-0"> <label for="empno">Enable Cost Centres:</label></div>
                         <div class="col-sm-6 m-0 p-0">
                             <select style="background-color: #2f516f;color: white;"  name="cost_centres" id="cost_centres" onchange="save()">
-                            {% if ft.cost_centres == 1 %}
+                            {% if ft.cost_centres %}
                               <option value="Yes" selected >Yes</option>
                               <option value="No" >No</option>
                             {% else %}
@@ -118,7 +118,7 @@ alert(compId);
                         <div class="col-sm-6 m-0 p-0"> <label for="empno">Enable Interest Calculation:</label></div>
                         <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;"
                               name="interest_calc" id="interest_calc" onchange="save()">
-                            {% if ft.interest_calc == 1 %}
+                            {% if ft.interest_calc %}
                               <option value="Yes" selected >Yes</option>
                               <option value="No" >No</option>
                             {% else %}
@@ -132,7 +132,7 @@ alert(compId);
                         <div class="col-sm-6 m-0 p-0"> <label for="empno">Maintain Inventory:</label></div>
                         <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;"  
                             name="maintain_inventory" id="maintain_inventory" onchange="save()">
-                            {% if ft.maintain_inventory == 1 %}
+                            {% if ft.maintain_inventory  %}
                             <option value="Yes" selected >Yes</option>
                             <option value="No" >No</option>
                           {% else %}
@@ -146,7 +146,7 @@ alert(compId);
                         <div class="col-sm-6 m-0 p-0"> <label for="empno">Integrate Accounts with Inventory:</label></div>
                         <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;" 
                              name="integrate_accounts" id="integrate_accounts" onchange="save()">
-                            {% if ft.integrate_accounts == 1 %}
+                            {% if ft.integrate_accounts %}
                             <option value="Yes" selected >Yes</option>
                             <option value="No" >No</option>
                           {% else %}
@@ -160,7 +160,7 @@ alert(compId);
                         <div class="col-sm-6 m-0 p-0"> <label for="empno">Enable Multiple Price Levels:</label></div>
                         <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;"
                               name="multiple_price_level" id="multiple_price_level" onchange="save()">
-                            {% if ft.multiple_price_level == 1 %}
+                            {% if ft.multiple_price_level %}
                             <option value="Yes" selected >Yes</option>
                             <option value="No" >No</option>
                           {% else %}
@@ -174,7 +174,7 @@ alert(compId);
                         <div class="col-sm-6 m-0 p-0"> <label for="empno">Enable Batches:</label></div>
                         <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;" 
                              name="batches" id="batches" onchange="save()">
-                            {% if ft.batches == 1 %}
+                            {% if ft.batches %}
                             <option value="Yes" selected >Yes</option>
                             <option value="No" >No</option>
                           {% else %}
@@ -188,7 +188,7 @@ alert(compId);
                         <div class="col-sm-6 m-0 p-0"> <label for="empno">Maintain Expiry date for Batches:</label></div>
                         <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;"
                               name="expirydate_batches" id="expirydate_batches" onchange="save()">
-                            {% if ft.expirydate_batches == 1 %}
+                            {% if ft.expirydate_batches %}
                             <option value="Yes" selected >Yes</option>
                             <option value="No" >No</option>
                           {% else %}
@@ -202,7 +202,7 @@ alert(compId);
                         <div class="col-sm-6 m-0 p-0"> <label for="empno">Enable Job Order Processing:</label></div>
                         <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;" 
                              name="joborder_processing" id="joborder_processing" onchange="save()">
-                            {% if ft.joborder_processing == 1 %}
+                            {% if ft.joborder_processing  %}
                             <option value="Yes" selected >Yes</option>
                             <option value="No" >No</option>
                           {% else %}
@@ -216,7 +216,7 @@ alert(compId);
                         <div class="col-sm-6 m-0 p-0"> <label for="empno">Enable Cost Tracking:</label></div>
                         <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;"  
                             name="cost_tracking" id="cost_tracking" onchange="save()">
-                            {% if ft.cost_tracking == 1 %}
+                            {% if ft.cost_tracking %}
                             <option value="Yes" selected >Yes</option>
                             <option value="No" >No</option>
                           {% else %}
@@ -229,7 +229,7 @@ alert(compId);
                         <div class="col-sm-6 m-0 p-0"> <label for="empno">Enable Job Costing:</label></div>
                         <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;" 
                              name="job_costing" id="job_costing" onchange="save()">
-                            {% if ft.job_costing == 1 %}
+                            {% if ft.job_costing %}
                             <option value="Yes" selected >Yes</option>
                             <option value="No" >No</option>
                           {% else %}
@@ -242,7 +242,7 @@ alert(compId);
                         <div class="col-sm-6 m-0 p-0"> <label for="empno">Use Discount Column in Invoices:</label></div>
                         <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;" 
                           name="discount_invoices" id="discount_invoices" onchange="save()">
-                         {% if ft.discount_invoices == 1 %}
+                         {% if ft.discount_invoices %}
                          <option value="Yes" selected >Yes</option>
                          <option value="No" >No</option>
                        {% else %}
@@ -255,7 +255,7 @@ alert(compId);
                         <div class="col-sm-6 m-0 p-0"> <label for="empno">Use Seperate Actual and Billed Quantity Columns in Invoices:</label></div>
                         <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;" 
                           name="Billed_Quantity" id="Billed_Quantity" onchange="save()">
-                         {% if ft.Billed_Quantity == 1 %}
+                         {% if ft.Billed_Quantity  %}
                          <option value="Yes" selected >Yes</option>
                          <option value="No" >No</option>
                        {% else %}
@@ -275,8 +275,8 @@ alert(compId);
 <div class="row container-fluid  p-2">
     <div class="col-sm-6 m-0 p-0"> <label for="empno">Enable Goods and Services Tax(GST):</label></div>
     <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;" 
-      name="gst" id="gst" onchange="gstForm()">
-     {% if ft.gst == 1 %}
+      name="gst" id="gst" onchange="savegst()">
+     {% if ft.gst %}
      <option  value="Yes" selected >Yes</option>
      <option value="No" >No</option>
    {% else %}
@@ -293,7 +293,7 @@ alert(compId);
     <div class="col-sm-6 m-0 p-0"> <label for="empno">Enable Tax Deducted at Source(TDS):</label></div>
     <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;" 
       name="tds" id="tds" onchange="save()">
-     {% if ft.tds == 1 %}
+     {% if ft.tds %}
      <option value="Yes" selected >Yes</option>
      <option value="No" >No</option>
    {% else %}
@@ -307,7 +307,7 @@ alert(compId);
     <div class="col-sm-6 m-0 p-0"> <label for="empno">Enable Tax Collected at Source(TCS):</label></div>
     <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;" 
       name="tcs" id="tcs" onchange="save()">
-     {% if ft.tcs == 1 %}
+     {% if ft.tcs %}
      <option value="Yes" selected >Yes</option>
      <option value="No" >No</option>
    {% else %}
@@ -321,7 +321,7 @@ alert(compId);
     <div class="col-sm-6 m-0 p-0"> <label for="empno">Enable Value Added Tax(VAT):</label></div>
     <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;" 
       name="vat" id="vat" onchange="save()">
-     {% if ft.vat == 1 %}
+     {% if ft.vat  %}
      <option value="Yes" selected >Yes</option>
      <option value="No" >No</option>
    {% else %}
@@ -335,7 +335,7 @@ alert(compId);
     <div class="col-sm-6 m-0 p-0"> <label for="empno">Enable Excise:</label></div>
     <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;" 
       name="excise" id="excise" onchange="save()">
-     {% if ft.excise == 1 %}
+     {% if ft.excise  %}
      <option value="Yes" selected >Yes</option>
      <option value="No" >No</option>
    {% else %}
@@ -349,7 +349,7 @@ alert(compId);
     <div class="col-sm-6 m-0 p-0"> <label for="empno">Enable Service Tax:</label></div>
     <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;" 
       name="servicetax" id="servicetax" onchange="save()">
-     {% if ft.servicetax == 1 %}
+     {% if ft.servicetax  %}
      <option value="Yes" selected >Yes</option>
      <option value="No" >No</option>
    {% else %}
@@ -364,7 +364,7 @@ alert(compId);
     <div class="col-sm-6 m-0 p-0"> <label for="empno">Maintain Payroll:</label></div>
     <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;" 
       name="payroll" id="payroll" onchange="save()">
-     {% if ft.payroll == 1 %}
+     {% if ft.payroll %}
      <option value="Yes" selected >Yes</option>
      <option value="No" >No</option>
    {% else %}
@@ -378,7 +378,7 @@ alert(compId);
     <div class="col-sm-6 m-0 p-0"> <label for="empno">Enable Multiple Addresses:</label></div>
     <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;" 
       name="multiple_addrss" id="multiple_addrss" onchange="save()">
-     {% if ft.multiple_addrss == 1 %}
+     {% if ft.multiple_addrss %}
      <option value="Yes" selected >Yes</option>
      <option value="No" >No</option>
    {% else %}
@@ -391,7 +391,7 @@ alert(compId);
     <div class="col-sm-6 m-0 p-0"> <label for="empno">Mark Modified Vouchers:</label></div>
     <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;" 
       name="vouchers" id="vouchers" onchange="save()">
-     {% if ft.vouchers == 1 %}
+     {% if ft.vouchers %}
      <option value="Yes" selected >Yes</option>
      <option value="No" >No</option>
    {% else %}

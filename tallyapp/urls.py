@@ -9,6 +9,7 @@ urlpatterns = [
     path('group/<int:pk>',views.group,name='group'),
     path('ledger/<int:pk>',views.ledger,name='ledger'),
     path('costcentre/<int:pk>',views.costcentre,name='costcentre'),
+    path('costcentre2/<int:pk>',views.costcentre2,name='costcentre2'),
     path('currency/<int:pk>',views.currency,name='currency'),
     path('features/<int:pk>',views.features,name='features'),
     path('creategroup/<int:pk>',views.creategroup,name='creategroup'),

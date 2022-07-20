@@ -60,10 +60,14 @@
                 $select2.html($options.filter('[text="' + this.value + '"]'));
                 $select3.html($options1.filter('[text="' + this.value + '"]'));
             }).trigger('change');
-
-                     
+            const d1='Apr 1 2022';
+            const d2='Mar 1 2023';
+            //let text = d1.toDateString();
+            //alert(text);
             document.getElementById("currentDate").innerHTML=new Date().toDateString();
-
+            document.getElementById("dateP1").innerHTML=d1;
+            document.getElementById("dateP2").innerHTML=d2;
+           
             var table = document.getElementById("table");
             var cells = table.getElementsByTagName("td");
             for (var i = 0; i < cells.length; i++) {
@@ -82,12 +86,16 @@
         }
 
         function setDate(){
-            alert( document.getElementById('enterDate').value);
-            document.getElementById("currentDate").innerHTML= document.getElementById('enterDate').value;
+            document.getElementById('hdnDate').value= 1;
+            
+            document.getElementById("currentDate").innerHTML= new Date(document.getElementById('enterDate').value).toDateString();
+
         }
         function setPeriod(){
-            document.getElementById("dateP1").innerHTML= document.getElementById('dateperiod1').value;
-            document.getElementById("dateP2").innerHTML= document.getElementById('dateperiod2').value;
+            document.getElementById("dateP1").innerHTML= new Date(document.getElementById('enterPeriod1').value).toDateString();
+            document.getElementById("dateP2").innerHTML= new Date(document.getElementById('enterPeriod2').value).toDateString();
+
+            
         }
     </script>
 </head>
@@ -240,25 +248,23 @@
                             
                         </li>
                         <li>
-                            <a href="javascript:;" class="has-arrow">
+                            <a data-toggle="modal" data-target="#myModal" href="javascript:;" class="has-arrow">
 
                                 <div class="parent-icon"><i class='bx bx-briefcase-alt'></i>
                                 </div>
                                 <div class="menu-title">Date</div>
                             </a>
-                            <ul>
-                                <li>
-                                    <a data-toggle="modal" data-target="#myModal" href="">Date</a>
-                                            <a data-toggle="modal" data-target="#myModal1" href="">Period</a>
-                                   
-                                </li>
-                               
-                                
-                                
-                            </ul>
                             
-                        </li>
-                        <!--starting of modal-->
+                            </li>
+                            <li>
+                                <a data-toggle="modal" data-target="#myModal1" href="javascript:;" class="has-arrow">
+    
+                                    <div class="parent-icon"><i class='bx bx-briefcase-alt'></i>
+                                    </div>
+                                    <div class="menu-title">Period</div>
+                                </a>
+                                
+                                </li>
             
                 
                         <li>
@@ -316,8 +322,10 @@
                         <div hidden id="cid" ></div>
                     <div style="margin-left:18px;font-size:11px;margin-top:25px">CURRENT PERIOD</div>
                     <div id=""></div>
-                    <a id="dateP1" style="font-weight: 900;margin-left:18px;">Apr 1 2022</a>&nbsp;to
-                    <a id="dateP2" style="font-weight: 900;">Mar 1 2023</a>
+                    <a id="dateP1" style="font-weight: 900;margin-left:18px;">
+                        
+                    </a>&nbsp;to
+                    <a id="dateP2" style="font-weight: 900;"></a>
                         <div style="text-align: right; margin-top:-35px;margin-right:18px;font-size:11px">CURRENT DATE</div>
                         <div style="text-align: right;margin-top:-3px;margin-right:18px;font-weight:900" id="currentDate"></div>
                         
@@ -330,6 +338,7 @@
                     <hr>
                     
                     <div style="margin-left:18px;font-weight: 900; font-size:15px;" id="compName"> </div>
+                    <div style="text-align:right;font-weight: 900; margin-top:-18px;font-size:12px;;margin-right:18px;" >No Vouchers Entered </div>
                     <!-- <div id="compId"></div> -->
                     <div style="top:550px">
                 <form id="myForm" action="" method="post" class="p-3">
@@ -340,7 +349,8 @@
                             {%if i.active == 1 %}
                             <tr>
                                 <td>
-                            <a style="cursor:pointer;" onclick="setName('{{i.name}}','{{i.id}}');">{{i.name}}</a><br>
+                            <a style="cursor:pointer;" onclick="setName('{{i.name}}','{{i.id}}');">{{i.name}}</a>
+                            <!-- <a style="text-align: right;margin-left:460px;"  >No Vouchers Entered</a><br> -->
                         </td>
                         <td>
                             <a  style="cursor:pointer;color:rgba(0,0,0,0.2);font-size:2px;" onclick="setName('{{i.name}}','{{i.id}}');">{{i.id}}</a><br>
@@ -371,11 +381,13 @@
         <div class="modal-dialog">
         <div class="modal-content">
         <div class="modal-body">
-        <form action="" method="POST" >
+        <form action="" id="frmDate" method="POST" >
         {% csrf_token %}
-            <div class="form-group" align="center">
-                <input type="date" name="currentdate" id="enterDate" placeholder="Date" ><br>
-                <input onclick="setDate()" type="submit"  value="Submit" class="form-control w-25 btn btn-info"><br>
+            <div class="form-group" align="center" id="mdlSubmit">
+                <input type="date" name="currentdate" id="enterDate" placeholder="Date" class="form-control w-50"><br>
+                <input type="hidden" id="hdnDate" value="0">
+                <input type="hidden" id="hdnDateVal" value="0">
+                <button class="btn btn-small w-25 btn btn-info" data-dismiss="modal" aria-hidden="true" onclick="setDate()">Submit</button> 
             </div>
         </form>
         </div>
@@ -390,10 +402,10 @@
         <form action="" method="POST" >
         {% csrf_token %}
             <div class="form-group" align="center">
-                <input type="date" name="dateperiod1"  id="dateperiod1" class="form-control w-50"><br>
+                <input type="date" name="dateperiod1"  id="enterPeriod1" class="form-control w-50"><br>
                 <label>to</label><br>
-                <input type="date" name="dateperiod2" id="dateperiod2" class="form-control w-50"><br>
-                <input type="submit" onclick="setPeriod()"  value="Submit" class="form-control w-25 btn btn-info"><br>
+                <input type="date" name="dateperiod2" id="enterPeriod2" class="form-control w-50"><br>
+                <button class="btn btn-small w-25 btn btn-info" data-dismiss="modal" aria-hidden="true" onclick="setPeriod()">Submit</button> 
             </div>
         </form>
         </div>
