@@ -1,4 +1,4 @@
-from re import A
+from datetime import datetime, timedelta
 from django.shortcuts import render,redirect
 from .models import *
 from django.contrib import messages
@@ -15,52 +15,62 @@ def company(request):
     return render(request,'company.html',{'com':com})
 
 
+# def getStates(request):
+#     cmp=States.objects.filter(country_id=pk)
+#     return cmp
 def getStates(request):
-    return States.objects.all()
+    st=States.objects.all()
+    country=Countries.objects.all()
+   
+    post_id=request.GET.get['post_id']
+    
+    cmp=States.objects.filter(country_id=post_id)
+    # return render(request,'createcompany.html',{'st':st,'country':country,'cmp':cmp})
+    return JsonResponse(cmp)
 
 def createcompany(request):
-    com=States.objects.all()
+    st=States.objects.all()
     country=Countries.objects.all()
-    return render(request,'createcompany.html',{'com':com,'country':country})
+    return render(request,'createcompany.html',{'st':st,'country':country})
 
 def companycreate(request):
     
     if request.method=='POST':
-            name=request.POST['name']
-            mailing_name=request.POST['mailing_name']
-            address1=request.POST['address1']
-            address2=request.POST['address2']
-            address3=request.POST['address3']
-            address4=request.POST['address4']
-            state=request.POST['state']
-            country=request.POST['country']
-            #stateId= request.POST['statehidden']
-            #print('fghj')
+        name=request.POST['name']
+        mailing_name=request.POST['mailing_name']
+        address1=request.POST['address1']
+        address2=request.POST['address2']
+        address3=request.POST['address3']
+        address4=request.POST['address4']
+        s=request.POST['state']
+        
+        print(s)
+        country=request.POST['country']   
+        print(country) 
+        pincode=request.POST['pincode']
+        telephone=request.POST['telephone']
+        mobile=request.POST['mobile']
+        fax=request.POST['fax']
+        email=request.POST['email']
+        website=request.POST['website']
+        fin_begin=request.POST['fin_begin']
+        books_begin=request.POST['books_begin']
+        currency_symbol=request.POST['currency_symbol']
+        formal_name=request.POST['formal_name']
+        end=datetime.strptime(fin_begin,'%Y-%m-%d')+timedelta(days=364)
+        a=end.date()
+        cmp=Companies.objects.filter(name=name)
+        if cmp:
             
-            state=States.objects.get(name=state) 
-            country=Countries.objects.get(name=country) 
-            pincode=request.POST['pincode']
-            telephone=request.POST['telephone']
-            mobile=request.POST['mobile']
-            fax=request.POST['fax']
-            email=request.POST['email']
-            website=request.POST['website']
-            fin_begin=request.POST['fin_begin']
-            books_begin=request.POST['books_begin']
-            currency_symbol=request.POST['currency_symbol']
-            formal_name=request.POST['formal_name']
-            cmp=Companies.objects.filter(name=name)
-            if cmp:
-                messages.info(request,'Company name already exists!!')
-                return redirect('createcompany')
-            else:
-                ctg=Companies(name=name,mailing_name=mailing_name,address1=address1,address2=address2,address3=address3,
-                    address4=address4,
-                    state=state,country=country,
-                    pincode=pincode,
-                    telephone=telephone,mobile=mobile,fax=fax,email=email,website=website,fin_begin=fin_begin,
-                    books_begin=books_begin,currency_symbol=currency_symbol,formal_name=formal_name)
-                ctg.save()
+            messages.info(request,'Company name already exists!!')
+            return redirect('createcompany')
+        else:
+            ctg=Companies(name=name,mailing_name=mailing_name,address1=address1,address2=address2,address3=address3,
+                address4=address4,states=s,country=country,
+                pincode=pincode,
+                telephone=telephone,mobile=mobile,fax=fax,email=email,website=website,fin_begin=fin_begin,
+                books_begin=books_begin,c_symbol=currency_symbol,f_name=formal_name,end=a)
+            ctg.save()
             
             
              
@@ -106,6 +116,7 @@ def ledger(request,pk):
         ch_printing = request.POST['ch_printing']
         ch_config = request.POST['ch_config']
         
+        
         #Asset_rounding
         rounding_method=request.POST['rounding_method']
         round_limit=request.POST['round_limit']
@@ -137,29 +148,29 @@ def ledger(request,pk):
             data1=Ledger_Mailing_Details(mailingname=mailingname,address=address,state=state,country=country,pincode=pincode,
                                         company=cmp,ledger=data)
             data1.save()
-            
+            return redirect('index')
             #banking_details
             data2=Ledger_Banking_Details(od_limit=od_limit,holder_name=holder_name,acc_no=acc_no,ifsc=ifsc,swift_code=swift_code,bank_name=bank_name,
                                         branch=branch,set_cheque=set_cheque,ch_printing=ch_printing,ch_config=ch_config,
                                         company=cmp,ledger=data)
             data2.save()
-            
+            return redirect('index')
             #Asset_rounding
             data3=Ledger_Asset_Rounding(rounding_method=rounding_method,round_limit=round_limit,
                                         company=cmp,ledger=data)
             data3.save()
-            
+            return redirect('index')
             #Asset_statutory
             data4=Ledger_Asset_Statutory(assessable_calculation=assessable_calculation,appropriate_to=appropriate_to,
                                          gst_applicable=gst_applicable,set_alter_GST=set_alter_GST,type_of_supply=type_of_supply,
                                          method_of_calc=method_of_calc,company=cmp,ledger=data)
             data4.save()
-            
+            return redirect('index')
             #Sundry
             data5=Ledger_Sundry(maintain_balance_bill_by_bill=maintain_balance_bill_by_bill,default_credit_period=default_credit_period,
                                         check_for_credit_days=check_for_credit_days,company=cmp,ledger=data)
             data5.save()
-            
+            return redirect('index')
             
     grup=Group.objects.filter(company_id=cmp)
     return render(request,'ledger.html',{'cmp':cmp,'grup':grup})
@@ -179,7 +190,7 @@ def costcentre(request,pk):
             
             data = Costcentre(cname=cname,alias=alia,under=under,company=cmp)
             data.save()
-        # return redirect('costcentre')
+            return redirect('index')
     ccentre=Costcentre.objects.filter(company_id=cmp)
     return render(request,'costcentre.html',{'cmp':cmp,'ccentre':ccentre})
 
@@ -198,7 +209,7 @@ def costcentre2(request,pk):
             
             data = Costcentre(cname=cname,alias=alia,under=under,company=cmp)
             data.save()
-        # return redirect('costcentre')
+            return redirect('index')
     ccentre=Costcentre.objects.filter(company_id=cmp)
     return render(request,'costcentre2.html',{'cmp':cmp,'ccentre':ccentre})
 
@@ -206,7 +217,7 @@ def costcentre2(request,pk):
 def ratesofexchange(request,pk):
     cmp=Companies.objects.get(id=pk)
     cur=Currency.objects.filter(company_id=cmp)
-    return render(request,'ratesofexchange.html',{'cmp':cmp,'cur':cur})
+    return render(request,'ratesofexchange.html',{'cmp':cmp,'curr':cur})
 
 def voucher(request,pk):
     cmp=Companies.objects.get(id=pk)
@@ -250,7 +261,9 @@ def voucher(request,pk):
 
         )
         mdl.save()
-    return render(request,'voucher.html',{'cmp':cmp})
+        return redirect('index')
+    vv=Voucher.objects.filter(company_id=cmp)
+    return render(request,'voucher.html',{'cmp':cmp,'vv':vv})
 
 def currency(request,pk):
     cmp=Companies.objects.get(id=pk)
@@ -270,7 +283,7 @@ def currency(request,pk):
                         suffix_symbol=suffix_symbol,symbol_and_amount=symbol_and_amount,
                         after_decimal=after_decimal,amount_in_words=amount_in_words,company=cmp)
         data.save()
-        # return redirect('costcentre')
+        return redirect('index')
     return render(request,'currency.html',{'cmp':cmp})
 
 
@@ -283,9 +296,11 @@ def creategroup(request,pk):
         alia = request.POST['alia']
         under = request.POST['under']
         sub_ledger = request.POST['sub_ledger']
+        gross = request.POST['gross']
         nett = request.POST['nee']
         calc = request.POST['cal']
         meth = request.POST['meth']
+        nature = request.POST['nature']
         grp=Group.objects.filter(name=gname)
         if grp:
             # messages.info(request,'Company name already exists!!')
@@ -299,14 +314,49 @@ def creategroup(request,pk):
                 debit_credit=nett,
                 calculation=calc,
                 used_purchase=meth,
+                nature_of_group=nature,
+                gross_profit=gross,
                 company=cmp
             )
             mdl.save()
-        # return redirect('index')
+            return redirect('index')
     grup=Group.objects.filter(company_id=cmp)
     return render(request,'group.html',{'cmp':cmp,'grup':grup})
     
-
+def group2(request,pk):
+    cmp=Companies.objects.get(id=pk)
+    if request.method == 'POST':
+        cmp=Companies.objects.get(id=pk)
+        gname = request.POST['gname']
+        alia = request.POST['alia']
+        under = request.POST['under']
+        sub_ledger = request.POST['sub_ledger']
+        gross = request.POST['gross']
+        nett = request.POST['nee']
+        calc = request.POST['cal']
+        meth = request.POST['meth']
+        nature = request.POST['nature']
+        grp=Group.objects.filter(name=gname)
+        if grp:
+            # messages.info(request,'Company name already exists!!')
+            pass
+        else:
+            mdl = Group(
+                name=gname,
+                alias=alia,
+                under=under,
+                sub_ledger=sub_ledger,
+                debit_credit=nett,
+                calculation=calc,
+                used_purchase=meth,
+                nature_of_group=nature,
+                gross_profit=gross,
+                company=cmp
+            )
+            mdl.save()
+            return redirect('index')
+    grup=Group.objects.filter(company_id=cmp)
+    return render(request,'group2.html',{'cmp':cmp,'grup':grup})
 
 def altercompanyview(request):
     com=Companies.objects.all()
@@ -323,10 +373,9 @@ def altercompany(request,pk):
         comp.address2=request.POST['address2']
         comp.address3=request.POST['address3']
         comp.address4=request.POST['address4']
-        state=request.POST['state']
-        country=request.POST['country']
-        comp.state=States.objects.get(name=state) 
-        comp.country=Countries.objects.get(name=country) 
+        comp.states=request.POST['state']
+        comp.country=request.POST['country']
+        
         comp.pincode=request.POST['pincode']
         comp.telephone=request.POST['telephone']
         comp.mobile=request.POST['mobile']
@@ -350,7 +399,7 @@ def addstate(request):
         name=request.POST['name']
         cntryid=request.POST['cname']
         st=States.objects.filter(name=name)
-        countr=Countries.objects.get(name=cntryid)
+        countr=Countries.objects.filter(name=cntryid)
         if st:
             # messages.info(request,'Company name already exists!!')
             return redirect('createcompany')
@@ -559,3 +608,7 @@ def gstcreate(request,pk):
         mdl.save()
         return redirect('index')
     return render(request,'features.html',{'ctg':cm})
+
+def featurepage(request):
+    comp=Companies.objects.all()
+    return render(request,'featurepage.html',{'comp':comp})

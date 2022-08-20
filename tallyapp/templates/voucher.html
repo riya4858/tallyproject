@@ -13,7 +13,13 @@
             display:none;
         }
     </style>
-   
+   <script>
+    function setvoucher(under,underId){
+        document.getElementById('aa').value= under;
+        //document.getElementById('underForm').style.visibility= "hidden";
+        document.getElementsByName('underhidden').value= underId;
+    }
+   </script>
 
     <div class="row container-fluid p-3 mx-0">
         <div class="col-sm-2 m-0 p-0"></div>
@@ -81,7 +87,9 @@
                                     <option value="Sales">Sales</option>
                                     <option value="SalesOrder">Sales Order</option>
                                     <option value="StockJournal">Stock Journal</option>
-                                                            
+                                    {% for i in vv %}
+                                    <option onclick="setvoucher('{{i.voucher_name}}','{{i.id}}')" >{{i.voucher_name}}</option>
+                                    {% endfor %}
                                 </select>
                             </div>
                         </div>

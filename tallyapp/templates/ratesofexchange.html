@@ -50,8 +50,8 @@
         }
     </style>
     <div class="row container-fluid p-3 mx-0">
-        <div class="col-sm-3 m-0 p-0"></div>
-        <div class="col-sm-6 m-0 p-0" style=" background-color:rgba(0,0,0,0.2);width:100%;" >
+        <div class="col-sm-2 m-0 p-0"></div>
+        <div class="col-sm-8 m-0 p-0" style=" background-color:rgba(0,0,0,0.2);width:100%;" >
             <h6 style="" class="bg-info text-light p-1">Multi-Currency Alteration</h6>
             <div  style="text-align: center;margin-top:-35px;font-weight:900">{{cmp.name}}</div><br>
             <div class="row container-fluid  p-2 m-0">
@@ -80,31 +80,35 @@
                         <th>Specified rate</th>
         
                     </tr>
+                    {% for i in curr %}
                     <tr>
-                        <form action="save_currency_data" method="post">
-                            {% csrf_token %}
+                        
                             <!-- slno -->
                       <td> 1</td>
+                     
                       <!-- currencylist -->
                       <td class="text-left"> 
-                        {% for i in cur %}
-                        <a  >{{i.symbol}} ( {{i.formal_name}})</a><br>
-                        {% endfor %}
+                       <!-- {{cmp.c_symbol}}({{cmp.f_name}}) -->
+                        
+                        <a style="color: white;" >{{i.symbol}} ( {{i.formal_name}})</a><br>
+                        
         
         
                      </td>
                      <!-- standard_rate -->
+                      <td><input type="text" > </td>
                       <td> </td>
+                      <td><input type="text"> </td>
                       <td> </td>
-                      <td> </td>
-                      <td> </td>
-                      <td> </td>
+                      <td> <input type="text"></td>
+                      <br>
                       
                       
-                    </form>
+                    
                     </tr>
+                    {% endfor %}
 
-                    {% for i in obj %}
+                    <!-- {% for i in obj %}
                     <tr>
                        
                         <td>{{ i.slno }}</td>
@@ -119,7 +123,7 @@
 
                     </tr>
                     
-                    {% endfor %}
+                    {% endfor %} -->
                     
                 </Table>
                 <div class="col text-center" >

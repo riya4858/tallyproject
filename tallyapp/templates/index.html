@@ -44,9 +44,19 @@
         .a {
             font-family: "Poppins", sans-serif;
         }
-        body{
-            overflow: hidden;
-          }
+       
+          .btns_prnt{
+            width: 350%;
+           
+            background-color: rgba(240, 248, 255, 0);
+            border: none;
+            /* padding: 6px; */
+        
+        }
+        .btns_prnt:hover{
+            background-color:rgb(44, 158, 187);
+            color: rgb(15, 14, 14);
+        }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
@@ -233,7 +243,7 @@
                       </li>
                         <li>
                            
-                            <a  onclick="getVal('features')" >
+                            <a  href="{% url 'featurepage' %}" >
                                 <div class="parent-icon"><i class="bx bx-home-alt"></i>
                                 </div>
                                 <div class="menu-title">Features</div>
@@ -345,17 +355,24 @@
                 <form id="myForm" action="" method="post" class="p-3">
                         {% csrf_token %}
                         <div>
-                            <table id="table">
+                            <table id="table" class="table">
                             {% for i in comp %}
                             {%if i.active == 1 %}
                             <tr>
-                                <td>
-                            <a style="cursor:pointer;" onclick="setName('{{i.name}}','{{i.id}}');">{{i.name}}</a>
-                            <!-- <a style="text-align: right;margin-left:460px;"  >No Vouchers Entered</a><br> -->
+                                
+                        <td>
+                           
+                            <div style="margin-left:1px; font-size:15px;cursor:pointer;" onclick="setName('{{i.name}}','{{i.id}}');">{{i.name}}</div>
+                            <!-- <div style="text-align:right;font-weight: 200; margin-top:-18px;font-size:12px;;margin-right:30px;" >No Vouchers Entered </div> -->
+
                         </td>
+
                         <td>
                             <a  style="cursor:pointer;color:rgba(0,0,0,0.2);font-size:2px;" onclick="setName('{{i.name}}','{{i.id}}');">{{i.id}}</a><br>
-                        </td>        
+
+                        </td>    
+                    <td>                        <div style="text-align:right;font-weight: 200; margin-top:-18px;font-size:12px;;margin-right:30px;" >No Vouchers Entered </div>
+                    </td>
                         </tr>
                             {% endif %}
                             {% endfor %}

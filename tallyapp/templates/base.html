@@ -206,7 +206,7 @@
                     </li>
                      
                         <li>
-                            <a  onclick="getVal('features')" >
+                            <a  href="{% url 'featurepage' %}" >
                                 <div class="parent-icon"><i class="bx bx-home-alt"></i>
                                 </div>
                                 <div class="menu-title">Features</div>
@@ -221,24 +221,25 @@
                             </a>
                             
                         </li>
-                        <li>
-                            <a href="javascript:;" class="has-arrow">
+                       <li>
+                            <a data-toggle="modal" data-target="#myModal" href="javascript:;" class="has-arrow">
 
                                 <div class="parent-icon"><i class='bx bx-briefcase-alt'></i>
                                 </div>
                                 <div class="menu-title">Date</div>
                             </a>
-                            <ul>
-                                <li>
-                                    <a data-toggle="modal" data-target="#myModal" data-dismiss="#myModal" href="">Date</a>
-                                            <a data-toggle="modal" data-target="#myModal1" href="">Period</a>
-                                   
+                            
+                            </li>
+                            <li>
+                                <a data-toggle="modal" data-target="#myModal1" href="javascript:;" class="has-arrow">
+    
+                                    <div class="parent-icon"><i class='bx bx-briefcase-alt'></i>
+                                    </div>
+                                    <div class="menu-title">Period</div>
+                                </a>
+                                
                                 </li>
-                               
-                                
-                                
-                            </ul>
-                        </li>
+            
                         <li>
                             <a onclick="window.print()" href="javascript:;" >
                                 

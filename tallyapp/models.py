@@ -1,14 +1,21 @@
 from django.db import models
-
 class Countries(models.Model):
     name=models.CharField(max_length=225)
-    
+    currency_symbol=models.CharField(max_length=225,blank=True)
+    formal_name=models.CharField(max_length=225,blank=True)
+    def __str__(self):
+        return self.name
 
     
 class States(models.Model):
-    name=models.CharField(max_length=225)
+    state_name=models.CharField(max_length=225,blank=True)
+    region_name=models.CharField(max_length=225,blank=True)
+    division_name=models.CharField(max_length=225,blank=True)
+    district_name=models.CharField(max_length=225,blank=True)
+    province_name=models.CharField(max_length=225,blank=True)
     country=models.ForeignKey(Countries,on_delete=models.CASCADE,blank=True,null=True)
-    
+    def __str__(self):
+        return self.state_name
 class Companies(models.Model):
     name=models.CharField(max_length=225)
     mailing_name=models.CharField(max_length=225)
@@ -24,12 +31,14 @@ class Companies(models.Model):
     website=models.CharField(max_length=225)
     fin_begin=models.DateField(null=True)
     books_begin=models.DateField(null=True)
-    state=models.CharField(max_length=225,default=True)
-    country=models.CharField(max_length=225,default=True)
-    currency_symbol=models.CharField(max_length=225)
-    formal_name=models.CharField(max_length=225)
+    states=models.CharField(max_length=225,blank=True,null=True)
+    country=models.CharField(max_length=225,blank=True,null=True)
+    c_symbol=models.CharField(max_length=225,blank=True,null=True)
+    f_name=models.CharField(max_length=225,blank=True,null=True)
     active=models.BooleanField(default=True)
+    end=models.DateField(null=True)
     
+
     
 class Group(models.Model):
     name = models.CharField(max_length=225)
@@ -39,6 +48,8 @@ class Group(models.Model):
     debit_credit = models.BooleanField(default=False)
     calculation = models.BooleanField(default=False)
     used_purchase = models.CharField(max_length=225,null=True,blank=True)
+    nature_of_group = models.CharField(max_length=225,null=True,blank=True)
+    gross_profit =models.CharField(max_length=225,null=True,blank=True)
     company=models.ForeignKey(Companies,on_delete=models.CASCADE,blank=True,null=True)
     
 
@@ -86,6 +97,16 @@ class Currency(models.Model):
     after_decimal = models.CharField(max_length=225)
     amount_in_words = models.CharField(max_length=225)
     company=models.ForeignKey(Companies,on_delete=models.CASCADE,blank=True,null=True)
+    
+class rateofexchange(models.Model):
+    currency = models.ForeignKey(Currency,on_delete=models.CASCADE,blank=True,null=True)
+    stdrate=models.CharField(max_length=225)
+    sell_voucher_rate=models.CharField(max_length=225)
+    sell_specified_rate=models.CharField(max_length=225)
+    buy_voucher_rate=models.CharField(max_length=225)
+    buy_specified_rate=models.CharField(max_length=225)
+    company=models.ForeignKey(Companies,on_delete=models.CASCADE,blank=True,null=True)
+
 class Voucher(models.Model):
     voucher_name = models.CharField(max_length=225)
     alias = models.CharField(max_length=225)

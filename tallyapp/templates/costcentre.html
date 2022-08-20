@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% block body %}
 <script src="https://code.jquery.com/jquery-git.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <style>
     .close {
         position: absolute;
@@ -43,6 +45,11 @@
       }
 </style>
 <script>
+    $(document).ready(function() {
+        
+       
+    });
+
    
     function showCost(){
         document.getElementById('underForm').style.display= "block";
@@ -56,6 +63,9 @@
         document.getElementById('underForm').style.visibility= "hidden";
         document.getElementsByName('underhidden').value= underId;
     }
+    function showMe() {
+        
+      }
 </script>
 
 <div class="row container-fluid p-3 mx-0">
@@ -70,9 +80,9 @@
    
                     <div class="row container-fluid  p-2 m-0">
                         <div class="col-sm-4 m-0 p-0"> <label for="gname">Name :</label></div>
-                        <div class="col-sm-8 m-0 p-0"><input type="text" id="cname"  name="cname" class="form-control " placeholder="" required></div> 
+                        <div class="col-sm-8 m-0 p-0"><input type="text" id="cname" onkeyup="showMe()" name="cname" class="form-control " placeholder="" required></div> 
                     </div>
-
+<div id="q" >
                     <div class="row container-fluid  p-2 m-0">
                         <div class="col-sm-4 m-0 p-0"> <label for="alia">(Alias) :</label></div>
                         <div class="col-sm-8 m-0 p-0"><input type="text" id="alia" name="alia"class="form-control " placeholder=""></div> 
@@ -86,6 +96,7 @@
 
                         </div> 
                     </div>
+</div>
                     <br>
                    
                     <div class="col text-center" >

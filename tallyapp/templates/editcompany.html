@@ -16,7 +16,7 @@
         right: 15px;
         border: 1px solid #f1f1f1;
         z-index: 9;
-        width: 300px;
+        width: 330px;
         height: 600px;
       }
     
@@ -45,10 +45,10 @@
         text-decoration: none;
     }
     .scrollbar {
-        margin-left: 30px;
+        margin-left: 20px;
         float: left;
         height: 300px;
-        width: 269px;
+        width: 300px;
         background: rgb(216, 232, 238);
         overflow-y: scroll;
         margin-bottom: 25px;
@@ -69,31 +69,30 @@
       .scrollbar-primary {
         scrollbar-color: #86d5f5 #f1f3f3;
       }
-      
+      .hide{
+        display: none;
+        align-items:center;
+        justify-content:center;
+        flex-direction: column;
+    }
+    .btns_prnt {
+        width: 100%;
+        text-align: end;
+        background-color: rgba(240, 248, 255, 0);
+        border: none;
+        /* padding: 6px; */
+    
+    }
+    .btns_prnt:hover{
+        background-color:rgb(218, 150, 24);
+        color: rgb(15, 14, 14);
+    }
 </style>
 <script>
     function save(){
         document.getElementById("create").submit();
     }
-    function showState(country){
-       
-        document.getElementById('myForm').style.visibility= "visible";
-        document.getElementById("myForm").style.display = "block";
-        document.getElementById('cname').value= country;
-     
-        var table = document.getElementById("table");
-            
-        for (let row of table.rows) 
-        {
-            
-               if(row.innerText=="Kerala")
-               {
-                   alert('as');
-                document.getElementById("table").deleteRow(0);
-               }
-            
-        }
-    }
+    
 
     function getValue(){
        
@@ -107,181 +106,290 @@
 
         
     }
-    function setState(state,stateId){
-        document.getElementById('state').value= state;
+    function setState(stat){
+        document.getElementById('state').value= stat;
         document.getElementById('myForm').style.visibility= "hidden";
-        document.getElementById('country').focus();
-        document.getElementsByName('statehidden').value= stateId;
-  
-        
- 
     }
-    function setCountry(country,countryId){
-        document.getElementById('country').value= country;
+    function setDivision(divis){
+        document.getElementById('state').value= divis;
+        document.getElementById('myFormbang').style.visibility= "hidden";
+    }
+    function setRegion(regi){
+        document.getElementById('state').value= regi;
+        document.getElementById('myFormghana').style.visibility= "hidden";
+    }
+    function setDistrict(di){
+        document.getElementById('state').value= di;
+        document.getElementById('myFormhong').style.visibility= "hidden";
+    }
+    function setCountry(countr){
+        
+        document.getElementById('country').value= countr;
         document.getElementById('myForm1').style.visibility= "hidden";
-        document.getElementById('myForm').style.visibility= "visible";
-        document.getElementById('currency_symbol').value = 'Rs'
-        document.getElementById('formal_name').value = 'INR'
-        document.getElementById('pincode').focus();
-        document.getElementsByName('countryhidden').value= countryId;
+        if(countr=="India")
+        {
+            document.getElementById('myFormusa').style.visibility= "hidden";
+            document.getElementById('div').style.display = "none";
+            document.getElementById('reg').style.display = "none";
+            document.getElementById('dis').style.display = "none";
+            document.getElementById('st').style.visibility= "visible";
+
+            document.getElementById('st').style.display = "block";
+
+            document.getElementById('myForm').style.visibility= "visible";
+            document.getElementById("myForm").style.display = "block";
+            document.getElementById('currency_symbol').value= 'Rs';
+            document.getElementById('formal_name').value= 'INR';
+
+        }
         
-        
-       }
-       function otherCountry(country,countryId){
-           //alert(countryId);
-        document.getElementById('country').value= country;
-        document.getElementById('myForm1').style.visibility= "hidden";
-        document.getElementById('myForm').style.visibility= "visible";
-        document.getElementById('state').value = ''
-        document.getElementById('state').focus();
-        document.getElementById('currency_symbol').value = ''
-        
-        document.getElementById('formal_name').value = ''
-       
-        
-       // document.getElementById('formal_name').focus();
-       
-        document.getElementsByName('countryhidden').value= countryId;
+        else if(countr=="Bangladesh"){
+     //India states      
+            document.getElementById('myForm').style.visibility= "hidden";  
+            document.getElementById('myFormbang').style.visibility= "visible";
+            document.getElementById("myFormbang").style.display = "block";
+            document.getElementById('div').style.visibility= "visible";
+            document.getElementById('div').style.display = "block";
+            document.getElementById('st').style.display = "none";
+            document.getElementById('dis').style.display = "none";
+            document.getElementById('reg').style.display = "none";
+            document.getElementById('currency_symbol').value= 'TK';
+            document.getElementById('formal_name').value= 'Bangladeshi Taka';
+        }
+        else if(countr=="Ghana"){
+            //India states      
+                   document.getElementById('myForm').style.visibility= "hidden";  
+                   document.getElementById('myFormghana').style.visibility= "visible";
+                   document.getElementById("myFormghana").style.display = "block";
+                   document.getElementById('reg').style.visibility= "visible";
+                   document.getElementById('reg').style.display = "block";
+                   document.getElementById('st').style.display = "none";
+                   document.getElementById('dis').style.display = "none";
+                   document.getElementById('div').style.display = "none";
+                   document.getElementById('currency_symbol').value= 'GHC';
+            document.getElementById('formal_name').value= 'Ghanaian cedi';
+               }
+            else if(countr=="Hong Kong"){
+        //India states      
+                document.getElementById('myForm').style.visibility= "hidden";  
+                document.getElementById('myFormhong').style.visibility= "visible";
+                document.getElementById("myFormhong").style.display = "block";
+                document.getElementById('dis').style.visibility= "visible";
+                document.getElementById('dis').style.display = "block";
+                document.getElementById('st').style.display = "none";
+                document.getElementById('div').style.display = "none";
+                document.getElementById('reg').style.display = "none";
+                document.getElementById('currency_symbol').value= 'HKD';
+                document.getElementById('formal_name').value= 'Hong Kong Dollar';
+            }
+            else if(countr=="Bhutan"){
+                //India states      
+                        document.getElementById('myForm').style.visibility= "hidden";  
+                        document.getElementById('myFormhong').style.visibility= "visible";
+                        document.getElementById("myFormhong").style.display = "block";
+                        document.getElementById('dis').style.visibility= "visible";
+                        document.getElementById('dis').style.display = "block";
+                        document.getElementById('st').style.display = "none";
+                        document.getElementById('div').style.display = "none";
+                        document.getElementById('reg').style.display = "none";
+                        document.getElementById('currency_symbol').value= 'Nu';
+                        document.getElementById('formal_name').value= 'Bhutanese Ngultrum';
+                    }
+            else{
+                document.getElementById('state').value= '';
+                document.getElementById('currency_symbol').value= '';
+                document.getElementById('formal_name').value= '';
+                document.getElementById('myForm').style.visibility= "hidden";
+                document.getElementById('myFormhong').style.visibility= "hidden";
+                document.getElementById('myFormghana').style.visibility= "hidden";
+                document.getElementById('myFormbang').style.visibility= "hidden";
+                document.getElementById('myFormusa').style.visibility= "hidden";
+            }
     }
 
-    $(document).ready(function(){
-        document.getElementById('cname').value='India';
-        document.getElementById('tblState').style.visibility= "hidden";
-        document.getElementById('tblCountry').style.visibility= "hidden";
-        finYear();
-        document.getElementById('fin').value = new date();
-       
+
+    $(document).ready(function() {
         
-    })
+    });
+  
+    
     function copyName(){
         document.getElementById("mailing_name").value = document.getElementById("companyname").value;
     }
-
-    function SaveState(){
-        alert($('#stateName').val());
-        $.ajax({
-            type: "POST",
-            url: "addstatenew",
-            data: {
-              'name': $('#stateName').val() // from form
-            },
-            contentType: "application/json; charset=utf-8",
-            async: false, //add this
-            success: function () {
-                alert('saved')
-              $('#message').html("<h2>Contact Form Submitted!</h2>")
-            },
-            error: function (errorThrown) {
-                alert(errorThrown);
-            }
-            
-          });
-          return false;
+    function statesubmit()  {
+        //First things first, we need our text:
+        
+        var x = document.getElementById("new");
+        number.push=document.getElementById("stateName").value;
+        x.innerHTML=number.join('<br/>');
+        alert('as');
     }
-
-    btnState
+    function setCountry1(stName,stId){
+        document.getElementById('country').value= stName;
+            document.getElementById('underForm1').style.visibility= "hidden";
+            document.getElementsByName('underhidden').value= stId;
+    }
     
 
 </script>
-{% for msg in messages %}
-        <div  style="background-color: rgb(236, 194, 116);width:245px ;color:black";>
-            <a href="" onclick="history.go(-1)" class="close" style="margin-right:1100px; ">+</a>
-            {{msg}}
-        </div>
-        {% endfor %}
-        <div class="row container-fluid p-0 mx-0">
-            <div class="col-sm-1 m-0 p-0"></div>
-            <div class="col-sm-10 m-0 p-0" style=" background-color:rgba(0,0,0,0.2); width:50%">
+
+        <div class="row container-fluid p-3 mx-0">
+            <div class="col-sm-2 m-0 p-0"></div>
+            <div class="col-sm-8 m-0 p-0" style=" background-color:rgba(0,0,0,0.2);">
                 <!-- <a href="javascript:history.go(-1);" class="close">+</a> -->
             <div  class="bg-info text-light">Company Alteration</div>
             <div  style="text-align: center;margin-top:-35px;font-weight:900">{{cmp.name}}</div>
                    
                     <div class="container" style="padding:40px;">
-        <form id="create" action="" method="post" class="needs-validation" novalidate>
+        <form id="create" action="{% url 'altercompany' comp.id %}" method="post" class="needs-validation" >
         {% csrf_token %}
         
         <div class="row">
             <div class="col-md-4 mt-3">
                 <label for="validationCustom02">Company name</label>
-                <input id="companyname" type="text" value="{{comp.name}}" class="form-control" id="validationCustom02" name="name"
-                 style="background-color: #2f516f;color: white;" required >
+                <input id="companyname" type="text" class="form-control" value="{{comp.name}}" id="validationCustom02" name="name"
+                 style="background-color: #2f516f;color: white;" required>
             </div>
             <div class="col-md-4 mt-3">
                 <label for="validationCustom02">Mailing name</label>
-                <input id="mailing_name" type="text" value="{{comp.mailing_name}}"  class="form-control" id="validationCustom02" name="mailing_name"
+                <input id="mailing_name" type="text"  class="form-control" value="{{comp.mailing_name}}" id="validationCustom02" name="mailing_name"
                 required style="background-color: #2f516f;color: white;"
-                 onclick="copyName()">
+                 onclick="copyName()" required>
             </div>
             <div class="col-md-4 mt-3">
                 <label for="validationCustom03">Address1</label>
-                <input type="text" id="address1" value="{{comp.address1}}" class="form-control" id="validationCustom03" name="address1"
-                required style="background-color: #2f516f;color: white;">
+                <input type="text" id="address1" class="form-control" value="{{comp.address1}}" id="validationCustom03" name="address1"
+                required style="background-color: #2f516f;color: white;" required>
                 
             </div>
             <div class="col-md-4 mt-3">
                 <label for="validationCustom03">Address2</label>
-                <input type="text" id="address2" value="{{comp.address2}}" class="form-control" id="validationCustom03" name="address2"
+                <input type="text" id="address2" class="form-control" value="{{comp.address2}}" id="validationCustom03" name="address2"
                 required style="background-color: #2f516f;color: white;"
                 >
             </div>
             <div class="col-md-4 mt-3">
                 <label for="validationCustom03">Address3</label>
-                <input type="text" id="address3" value="{{comp.address3}}" class="form-control" id="validationCustom03" name="address3"
+                <input type="text" id="address3" class="form-control" value="{{comp.address3}}" id="validationCustom03" name="address3"
                 required style="background-color: #2f516f;color: white;"
                 >
             </div>
             <div class="col-md-4 mt-3">
                 <label for="validationCustom03">Address4</label>
-                <input type="text" value="{{comp.address4}}" id="address4" class="form-control" id="validationCustom03" name="address4"
+                <input type="text" id="address4" class="form-control" value="{{comp.address4}}" id="validationCustom03" name="address4"
                 required style="background-color: #2f516f;color: white;"
                 >
             </div>
-            <div class="col-md-4 mt-3">
-                <label for="validationCustom03">State</label>
-                
-                <input type="text" id="state" value="{{comp.state.name}}" class="form-control" id="validationCustom03" name="state"
+            <div class="col-md-4 mt-3"  >
+                <label id="st" for="validationCustom03">State</label>
+                <label id="reg" class="hide" for="validationCustom03">Region</label>
+                <label  id="div" class="hide" for="validationCustom03">Divisions</label>
+                <label id="dis" class="hide" for="validationCustom03">District</label>
+                <input type="text" value="{{comp.states}}" class="form-control"  id="state" name="state"
                 required style="background-color: #2f516f;color: white;"
                 onclick="showState(document.getElementById('country').value);">
             </div>
+            
             <div class="form-popup " id="myForm" style="background-color: rgb(216, 232, 238);" >
                 <form action="" class="form-container" id="countryform" >
                     <h6 style="background-color:rgb(17, 169, 240) ;color:white">List of states</h6>
                     <a data-toggle="modal" data-target="#myModal" href="" style="margin-left:218px; color:black;">New State</a>
                     <a  onclick="showCountry();" style="margin-left:180px;color:black;cursor:pointer" >Change Country</a>  
                 <hr >
+                <div class="scrollbar scrollbar-primary " >
+                    <!-- india -->
+                  
+                    <table  id="india">
+                      
+                       <a class="btns_prnt" style="cursor:pointer;color: black;" onclick="setState('Andaman and Nicobar Islands')">Andaman and Nicobar Islands</a><br>
+                       <a class="btns_prnt" style="cursor:pointer;color: black;" onclick="setState('Andhra Pradesh')">Andhra Pradesh</a><br>
+                       <a class="btns_prnt" style="cursor:pointer;color: black;" onclick="setState('Arunachal Pradesh')">Arunachal Pradesh</a><br>
+                       <a style="cursor:pointer;color: black;" onclick="setState('Assam')">Assam </a><br>
+                       <a style="cursor:pointer;color: black;" onclick="setState('Bihar')">Bihar </a><br>
+                       <a style="cursor:pointer;color: black;" onclick="setState('Chandigarh')">Chandigarh </a><br>
+                       <a style="cursor:pointer;color: black;" onclick="setState('Chhattisgarh')">Chhattisgarh </a><br>
+                       <a style="cursor:pointer;color: black;" onclick="setState('Dadra & Nagar Haveli and Daman and Diu')">Dadra & Nagar Haveli and Daman and Diu </a><br>
+                       <a style="cursor:pointer;color: black;" onclick="setState('Delhi')">Delhi </a><br>
+                       <a style="cursor:pointer;color: black;" onclick="setState('Goa')">Goa </a><br>
+                       <a style="cursor:pointer;color: black;" onclick="setState('Gujarat')">Gujarat </a><br>
+                       <a style="cursor:pointer;color: black;" onclick="setState('Haryana')">Haryana </a><br>
+                       <a style="cursor:pointer;color: black;" onclick="setState('Himachal Pradesh')">Himachal Pradesh</a><br>
+                       <a style="cursor:pointer;color: black;" onclick="setState('Jammu & Kashmir')">Jammu & Kashmir </a><br>
+                       <a style="cursor:pointer;color: black;" onclick="setState('Jharkhand')">Jharkhand </a><br>
+                       <a style="cursor:pointer;color: black;" onclick="setState('Karnataka')">Karnataka</a><br>
+                        <a style="cursor:pointer;color: black;" onclick="setState('Kerala')">Kerala</a><br>
+                        <a style="cursor:pointer;color: black;" onclick="setState('Ladakh')">Ladakh</a><br>
+                        <a style="cursor:pointer;color: black;" onclick="setState('Lakshadweep')">Lakshadweep</a><br>
+                        <a style="cursor:pointer;color: black;" onclick="setState('Madhya Pradesh')">Madhya Pradesh </a><br>
+                       <a style="cursor:pointer;color: black;" onclick="setState('Maharashtra')">Maharashtra </a><br>
+                       <a style="cursor:pointer;color: black;" onclick="setState('Manipur')">Manipur </a><br>
+                       <a style="cursor:pointer;color: black;" onclick="setState('Meghalaya')">Meghalaya </a><br>
+                       <a style="cursor:pointer;color: black;" onclick="setState('Mizoram')">Mizoram </a><br>
+                       <a style="cursor:pointer;color: black;" onclick="setState('Nagaland')">Nagaland </a><br>
+                       <a style="cursor:pointer;color: black;" onclick="setState('Odisha')">Odisha </a><br>
+                       <a style="cursor:pointer;color: black;" onclick="setState('Puduchery')">Puduchery </a><br>
+                       <a style="cursor:pointer;color: black;" onclick="setState('Punjab')">Punjab </a><br>
+                       <a style="cursor:pointer;color: black;" onclick="setState('Rajasthan')">Rajasthan </a><br>
+                       <a style="cursor:pointer;color: black;" onclick="setState('Sikkim')">Sikkim </a><br>
+                       <a style="cursor:pointer;color: black;" onclick="setState('Tamilnadu')">Tamilnadu</a><br>
+                       <a style="cursor:pointer;color: black;" onclick="setState('Telengana')">Telengana </a><br>
+                       <a style="cursor:pointer;color: black;" onclick="setState('Tripura')">Tripura </a><br>
+                       <a style="cursor:pointer;color: black;" onclick="setState('Uttarakhand')">Uttarakhand </a><br>
+                        <a style="cursor:pointer;color: black;" onclick="setState('TamiUttar Pradeshlnadu')">Uttar Pradesh </a><br>
+                       <a style="cursor:pointer;color: black;" onclick="setState('West Bengal')">West Bengal </a><br>
+                       <a style="cursor:pointer;color: black;" id="new" onclick="setState('West Bengal')"></a><br>
+                       {% for i in country %}
+                       <a onclick="setCountry1('{{i.name}}','{{i.id}}')"  style="cursor:pointer;color: black;">{{i.name}}</a><br>
+                       {% endfor %}
+                        </table>
+                </div>
+                </form>
+
+                
+               
+            </div>
+
+            <div class="form-popup " id="myFormusa" style="background-color: rgb(216, 232, 238);" >
+                <form action="" class="form-container1" id="countryform" >
+                    <h6 style="background-color:rgb(17, 169, 240) ;color:white">List of states</h6>
+                    <a data-toggle="modal" data-target="#myModal" href="" style="margin-left:218px; color:black;">New State</a>
+                    <a  onclick="showCountry();" style="margin-left:180px;color:black;cursor:pointer" >Change Country</a>  
+                <hr >
                 <div class="scrollbar scrollbar-primary">
                     
-                   
-                    <table  id="table">
-                        <tr >
-                          
-                        {% for i in com %}
-                        
-                        
                   
-                        <a onclick="setState('{{i.name}}','{{i.id}}')"  class="content" style="cursor:pointer;color:black;">&nbsp;&nbsp;{{i.name}}</a><br>
-                     
-                      {% endfor %}
-                     
+                    <table  >
+                        <tr >
+                       <a style="cursor:pointer;color: black;" onclick="setState('Kerala')">Kerala</a><br>
+                       <a style="cursor:pointer;color: black;" onclick="setState('Tamilnadu')">Tamilnadu</a><br>
+                       <a style="cursor:pointer;color: black;" onclick="setState('Karnataka')">Karnataka</a><br>
+                       <a style="cursor:pointer;color: black;" onclick="setState('Andhra Pradesh')">Andhra Pradesh</a><br>
+                       <a style="cursor:pointer;color: black;" onclick="setState('Arunachal Pradesh')">Arunachal Pradesh</a><br>
+                       <a style="cursor:pointer;color: black;" onclick="setState('Assam')">Assam </a><br>
+                       <a style="cursor:pointer;color: black;" onclick="setState('Bihar')">Bihar </a><br>
+               
+
                         </tr>
                         </table>
                 </div>
                 <input type="text" name="statehidden" hidden value="{{i.id}}">
                 </form>
+
+                
                
             </div>
-            
+
             <!--starting of modal-->
             <div class="modal fade" id="myModal" role="dialog" style="margin-top: 150px;">
             <div class="modal-dialog">
             <div class="modal-content">
             <div class="modal-body">
-            <form id="frmState" action="{% url 'addstate'  %}" method="POST" >
+            <form id="frmState" action="" method="POST" >
             {% csrf_token %} 
                 <div class="form-group" align="center">
-                    <input type="text" id ="cname" name="cname" hidden>
+                   
                     <input type="text" id ="stateName" name="name" placeholder="New state name" class="form-control w-75"><br>
-                    <input   type="submit"  value="Submit" class="form-control w-25 btn btn-dark"><br>
+                    <input   type="submit" value="Submit" onclick="statesubmit()" class="form-control w-25 btn btn-dark"><br>
                 </div>
                 
             </form>
@@ -292,7 +400,7 @@
             
             <div class="col-md-4 mt-3">
                 <label for="validationCustom03">Country</label>
-                <input type="text" value="{{comp.country.name}}" id="country" class="form-control" id="validationCustom03" name="country"
+                <input type="text" id="country" class="form-control" value="{{comp.country}}" id="validationCustom03" name="country"
                 required style="background-color: #2f516f;color: white;" onclick="showCountry();"
                 value="India">
             </div>
@@ -300,19 +408,45 @@
                 <form action="" class="form-container1" >
                     <h6 style="background-color:rgb(17, 169, 240) ;color:white">List of Countries</h6>
                     <a data-toggle="modal" data-target="#myModal1" href="" style="margin-left:200px; color:black;">New Country</a>
-                    <a   style="margin-left:250px;color:black;cursor:pointer" >Back</a>  
+                    <a onclick="document.getElementById('myForm1').style.visibility= 'hidden'"  style="margin-left:250px;color:black;cursor:pointer" >Back</a>  
                 <hr >
-                <div>
-                    <table id="statetbl">
+                <div class="scrollbar scrollbar-primary">
+                    <table >
                     <tr >
-                    {% for i in country %}
-                   
-                        {% if i.name == 'India' %}
-                    <a onclick="setCountry('{{i.name}}','{{i.id}}')"  class="content" style="cursor:pointer;color:black;">&nbsp;&nbsp;{{i.name}}</a><br>
-                    {% else %}
-                    <a onclick="otherCountry('{{i.name}}','{{i.id}}')"  class="content" style="cursor:pointer;color:black;">&nbsp;&nbsp;{{i.name}}</a><br>
-                    {% endif %}
-                    {% endfor %}
+                        
+                   <a onclick="setCountry('Bangladesh')"  style="cursor:pointer;color: black;">Bangladesh</a><br>
+                   <a onclick="setCountry('Bhutan')"  style="cursor:pointer;color: black;">Bhutan</a><br>
+                   <a onclick="setCountry('Botswana')"  style="cursor:pointer;color: black;">Botswana</a><br>
+                   <a onclick="setCountry('Egypt')"  style="cursor:pointer;color: black;">Egypt</a><br>
+                   <a onclick="setCountry('Ghana')"  style="cursor:pointer;color: black;">Ghana</a><br>
+                   <a onclick="setCountry('Hong Kong')"  style="cursor:pointer;color: black;">Hong Kong</a><br>
+                   <a onclick="setCountry('India')"  style="cursor:pointer;color: black;">India</a><br>
+                   <a onclick="setCountry('Indonesia')"  style="cursor:pointer;color: black;">Indonesia</a><br>
+                   <a onclick="setCountry('Kenya')"  style="cursor:pointer;color: black;">Kenya</a><br>
+                   <a onclick="setCountry('Kingdom of Bahrain')"  style="cursor:pointer;color: black;">Kingdom of Bahrain</a><br>
+                   <a onclick="setCountry('Kuwait')"  style="cursor:pointer;color: black;">Kuwait</a><br>
+                   <a onclick="setCountry('Liberia')"  style="cursor:pointer;color: black;">Liberia</a><br>
+                   <a onclick="setCountry('Malawi')"  style="cursor:pointer;color: black;">Malawi</a><br>
+                   <a onclick="setCountry('Malaysia')"  style="cursor:pointer;color: black;">Malaysia</a><br>
+                   <a onclick="setCountry('Malaysia(Burma)')"  style="cursor:pointer;color: black;">Myanmar(Burma)</a><br>
+                   <a onclick="setCountry('Nepal')"  style="cursor:pointer;color: black;">Nepal</a><br>
+                   <a onclick="setCountry('Nigeria')"  style="cursor:pointer;color: black;">Nigeria</a><br>
+                   <a onclick="setCountry('Philippies')"  style="cursor:pointer;color: black;">Philippies</a><br>
+                   <a onclick="setCountry('Qatar')"  style="cursor:pointer;color: black;">Qatar</a><br>
+                   <a onclick="setCountry('Saudi Arabia')"  style="cursor:pointer;color: black;">Saudi Arabia</a><br>
+                   <a onclick="setCountry('Singapore')"  style="cursor:pointer;color: black;">Singapore</a><br>
+                   <a onclick="setCountry('South Africa')"  style="cursor:pointer;color: black;">South Africa</a><br>
+                   <a onclick="setCountry('Sri Lanka')"  style="cursor:pointer;color: black;">Sri Lanka</a><br>
+                   <a onclick="setCountry('Sultanate of Oman')"  style="cursor:pointer;color: black;">Sultanate of Oman</a><br>
+                   <a onclick="setCountry('Tanzania')"  style="cursor:pointer;color: black;">Tanzania</a><br>
+                   <a onclick="setCountry('Thailand')"  style="cursor:pointer;color: black;">Thailand</a><br>
+                   <a onclick="setCountry('UAE')"  style="cursor:pointer;color: black;">UAE</a><br>
+                   <a onclick="setCountry('Uganda')"  style="cursor:pointer;color: black;">Uganda</a><br>
+                   <a onclick="setCountry('UK')"  style="cursor:pointer;color: black;">UK</a><br>
+                   <a onclick="setCountry('United States of America')"  style="cursor:pointer;color: black;">United States of America</a><br>
+                   <a onclick="setCountry('Zambia')"  style="cursor:pointer;color: black;">Zambia</a><br>
+
+                  
                     </tr>
                     </table>
                 </div>
@@ -339,25 +473,25 @@
            
             <div class="col-md-4 mt-3">
                 <label for="validationCustom03">Pincode</label>
-                <input id="pincode" type="text" value="{{comp.pincode}}" class="form-control" id="validationCustom03" name="pincode"
+                <input id="pincode" type="text" class="form-control" value="{{comp.pincode}}" id="validationCustom03" name="pincode"
                 required style="background-color: #2f516f;color: white; " required pattern="\S+"/>
                 
             </div>
             <div class="col-md-4 mt-3">
                 <label for="validationCustom03">Telephone</label>
-                <input id="telephone" type="text" value="{{comp.telephone}}" class="form-control" id="validationCustom03" name="telephone"
+                <input id="telephone" type="text" class="form-control" value="{{comp.telephone}}" id="validationCustom03" name="telephone"
                 required style="background-color: #2f516f;color: white;"
                 onkeypress="document.getElementById('mobile').focus();">
             </div>
             <div class="col-md-4 mt-3">
                 <label for="validationCustom03">Mobile</label>
-                <input id="mobile" type="text" value="{{comp.mobile}}" class="form-control" id="validationCustom03" pattern= "[0-9]" name="mobile"
+                <input id="mobile" type="text" class="form-control" value="{{comp.mobile}}" id="validationCustom03" pattern= "[0-9]" name="mobile"
                 required style="background-color: #2f516f;color: white;  "
                 >
             </div>
             <div class="col-md-4 mt-3">
                 <label for="validationCustom03">Fax</label>
-                <input id="fax" type="text" value="{{comp.fax}}" class="form-control" id="validationCustom03" name="fax"
+                <input id="fax" type="text" class="form-control" value="{{comp.fax}}" id="validationCustom03" name="fax"
                 required style="background-color: #2f516f;color: white;"
                 >
             </div>
@@ -365,13 +499,13 @@
         
             <div class="col-md-4 mt-3">
                 <label for="validationCustom03">Email</label>
-                <input id="email" type="email" value="{{comp.email}}" class="form-control" id="validationCustom03" name="email"
+                <input id="email" type="email" class="form-control" value="{{comp.email}}" id="validationCustom03" name="email"
                 required style="background-color: #2f516f;color: white;"
                 >
             </div>
             <div class="col-md-4 mt-3">
                 <label for="validationCustom03">Website</label>
-                <input id="website" value="{{comp.website}}" type="text" class="form-control" id="validationCustom03" name="website"
+                <input id="website" type="text" class="form-control" value="{{comp.website}}" id="validationCustom03" name="website"
                 required style="background-color: #2f516f;color: white;">
             </div>
        
@@ -389,14 +523,14 @@
             </div>
             <div class="col-md-4 mt-3">
                 <label for="validationCustom03">Base currency symbol </label>
-                <input id="currency_symbol"  value="{{comp.currency_symbol}}" type="text" class="form-control" id="validationCustom03" 
+                <input id="currency_symbol" value="{{comp.c_symbol}}" type="text" class="form-control" id="validationCustom03" 
                 name="currency_symbol"
                 required style="background-color: #2f516f;color: white;"
                >
             </div>
             <div class="col-md-4 mt-3">
                 <label for="validationCustom03">Formal name</label>
-                <input id="formal_name" value="{{comp.formal_name}}" type="text" class="form-control" id="validationCustom03"
+                <input id="formal_name" value="{{comp.f_name}}" type="text" class="form-control" id="validationCustom03"
                  name="formal_name"
                 required style="background-color: #2f516f;color: white;"
                >
@@ -408,7 +542,7 @@
                         
                     <br>
             <div class="col text-center" >
-                <button  onClick='save()' type="submit" class="btn btn-info" >Update</button>
+                <button  onClick='save()' type="submit" class="btn btn-info" >Alter</button>
             <!-- <input  type="submit" value="create"> -->
             </div>
             </form>
@@ -416,7 +550,9 @@
                 
             
         </div>
+        <!-- <div class="col-sm-4 m-0 p-0"></div> -->
     </div>
+   
 </div>
 <!-- <script>
     $("#otherCountry").click(function() {
@@ -425,7 +561,136 @@
       });
 </script> -->
 
+<!-- Bangladesh -->
+<div class="form-popup " id="myFormbang" style="background-color: rgb(216, 232, 238);" >
+    <form action="" class="form-container1" id="countryform" >
+        <h6 style="background-color:rgb(17, 169, 240) ;color:white">List of Divisions</h6>
+        <a data-toggle="modal" data-target="#myModal" href="" style="margin-left:218px; color:black;">New Division</a>
+        <a  onclick="showCountry();" style="margin-left:180px;color:black;cursor:pointer" >Change Country</a>  
+    <hr >
+    <div class="scrollbar scrollbar-primary">
+        
+      
+        <table  >
+            <tr >
+           <a style="cursor:pointer;color: black;" onclick="setDivision('Barishal')">Barishal</a><br>
+           <a style="cursor:pointer;color: black;" onclick="setDivision('Chattogram')">Chattogram</a><br>
+           <a style="cursor:pointer;color: black;" onclick="setDivision('Dhaka')">Dhaka</a><br>
+           <a style="cursor:pointer;color: black;" onclick="setDivision('Khulna')">Khulna</a><br>
+           <a style="cursor:pointer;color: black;" onclick="setDivision('Rajshahi')">Rajshahi</a><br>
+           <a style="cursor:pointer;color: black;" onclick="setDivision('Rangpur')">Rangpur </a><br>
+           <a style="cursor:pointer;color: black;" onclick="setDivision('Mymensingh ')">Mymensingh  </a><br>
+           <a style="cursor:pointer;color: black;" onclick="setDivision('Sylhet ')">Sylhet  </a><br>
+   
 
+            </tr>
+            </table>
+    </div>
+    <input type="text" name="statehidden" hidden value="{{i.id}}">
+    </form>
+
+    
+   
+</div>
+<!-- Ghana -->
+<div class="form-popup " id="myFormghana" style="background-color: rgb(216, 232, 238);" >
+    <form action="" class="form-container1" id="countryform" >
+        <h6 style="background-color:rgb(17, 169, 240) ;color:white">List of Regions</h6>
+        <a data-toggle="modal" data-target="#myModal" href="" style="margin-left:218px; color:black;">New Region</a>
+        <a  onclick="showCountry();" style="margin-left:180px;color:black;cursor:pointer" >Change Country</a>  
+    <hr >
+    <div class="scrollbar scrollbar-primary">
+        
+      
+        <table  >
+            <tr >
+           <a style="cursor:pointer;color: black;" onclick="setRegion('Ashanti')">Ashanti</a><br>
+           <a style="cursor:pointer;color: black;" onclick="setRegion('Brong-Ahafo')">Brong-Ahafo</a><br>
+           <a style="cursor:pointer;color: black;" onclick="setRegion('Central')">Central</a><br>
+           <a style="cursor:pointer;color: black;" onclick="setRegion('Eastern')">Eastern</a><br>
+           <a style="cursor:pointer;color: black;" onclick="setRegion('Greater Accra')">Greater Accra</a><br>
+           <a style="cursor:pointer;color: black;" onclick="setRegion('Northern')">Northern </a><br>
+           <a style="cursor:pointer;color: black;" onclick="setRegion('Upper East')">Upper East  </a><br>
+           <a style="cursor:pointer;color: black;" onclick="setRegion('Upper West')">Upper West   </a><br>
+           <a style="cursor:pointer;color: black;" onclick="setRegion('Volta')">Volta   </a><br>
+           <a style="cursor:pointer;color: black;" onclick="setRegion('Western')">Western  </a><br>
+   
+
+            </tr>
+            </table>
+    </div>
+    <input type="text" name="statehidden" hidden value="{{i.id}}">
+    </form>
+
+    
+   
+</div>
+<!-- Ghana -->
+<div class="form-popup " id="myFormhong" style="background-color: rgb(216, 232, 238);" >
+    <form action="" class="form-container1" id="countryform" >
+        <h6 style="background-color:rgb(17, 169, 240) ;color:white">List of Districts</h6>
+        <a data-toggle="modal" data-target="#myModal" href="" style="margin-left:218px; color:black;">New District</a>
+        <a  onclick="showCountry();" style="margin-left:180px;color:black;cursor:pointer" >Change Country</a>  
+    <hr >
+    <div class="scrollbar scrollbar-primary">
+        
+      
+        <table  >
+            <tr >
+           <a style="cursor:pointer;color: black;" onclick="setDistrict('Islands')">Islands</a><br>
+           <a style="cursor:pointer;color: black;" onclick="setDistrict('Kwai Tsing')">Kwai Tsing</a><br>
+           <a style="cursor:pointer;color: black;" onclick="setDistrict('North')">North</a><br>
+           <a style="cursor:pointer;color: black;" onclick="setDistrict('Sai Kung')">Sai Kung</a><br>
+           <a style="cursor:pointer;color: black;" onclick="setDistrict('Sha Tin')"> Sha Tin</a><br>
+           <a style="cursor:pointer;color: black;" onclick="setDistrict('Tai Po')">Tai Po </a><br>
+           <a style="cursor:pointer;color: black;" onclick="setDistrict('Tsuen Wan')">Tsuen Wan  </a><br>
+           <a style="cursor:pointer;color: black;" onclick="setDistrict('Tuen Mun')">Tuen Mun  </a><br>
+           <a style="cursor:pointer;color: black;" onclick="setDistrict('Yuen Long')">Yuen Long  </a><br>
+   
+
+            </tr>
+            </table>
+    </div>
+    <input type="text" name="statehidden" hidden value="{{i.id}}">
+    </form>
+</div>
+<!-- Indonesia -->
+<div class="form-popup " id="myFormindo" style="background-color: rgb(216, 232, 238);" >
+    <form action="" class="form-container1" id="countryform" >
+        <h6 style="background-color:rgb(17, 169, 240) ;color:white">List of Provinces</h6>
+        <a data-toggle="modal" data-target="#myModal" href="" style="margin-left:218px; color:black;">New Province</a>
+        <a  onclick="showCountry();" style="margin-left:180px;color:black;cursor:pointer" >Change Country</a>  
+    <hr >
+    <div class="scrollbar scrollbar-primary">
+        
+      
+        <table  >
+            <tr >
+           <a style="cursor:pointer;color: black;" onclick="setProvince('Aceh')">Aceh</a><br>
+           <a style="cursor:pointer;color: black;" onclick="setProvince('Bali')">Bali/a><br>
+           <a style="cursor:pointer;color: black;" onclick="setProvince('Bangka Belitung Islands')">Bangka Belitung Islands</a><br>
+           <a style="cursor:pointer;color: black;" onclick="setProvince('Banten')">Banten</a><br>
+           <a style="cursor:pointer;color: black;" onclick="setProvince('Bengkulu')"> Bengkulu</a><br>
+           <a style="cursor:pointer;color: black;" onclick="setProvince('Central Java')">Central Java </a><br>
+           <a style="cursor:pointer;color: black;" onclick="setProvince('Central Kalimantan')">Central Kalimantan  </a><br>
+           <a style="cursor:pointer;color: black;" onclick="setProvince('Central Papua')">Central Papua  </a><br>
+           <a style="cursor:pointer;color: black;" onclick="setProvince('Central Sulawesi')">Central Sulawesi </a><br>
+           <a style="cursor:pointer;color: black;" onclick="setProvince('East Java')">East Java </a><br>
+           <a style="cursor:pointer;color: black;" onclick="setProvince('East Kalimantan')">East Kalimantan </a><br>
+           <a style="cursor:pointer;color: black;" onclick="setProvince('East Nusa Tenggara')">East Nusa Tenggara </a><br>
+           <a style="cursor:pointer;color: black;" onclick="setProvince('Gorontalo')">Gorontalo </a><br>
+           <a style="cursor:pointer;color: black;" onclick="setProvince('Highland Papua')">Highland Papua </a><br>
+           <a style="cursor:pointer;color: black;" onclick="setProvince('Special Capital Region of Jakarta')">Special Capital Region of Jakarta </a><br>
+           <a style="cursor:pointer;color: black;" onclick="setProvince('Jambi')"> Jambi</a><br>
+           <a style="cursor:pointer;color: black;" onclick="setProvince('Jambi')"> Lampung</a><br>
+   
+
+            </tr>
+            </table>
+    </div>
+    <input type="text" name="statehidden" hidden value="{{i.id}}">
+    </form>
+</div>
 
 
 {% endblock %}

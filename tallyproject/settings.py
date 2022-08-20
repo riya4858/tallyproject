@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'tallyproject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'tallyproject',
+        'NAME': 'tallydb',
         'USER':'root',
         'PASSWORD':'',
         'HOST':'localhost',
