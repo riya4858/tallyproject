@@ -166,81 +166,16 @@
                                 <div class="menu-title">Dashboard</div>
                             </a>
                         </li>
+ 
                         <li>
-                          <a href="javascript:;" class="has-arrow">
-                              <div class="parent-icon"><i class="bx bx-home-alt"></i>
-                              </div>
-                              <div class="menu-title">Create</div>
-                          </a>
-                          <ul>
-                              <li>
-                                  <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="bx bx-right-arrow-alt"></i>Accounting Masters</a>
-                                  <ul>
-                                      <li>
-                                         
-                                          <a onclick="getVal('creategroup')">Group</a>
-                                          <a onclick="getVal('ledger')">Ledger</a>
-                                          <a onclick="getVal('costcentre')">Cost centre</a>
-                                          <a onclick="getVal('currency')">Currency</a>
-                                          <a onclick="getVal('ratesofexchange')">Rates of 
-                                            Exchange
-                                          </a>
-                                          <a onclick="getVal('voucher')">Voucher Type</a>
-                                         
-                                      </li>
-                                  </ul>
-                                  
-                              </li>
-                              <li>
-                                <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="bx bx-right-arrow-alt"></i>Inventory Masters</a>
-                                <ul>
-                                    <li>
-                                       
-                                        <a >Stock Group</a>
-                                        <a>Stock Category</a>
-                                        <a >Stock Item</a>
-                                        <a >Unit</a>
-                                        <a >Godown
-                                        </a>
-                                        <a >Price Levels</a>
-                                        <a >Price List(Stock Group)</a>
-                                        <a >Price List(Stock Category)</a>
-                                       
-                                    </li>
-                                </ul>
-                                
-                            </li>
-                            <li>
-                                <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="bx bx-right-arrow-alt"></i>Payroll Masters</a>
-                                <ul>
-                                    <li>
-                                       
-                                        <a >Employee Group</a>
-                                        <a >Employee</a>
-                                        <a >Units(Work)</a>
-                                        <a >Attendence Production Type</a>
-                                        <a >Pay Heads</a>
-                                        <a >Payroll Voucher Type</a>
-                                       
-                                    </li>
-                                </ul>
-                                
-                            </li>
-                            <li>
-                                <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="bx bx-right-arrow-alt"></i>Statutory Details</a>
-                                <ul>
-                                    <li>
-                                       
-                                        <a >PAN/CIN Details</a>
-                                       
-                                    </li>
-                                </ul>
-                                
-                            </li>
-                              
-                              
-                          </ul>
-                      </li>
+                            <a href="{% url 'company' %}" >
+                                <div class="parent-icon"><i class="bx bx-file"></i>
+                                </div>
+                                <div  class="menu-title" >Company</div>
+                            </a>
+                            
+                        </li>
+                                               
                         <li>
                            
                             <a  href="{% url 'featurepage' %}" >
@@ -251,12 +186,79 @@
                           
                         </li>
                         <li>
-                            <a href="{% url 'company' %}" >
-                                <div class="parent-icon"><i class="bx bx-file"></i>
+                            <a href="javascript:;" class="has-arrow">
+                                <div class="parent-icon"><i class="bx bx-home-alt"></i>
                                 </div>
-                                <div  class="menu-title" >Company</div>
+                                <div class="menu-title">Create</div>
                             </a>
-                            
+                            <ul>
+                                <li>
+                                    <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="bx bx-right-arrow-alt"></i>Accounting Masters</a>
+                                    <ul>
+                                        <li>
+                                           
+                                            <a onclick="getVal('creategroup')">Group</a>
+                                            <a onclick="getVal('ledger')">Ledger</a>
+                                            <a onclick="getVal('costcentre')">Cost centre</a>
+                                            <a onclick="getVal('currency')">Currency</a>
+                                            <a onclick="getVal('ratesofexchange')">Rates of 
+                                              Exchange
+                                            </a>
+                                            <a onclick="getVal('voucher')">Voucher Type</a>
+                                           
+                                        </li>
+                                    </ul>
+                                    
+                                </li>
+                                <li>
+                                  <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="bx bx-right-arrow-alt"></i>Inventory Masters</a>
+                                  <ul>
+                                      <li>
+                                         
+                                          <a >Stock Group</a>
+                                          <a>Stock Category</a>
+                                          <a >Stock Item</a>
+                                          <a >Unit</a>
+                                          <a >Godown
+                                          </a>
+                                          <a >Price Levels</a>
+                                          <a >Price List(Stock Group)</a>
+                                          <a >Price List(Stock Category)</a>
+                                         
+                                      </li>
+                                  </ul>
+                                  
+                              </li>
+                              <li>
+                                  <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="bx bx-right-arrow-alt"></i>Payroll Masters</a>
+                                  <ul>
+                                      <li>
+                                         
+                                          <a >Employee Group</a>
+                                          <a >Employee</a>
+                                          <a >Units(Work)</a>
+                                          <a >Attendence Production Type</a>
+                                          <a >Pay Heads</a>
+                                          <a >Payroll Voucher Type</a>
+                                         
+                                      </li>
+                                  </ul>
+                                  
+                              </li>
+                              <li>
+                                  <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="bx bx-right-arrow-alt"></i>Statutory Details</a>
+                                  <ul>
+                                      <li>
+                                         
+                                          <a >PAN/CIN Details</a>
+                                         
+                                      </li>
+                                  </ul>
+                                  
+                              </li>
+                                
+                                
+                            </ul>
                         </li>
                         <li>
                             <a data-toggle="modal" data-target="#myModal" href="javascript:;" class="has-arrow">
