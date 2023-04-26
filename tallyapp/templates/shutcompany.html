@@ -38,7 +38,7 @@
            <div>
                <table>
                {% for i in com %}
-               {% if i.active == 0 %}
+               {% if i.status == 0 %}
 
                {% else %}
                <tr><a href="{% url 'disable' i.id %}"  onclick="confirm()" id='mySelect'>&nbsp;&nbsp;{{i.name}}</a>

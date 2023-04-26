@@ -257,35 +257,18 @@
                  onclick="copyName()" required>
             </div>
             <div class="col-md-4 mt-3">
-                <label for="validationCustom03">Address1</label>
-                <input type="text" id="address1" class="form-control" value="{{comp.address1}}" id="validationCustom03" name="address1"
-                required style="background-color: #2f516f;color: white;" required>
+                <label for="validationCustom03">Address</label>
+                <textarea type="text" id="address" class="form-control" value="{{comp.address}}" id="validationCustom03" name="address"
+                required style="background-color: #2f516f;color: white;" required></textarea>
                 
             </div>
-            <div class="col-md-4 mt-3">
-                <label for="validationCustom03">Address2</label>
-                <input type="text" id="address2" class="form-control" value="{{comp.address2}}" id="validationCustom03" name="address2"
-                required style="background-color: #2f516f;color: white;"
-                >
-            </div>
-            <div class="col-md-4 mt-3">
-                <label for="validationCustom03">Address3</label>
-                <input type="text" id="address3" class="form-control" value="{{comp.address3}}" id="validationCustom03" name="address3"
-                required style="background-color: #2f516f;color: white;"
-                >
-            </div>
-            <div class="col-md-4 mt-3">
-                <label for="validationCustom03">Address4</label>
-                <input type="text" id="address4" class="form-control" value="{{comp.address4}}" id="validationCustom03" name="address4"
-                required style="background-color: #2f516f;color: white;"
-                >
-            </div>
+            
             <div class="col-md-4 mt-3"  >
                 <label id="st" for="validationCustom03">State</label>
                 <label id="reg" class="hide" for="validationCustom03">Region</label>
                 <label  id="div" class="hide" for="validationCustom03">Divisions</label>
                 <label id="dis" class="hide" for="validationCustom03">District</label>
-                <input type="text" value="{{comp.states}}" class="form-control"  id="state" name="state"
+                <input type="text" value="{{comp.state}}" class="form-control"  id="state" name="state"
                 required style="background-color: #2f516f;color: white;"
                 onclick="showState(document.getElementById('country').value);">
             </div>
@@ -523,14 +506,14 @@
             </div>
             <div class="col-md-4 mt-3">
                 <label for="validationCustom03">Base currency symbol </label>
-                <input id="currency_symbol" value="{{comp.c_symbol}}" type="text" class="form-control" id="validationCustom03" 
+                <input id="currency_symbol" value="{{comp.currency_symbol}}" type="text" class="form-control" id="validationCustom03" 
                 name="currency_symbol"
                 required style="background-color: #2f516f;color: white;"
                >
             </div>
             <div class="col-md-4 mt-3">
                 <label for="validationCustom03">Formal name</label>
-                <input id="formal_name" value="{{comp.f_name}}" type="text" class="form-control" id="validationCustom03"
+                <input id="formal_name" value="{{comp.formal_name}}" type="text" class="form-control" id="validationCustom03"
                  name="formal_name"
                 required style="background-color: #2f516f;color: white;"
                >

@@ -1,412 +1,425 @@
 {% extends 'base.html' %}
 {% block body %}
-<style>
-    .a label {
-        position:relative;
-        width:320px;
-    }
-    .vl {
-        border-left: 6px solid rgb(5, 12, 5);
-        height: 500px;
-        margin-left: 600px;
-        margin-bottom: 300px;
-
-        
-      }
-      .form-popup {
-        display: none;
-        position: fixed;
-        top: 180px;
-        right: 15px;
-        border: 1px solid #f1f1f1;
-        z-index: 9;
-        width: 300px;
-        height: 600px;
-      }
-    
-      .content a:hover {background-color: rgb(238, 167, 75);}
-      
-      /* Add styles to the form container */
-      .form-container {
-        max-width: 50px;
-        height: 500px;
-        padding: 10px;
-      }
-</style>
-<script>
-    function save(){
-        document.getElementById("frmfeature").submit();
-    }
-    function savegst(){
-      document.getElementById("frmfeature").submit();
-      window.location.href="{% url 'gst' ctg.id %}";
-  }
-
-    function myFunction() {
-        compId= document.getElementById('compId').innerHTML
-alert(compId);
-        //get feature
-
-        //document.getElementById('maintain_accounts').value='No'
-    }
-    
-</script>
-<body >
-<div class="page-content">
- 
-    <div class="card radius-15" style="background-color: #243e54;">
-        <div class="card-body">
-            <div class="card-title">
-                <!-- <h6 class="mb-0" style="margin-left: 480px;"><b>Company Created Successfully</b></h6> -->
-            </div>
-            <hr/>
-            <h6>Company:&nbsp;&nbsp;{{ctg.name}}</h6>
-            <!-- <div id="compId">{{ctg.id}}</div> -->
-           
-
+<div class="m-3">
+  <h6  class="bg-info text-light p-2 m-0 text-left">Company Features Alteration</h6>
+  <form class="p-5" style="background-color:rgba(0,0,0,.4);" method="post" action="{% url 'company_feature' cmp.id  %}">
+      {% csrf_token %}
+      <div class="p-3">
+          <hr>
+          <div class="row container-fluid  p-2 m-0">
+              <div class="col-sm-1 m-0 p-0"> <label for="a">Company : </label></div>
+              <div class="col-sm-2 m-0 p-0">
+                  {{cmp.name}}
+              </div>
+          </div>
+          <hr>
+          <!-- <div class="row container-fluid  p-2 m-0">
+              <div class="col-sm-2 m-0 p-0"> <label for="a">Show more features</label></div>
+              <div class="col-sm-3 m-0 p-0">
+                  <select name="" class="form-control" id="features" onchange="showfeature()"  required>
+                      <option value="No">No</option>
+                      <option value="Yes">Yes</option> 
+                      
+                  </select>
+              </div>
+              <div class="col-sm-7 m-0 p-0"></div>
+          </div> -->
+  
+          <!-- <div class="row container-fluid  p-2 m-0 hide"id="showall0">
+              <div class="col-sm-2 m-0 p-0"> <label for="">Show all features</label></div>
+              <div class="col-sm-3 m-0 p-0"> 
+                  <select name="" class="form-control" id="all" onchange="showall()" required>
+                      <option value="No">No</option>
+                      <option value="Yes">Yes</option> 
+                      
+                  </select>
+              </div>
+              <div class="col-sm-7 m-0 p-0"></div>
+          </div> -->
+      </div> 
+      <div class="row container-fluid  p-0 m-0" style=" border: 1px solid rgba(128, 128, 128, 0.6);">
+          <div class="col-sm-6 m-0 p-4" style=" border-right: 1px solid rgba(128, 128, 128, 0.6);">
+              <h5  class="bg-trasparent text-light p-2 m-0 text-left">Accounting</h5>
+              <div class="row container-fluid  p-2">
+                  <div class="col-sm-6 m-0 p-0"> <label for=""></label>Maintain Accounts</div>
+                  <div class="col-sm-6 m-0 p-0">
+                      <select name="maintain_account" id="i" class="form-control">
+                          <option value="Yes">Yes</option>
+                          <option value="No">No</option> 
+                      </select>
+                  </div>
+              </div>
+              <div class="row container-fluid  p-2">
+                  <div class="col-sm-6 m-0 p-0"> <label for=""></label>&nbsp;&nbsp;&nbsp;&nbsp;Enable Bill-wise entry</div>
+                  <div class="col-sm-6 m-0 p-0">
+                      <select name="billwise_entry" id="i" class="form-control">
+                          <option value="No">No</option>
+                          <option value="Yes">Yes</option> 
+                      </select>
+                  </div>
+              </div>
+              <div class="row container-fluid  hide p-2 " id="enbcost">
+                  <div class="col-sm-6 m-0 p-0"> <label for=""></label>&nbsp;&nbsp;&nbsp;&nbsp;Enable Cost Centres</div>
+                  <div class="col-sm-6 m-0 p-0">
+                      <select name="cost_centre" id="i" class="form-control">
+                          <option value="No">No</option>
+                          <option value="Yes">Yes</option> 
+                      </select>
+                  </div>
+              </div>
+              <div class="row container-fluid hide p-2" id="enbint">
+                  <div class="col-sm-6 m-0 p-0"> <label for=""></label>&nbsp;&nbsp;&nbsp;&nbsp;Enable Interest Calculation</div>
+                  <div class="col-sm-6 m-0 p-0">
+                      <select name="interest_calculation" id="i" class="form-control">
+                          <option value="No">No</option>
+                          <option value="Yes">Yes</option> 
+                      </select>
+                  </div>
+              </div>
+              <h5  class="bg-trasparent text-light p-2 m-0 text-left">Inventory</h5>
+              <div class="row container-fluid  p-2">
+                  <div class="col-sm-6 m-0 p-0"> <label for=""></label>Maintain Inventory</div>
+                  <div class="col-sm-6 m-0 p-0">
+                      <select name="maintain_inventry" id="i" class="form-control">
+                          <option value="No">Yes</option>
+                          <option value="Yes">No</option> 
+                      </select>
+                  </div>
+              </div>
+              <div class="row container-fluid  p-2">
+                  <div class="col-sm-6 m-0 p-0"> <label for=""></label>&nbsp;&nbsp;&nbsp;&nbsp;Integrate account with inventory</div>
+                  <div class="col-sm-6 m-0 p-0">
+                      <select name="account_inventry" id="i" class="form-control">
+                          <option value="No">No</option>
+                          <option value="Yes">Yes</option> 
+                      </select>
+                  </div>
+              </div>
+              <div class="row container-fluid  hide p-2" id="enbmul">
+                  <div class="col-sm-6 m-0 p-0"> <label for=""></label>&nbsp;&nbsp;&nbsp;&nbsp;Enable multitle price leves</div>
+                  <div class="col-sm-6 m-0 p-0">
+                      <select name="multiple_pricelevel" id="i" class="form-control">
+                          <option value="No">No</option>
+                          <option value="Yes">Yes</option> 
+                      </select>
+                  </div>
+              </div>
+              <div class="row container-fluid hide p-2" id="enbbat">
+                  <div class="col-sm-6 m-0 p-0"> <label for=""></label>&nbsp;&nbsp;&nbsp;&nbsp;Enable Batches</div>
+                  <div class="col-sm-6 m-0 p-0">
+                      <select name="enable_batches" id="enbbat0" class="form-control" onchange="showenbbat()">
+                          <option value="No">No</option>
+                          <option value="Yes">Yes</option> 
+                      </select>
+                  </div>
+              </div>
+              <div class="row container-fluid  hide p-2" id="maiex">
+                  <div class="col-sm-6 m-0 p-0"> <label for=""></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      Maintain Expiry Date of Batches</div>
+                  <div class="col-sm-6 m-0 p-0">
+                      <select name="expiry_date" id="i" class="form-control">
+                          <option value="No">No</option>
+                          <option value="Yes">Yes</option> 
+                      </select>
+                  </div>
+              </div>
+              <div class="row container-fluid  hide p-2" id="enbjob">
+                  <div class="col-sm-6 m-0 p-0"> <label for=""></label>&nbsp;&nbsp;&nbsp;&nbsp;Enable Job Order Proccessing</div>
+                  <div class="col-sm-6 m-0 p-0">
+                      <select name="job_order_procress" id="i" class="form-control">
+                          <option value="No">No</option>
+                          <option value="Yes">Yes</option> 
+                      </select>
+                  </div>
+              </div>
+              <div class="row container-fluid  hide p-2" id="enbcostrack">
+                  <div class="col-sm-6 m-0 p-0"> <label for=""></label>&nbsp;&nbsp;&nbsp;&nbsp;Enable Cost Tracking</div>
+                  <div class="col-sm-6 m-0 p-0">
+                      <select name="cost_tracking" id="i" class="form-control">
+                          <option value="No">No</option>
+                          <option value="Yes">Yes</option> 
+                      </select>
+                  </div>
+              </div>
+              <div class="row container-fluid  hide p-2" id="enbjbcst">
+                  <div class="col-sm-6 m-0 p-0"> <label for=""></label>&nbsp;&nbsp;&nbsp;&nbsp;Enable Job Costing</div>
+                  <div class="col-sm-6 m-0 p-0">
+                      <select name="job_costing" id="i" class="form-control">
+                          <option value="No">No</option>
+                          <option value="Yes">Yes</option> 
+                      </select>
+                  </div>
+              </div>
+              <div class="row container-fluid hide p-2" id="usedis">
+                  <div class="col-sm-6 m-0 p-0"> <label for=""></label>&nbsp;&nbsp;&nbsp;&nbsp;Use Discount column in invoices</div>
+                  <div class="col-sm-6 m-0 p-0">
+                      <select name="discount_column" id="i" class="form-control">
+                          <option value="No">No</option>
+                          <option value="Yes">Yes</option> 
+                      </select>
+                  </div>
+              </div>
+              <div class="row container-fluid hide p-2" id="usesep">
+                  <div class="col-sm-6 m-0 p-0"> <label for=""></label>&nbsp;&nbsp;&nbsp;&nbsp;Use seperate Actual and Billed Quantity column in invoice</div>
+                  <div class="col-sm-6 m-0 p-0">
+                      <select name="seperte_actual" id="i" class="form-control">
+                          <option value="No">No</option>
+                          <option value="Yes">Yes</option> 
+                      </select>
+                  </div>
+              </div>
+          </div>
+          <div class="col-sm-6 m-0 p-4" style=" border-right: 1px solid rgba(128, 128, 128, 0.6);">
+              <h5 class="text-left">Taxation</h5>
+              <div class="row container-fluid  p-0">
+                  <div class="col-sm-6 m-0 p-0"></div>
+                  <div class="col-sm-6 m-0 p-0"></div>
+              </div>
+              <div class="row container-fluid  p-2" id="enbgst">
+                  <div class="col-sm-6 m-0 p-0"> <label for="d">Enable Goods and Service Tax (GST)</label></div>
+                  <div class="col-sm-6 m-0 p-0">
+                      <select name="gst" id="gst" class="form-control" onchange="showgst()">
+                          <option value="No">No</option>
+                          <option value="Yes">Yes</option> 
+                      </select>
+                  </div>
+              </div>
+              <div class="row container-fluid  p-2" id="enbtds">
+                  <div class="col-sm-6 m-0 p-0"> <label for="d">Enable Tax Deducted at Source (TDS)</label></div>
+                  <div class="col-sm-6 m-0 p-0">
+                      <select name="tds" id="tds" class="form-control" onchange="showtds()">
+                          <option value="No">No</option>
+                          <option value="Yes">Yes</option> 
+                      </select>
+                  </div>
+              </div>
+              <div class="row container-fluid  hide p-2" id="enbtax">
+                  <div class="col-sm-6 m-0 p-0"> <label for="d">Enable Tax Collected at Source (TCS)</label></div>
+                  <div class="col-sm-6 m-0 p-0">
+                      <select name="tcs" id="i" class="form-control">
+                          <option value="No">No</option>
+                          <option value="Yes">Yes</option> 
+                      </select>
+                  </div>
+              </div>
+              <div class="row container-fluid  hide p-2" id="enbval">
+                  <div class="col-sm-6 m-0 p-0"> <label for="d">Enable Value Added Tax (VAT)</label></div>
+                  <div class="col-sm-6 m-0 p-0">
+                      <select name="vat" id="i" class="form-control">
+                          <option value="No">No</option>
+                          <option value="Yes">Yes</option> 
+                      </select>
+                  </div>
+              </div>
+              <div class="row container-fluid  hide p-2" id="enbex">
+                  <div class="col-sm-6 m-0 p-0"> <label for="d">Enable Excise</label></div>
+                  <div class="col-sm-6 m-0 p-0">
+                      <select name="excise" id="i" class="form-control">
+                          <option value="No">No</option>
+                          <option value="Yes">Yes</option> 
+                      </select>
+                  </div>
+              </div>
+              <div class="row container-fluid hide p-2" id="enbser">
+                  <div class="col-sm-6 m-0 p-0"> <label for="d">Enable Service Tax</label></div>
+                  <div class="col-sm-6 m-0 p-0">
+                      <select name="service_tax" id="i" class="form-control">
+                          <option value="No">No</option>
+                          <option value="Yes">Yes</option> 
+                      </select>
+                  </div>
+              </div>
+              <h5 class="text-left hide" id="Payroll">Payroll</h5>
+              <div class="row container-fluid  p-0">
+                  <div class="col-sm-6 m-0 p-0"></div>
+                  <div class="col-sm-6 m-0 p-0"></div>
+              </div>
+              <div class="row container-fluid hide p-2" id="maipay">
+                  <div class="col-sm-6 m-0 p-0"> <label for="e">Maintain Payroll</label></div>
+                  <div class="col-sm-6 m-0 p-0">
+                      <select name="payroll"  class="form-control" id="maipay0" onchange="showmainpay()">
+                          <option value="No">No</option> 
+                          <option value="Yes">Yes</option>
+                      </select>
+                  </div>
+              </div>
+              <!-- <div class="row container-fluid hide p-2" id="enbsta">
+                  <div class="col-sm-6 m-0 p-0"> <label for="e">Enable Payroll Statutory</label></div>
+                  <div class="col-sm-6 m-0 p-0">
+                      <select  class="form-control">
+                          <option value="">Yes</option> 
+                          <option value="">No</option>
+                      </select>
+                  </div>
+              </div> -->
+              <div class=" p-0 m-0 w-0 ">
+              <h5 class="text-left hide p-2" id="other">Others</h5>
+              <div class="row container-fluid  p-0">
+                  <div class="col-sm-6 m-0 p-0"></div>
+                  <div class="col-sm-6 m-0 p-0"></div>
+              </div>
+              <div class="row container-fluid hide p-2" id="enbadrs">
+                  <div class="col-sm-6 m-0 p-0"> <label for="e">Enable Multiple Addressess</label></div>
+                  <div class="col-sm-6 m-0 p-0">
+                      <select name="multiple_address" class="form-control">
+                          <option value="No">No</option> 
+                          <option value="Yes">Yes</option>
+                      </select>
+                  </div>
+              </div>
+              <div class="row container-fluid  hide p-2" id="markmod">
+                  <div class="col-sm-6 m-0 p-0"> <label for="e">Mark Modified vouchers</label></div>
+                  <div class="col-sm-6 m-0 p-0">
+                      <select name="mark_modified" class="form-control">
+                          <option value="No">No</option> 
+                          <option value="Yes">Yes</option>
+                      </select>
+                  </div>
+              </div>
+          </div>
+      </div> 
+      <div class="row container-fluid  p-0 m-0" style=" border: 1px solid rgba(128, 128, 128, 0.6);">
+          <div class="text-center"><button class="btn btn-info w-15">ACCEPT</button></div>   
+      </div>
           
-        <form action="{% url 'features' ctg.id %}" method="POST" id="frmfeature">
-            {% csrf_token %}
-            <div class="row container-fluid  p-0 m-0" style=" border: 1px solid rgba(128, 128, 128, 0.6);">
-                        
-                <div class="col-sm-6 m-0 p-4" style=" border-right: 1px solid rgba(128, 128, 128, 0.6);">
-                    <h6><b>Accounting</b></h6>
-                    <div class="row container-fluid  p-2">
-                        <div class="col-sm-6 m-0 p-0"> <label for="empno">Maintain Accounts:</label></div>
-                        <div class="col-sm-6 m-0 p-0">
-                          <select style="background-color: #2f516f;color: white;"
-                          name="maintain_accounts" id="maintain_accounts" onchange="save()" >
-                          
-                        {% if ft.maintain_accounts %}
-                          <option value="Yes" selected >Yes</option>
-                          <option value="No" >No</option>
-                        {% else %}
-                          <option value="Yes" >Yes</option>
-                          <option value="No" selected>No</option>
-                        {% endif %}
-                         </select></div>
-                    </div>
-                    <div class="row container-fluid  p-2">
-                        <div class="col-sm-6 m-0 p-0"> <label for="empno">Enable Bill-wise entry:</label></div>
-                        <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;"
-                              name="bill_wise_entry" id="bill_wise_entry" onchange="save()" >
-                            {% if ft.bill_wise_entry %}
-                              <option value="Yes" selected >Yes</option>
-                              <option value="No" >No</option>
-                            {% else %}
-                              <option value="Yes" >Yes</option>
-                              <option value="No" selected>No</option>
-                            {% endif %}
-                             </select></div>
-                    </div>
-
-                    <div class="row container-fluid  p-2">
-                        <div class="col-sm-6 m-0 p-0"> <label for="empno">Enable Cost Centres:</label></div>
-                        <div class="col-sm-6 m-0 p-0">
-                            <select style="background-color: #2f516f;color: white;"  name="cost_centres" id="cost_centres" onchange="save()">
-                            {% if ft.cost_centres %}
-                              <option value="Yes" selected >Yes</option>
-                              <option value="No" >No</option>
-                            {% else %}
-                              <option value="Yes" >Yes</option>
-                              <option value="No" selected>No</option>
-                            {% endif %}
-                             </select></div>
-                    </div>
-
-                    <div class="row container-fluid  p-2">
-                        <div class="col-sm-6 m-0 p-0"> <label for="empno">Enable Interest Calculation:</label></div>
-                        <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;"
-                              name="interest_calc" id="interest_calc" onchange="save()">
-                            {% if ft.interest_calc %}
-                              <option value="Yes" selected >Yes</option>
-                              <option value="No" >No</option>
-                            {% else %}
-                              <option value="Yes" >Yes</option>
-                              <option value="No" selected>No</option>
-                            {% endif %}
-                             </select></div>
-                    </div>
-                    <h6><b>Inventory</b></h6>
-                    <div class="row container-fluid  p-2">
-                        <div class="col-sm-6 m-0 p-0"> <label for="empno">Maintain Inventory:</label></div>
-                        <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;"  
-                            name="maintain_inventory" id="maintain_inventory" onchange="save()">
-                            {% if ft.maintain_inventory  %}
-                            <option value="Yes" selected >Yes</option>
-                            <option value="No" >No</option>
-                          {% else %}
-                            <option value="Yes" >Yes</option>
-                            <option value="No" selected>No</option>
-                          {% endif %}
-                             </select></div>
-                    </div>
-
-                    <div class="row container-fluid  p-2">
-                        <div class="col-sm-6 m-0 p-0"> <label for="empno">Integrate Accounts with Inventory:</label></div>
-                        <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;" 
-                             name="integrate_accounts" id="integrate_accounts" onchange="save()">
-                            {% if ft.integrate_accounts %}
-                            <option value="Yes" selected >Yes</option>
-                            <option value="No" >No</option>
-                          {% else %}
-                            <option value="Yes" >Yes</option>
-                            <option value="No" selected>No</option>
-                          {% endif %}
-                             </select></div>
-                    </div>
-
-                    <div class="row container-fluid  p-2">
-                        <div class="col-sm-6 m-0 p-0"> <label for="empno">Enable Multiple Price Levels:</label></div>
-                        <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;"
-                              name="multiple_price_level" id="multiple_price_level" onchange="save()">
-                            {% if ft.multiple_price_level %}
-                            <option value="Yes" selected >Yes</option>
-                            <option value="No" >No</option>
-                          {% else %}
-                            <option value="Yes" >Yes</option>
-                            <option value="No" selected>No</option>
-                          {% endif %}
-                             </select></div>
-                    </div>
-
-                    <div class="row container-fluid  p-2">
-                        <div class="col-sm-6 m-0 p-0"> <label for="empno">Enable Batches:</label></div>
-                        <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;" 
-                             name="batches" id="batches" onchange="save()">
-                            {% if ft.batches %}
-                            <option value="Yes" selected >Yes</option>
-                            <option value="No" >No</option>
-                          {% else %}
-                            <option value="Yes" >Yes</option>
-                            <option value="No" selected>No</option>
-                          {% endif %}
-                             </select></div>
-                    </div>
-
-                    <div class="row container-fluid  p-2">
-                        <div class="col-sm-6 m-0 p-0"> <label for="empno">Maintain Expiry date for Batches:</label></div>
-                        <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;"
-                              name="expirydate_batches" id="expirydate_batches" onchange="save()">
-                            {% if ft.expirydate_batches %}
-                            <option value="Yes" selected >Yes</option>
-                            <option value="No" >No</option>
-                          {% else %}
-                            <option value="Yes" >Yes</option>
-                            <option value="No" selected>No</option>
-                          {% endif %}
-                             </select></div>
-                    </div>
-
-                    <div class="row container-fluid  p-2">
-                        <div class="col-sm-6 m-0 p-0"> <label for="empno">Enable Job Order Processing:</label></div>
-                        <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;" 
-                             name="joborder_processing" id="joborder_processing" onchange="save()">
-                            {% if ft.joborder_processing  %}
-                            <option value="Yes" selected >Yes</option>
-                            <option value="No" >No</option>
-                          {% else %}
-                            <option value="Yes" >Yes</option>
-                            <option value="No" selected>No</option>
-                          {% endif %}
-                             </select></div>
-                    </div>
-
-                    <div class="row container-fluid  p-2">
-                        <div class="col-sm-6 m-0 p-0"> <label for="empno">Enable Cost Tracking:</label></div>
-                        <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;"  
-                            name="cost_tracking" id="cost_tracking" onchange="save()">
-                            {% if ft.cost_tracking %}
-                            <option value="Yes" selected >Yes</option>
-                            <option value="No" >No</option>
-                          {% else %}
-                            <option value="Yes" >Yes</option>
-                            <option value="No" selected>No</option>
-                          {% endif %}
-                             </select></div>
-                    </div>
-                    <div class="row container-fluid  p-2">
-                        <div class="col-sm-6 m-0 p-0"> <label for="empno">Enable Job Costing:</label></div>
-                        <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;" 
-                             name="job_costing" id="job_costing" onchange="save()">
-                            {% if ft.job_costing %}
-                            <option value="Yes" selected >Yes</option>
-                            <option value="No" >No</option>
-                          {% else %}
-                            <option value="Yes" >Yes</option>
-                            <option value="No" selected>No</option>
-                          {% endif %}
-                             </select></div>
-                    </div>
-                    <div class="row container-fluid  p-2">
-                        <div class="col-sm-6 m-0 p-0"> <label for="empno">Use Discount Column in Invoices:</label></div>
-                        <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;" 
-                          name="discount_invoices" id="discount_invoices" onchange="save()">
-                         {% if ft.discount_invoices %}
-                         <option value="Yes" selected >Yes</option>
-                         <option value="No" >No</option>
-                       {% else %}
-                         <option value="Yes" >Yes</option>
-                         <option value="No" selected>No</option>
-                       {% endif %}
-                          </select></div>
-                    </div>
-                    <div class="row container-fluid  p-2">
-                        <div class="col-sm-6 m-0 p-0"> <label for="empno">Use Seperate Actual and Billed Quantity Columns in Invoices:</label></div>
-                        <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;" 
-                          name="Billed_Quantity" id="Billed_Quantity" onchange="save()">
-                         {% if ft.Billed_Quantity  %}
-                         <option value="Yes" selected >Yes</option>
-                         <option value="No" >No</option>
-                       {% else %}
-                         <option value="Yes" >Yes</option>
-                         <option value="No" selected>No</option>
-                       {% endif %}
-                          </select></div>
-                    </div>
-
-
-
-                    
-                </div>
-
-                <div class="col-sm-6 m-0 p-4" style=" border-right: 1px solid rgba(128, 128, 128, 0.6);">
-<h6><b>Taxation</b></h6>
-<div class="row container-fluid  p-2">
-    <div class="col-sm-6 m-0 p-0"> <label for="empno">Enable Goods and Services Tax(GST):</label></div>
-    <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;" 
-      name="gst" id="gst" onchange="savegst()">
-     {% if ft.gst %}
-     <option  value="Yes" selected >Yes</option>
-     <option value="No" >No</option>
-   {% else %}
-     <option  value="Yes" >Yes</option>
-     <option value="No" selected >No</option>
-   {% endif %}
-      </select></div>
+  </form>
 </div>
 
+<script>
 
+  function showunder(){
+      var status = document.getElementById("under");
+      var a = status.value;
+      console.log(a);
+      if( a == "yes1" ){
+          console.log(a);
 
+          document.getElementById('feature1').style.display = "flex";
+          document.getElementById('feature1').style.display = "none";
+          document.getElementById('feature1').style.display = "none";
+          document.getElementById('feature1').style.display = "none";
+          document.getElementById('feature1').style.display = "none";
+          document.getElementById('feature1').style.display = "none";
+          document.getElementById('feature1').style.display = "none";
+          document.getElementById('feature1').style.display = "none";
+          document.getElementById('feature1').style.display = "none";
+      }
+  }
+  function showfeature(){
+      var status = document.getElementById("features");
+      var a = status.value;
+      console.log(a);
+      if( a =="Yes" ){
+          console.log(a);
+          document.getElementById("showall0").style.display="flex";
+          document.getElementById("enbcost").style.display="none";
+          document.getElementById("enbint").style.display="flex";
+          document.getElementById("enbmul").style.display="flex";
+          document.getElementById("enbbat").style.display="flex";
+          document.getElementById("maiex").style.display="none";
+          document.getElementById("usedis").style.display="flex";
+          document.getElementById("usesep").style.display="flex";
+          document.getElementById("enbtax").style.display="flex";
+          document.getElementById('other').style.display = "flex";
+          document.getElementById("enbadrs").style.display="flex";
+          document.getElementById("markmod").style.display="flex";
+      }
 
-<div class="row container-fluid  p-2">
-    <div class="col-sm-6 m-0 p-0"> <label for="empno">Enable Tax Deducted at Source(TDS):</label></div>
-    <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;" 
-      name="tds" id="tds" onchange="save()">
-     {% if ft.tds %}
-     <option value="Yes" selected >Yes</option>
-     <option value="No" >No</option>
-   {% else %}
-     <option value="Yes" >Yes</option>
-     <option value="No" selected>No</option>
-   {% endif %}
-      </select></div>
-</div>
+      else{
+          document.getElementById("showall0").style.display="none";
+          document.getElementById("enbcost").style.display="none";
+          document.getElementById("enbint").style.display="none";
+          document.getElementById("enbmul").style.display="none";
+          document.getElementById("enbbat").style.display="none";
+          document.getElementById("maiex").style.display="none";
+          document.getElementById("usedis").style.display="none";
+          document.getElementById("usesep").style.display="none";
+          document.getElementById("enbtax").style.display="none";
+          document.getElementById('other').style.display = "none";
+          document.getElementById("enbadrs").style.display="none";
+          document.getElementById("markmod").style.display="none";
+      }
+  }
+  function showall(){
+      var status = document.getElementById("all");
+      var a = status.value
+      console.log(a);
+      if( a == "Yes" ){
+          console.log(a);
 
-<div class="row container-fluid  p-2">
-    <div class="col-sm-6 m-0 p-0"> <label for="empno">Enable Tax Collected at Source(TCS):</label></div>
-    <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;" 
-      name="tcs" id="tcs" onchange="save()">
-     {% if ft.tcs %}
-     <option value="Yes" selected >Yes</option>
-     <option value="No" >No</option>
-   {% else %}
-     <option value="Yes" >Yes</option>
-     <option value="No" selected>No</option>
-   {% endif %}
-      </select></div>
-</div>
+          document.getElementById('enbcost').style.display = "flex";
+          document.getElementById("enbjob").style.display="flex";
+          document.getElementById("enbcostrack").style.display="flex";
+          document.getElementById("enbjbcst").style.display="flex";
+          document.getElementById("enbval").style.display="flex";
+          document.getElementById("enbex").style.display="flex";
+          document.getElementById("enbser").style.display="flex";
+          document.getElementById("Payroll").style.display="flex";
+          document.getElementById("maipay").style.display="flex";
+          document.getElementById("enbsta").style.display="none";
+      }
+      else{
+          document.getElementById('enbcost').style.display = "none";
+          document.getElementById("enbjob").style.display="none";
+          document.getElementById("enbcostrack").style.display="none";
+          document.getElementById("enbjbcst").style.display="none";
+          document.getElementById("enbval").style.display="none";
+          document.getElementById("enbex").style.display="none";
+          document.getElementById("enbser").style.display="none";
+          document.getElementById("Payroll").style.display="none";
+          document.getElementById("maipay").style.display="none";
+          document.getElementById("enbsta").style.display="none";
+      }
+  }
+  function showenbbat(){
+  var status = document.getElementById("enbbat0");
+  var a = status.value
+  console.log(a);
+  if( a == "Yes" ){
+      console.log(a);
 
-<div class="row container-fluid  p-2">
-    <div class="col-sm-6 m-0 p-0"> <label for="empno">Enable Value Added Tax(VAT):</label></div>
-    <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;" 
-      name="vat" id="vat" onchange="save()">
-     {% if ft.vat  %}
-     <option value="Yes" selected >Yes</option>
-     <option value="No" >No</option>
-   {% else %}
-     <option value="Yes" >Yes</option>
-     <option value="No" selected>No</option>
-   {% endif %}
-      </select></div>
-</div>
+      document.getElementById('maiex').style.display = "flex";
+  }
+  else{
+      document.getElementById('maiex').style.display = "none";
+  }
+  }
+  function showmainpay(){
+  var status = document.getElementById("maipay0");
+  var a = status.value
+  console.log(a);
+  if( a == "Yes" ){
+      console.log(a);
 
-<div class="row container-fluid  p-2">
-    <div class="col-sm-6 m-0 p-0"> <label for="empno">Enable Excise:</label></div>
-    <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;" 
-      name="excise" id="excise" onchange="save()">
-     {% if ft.excise  %}
-     <option value="Yes" selected >Yes</option>
-     <option value="No" >No</option>
-   {% else %}
-     <option value="Yes" >Yes</option>
-     <option value="No" selected>No</option>
-   {% endif %}
-      </select></div>
-</div>
+      document.getElementById('enbsta').style.display = "flex";
+  }
+  else{
+      document.getElementById('enbsta').style.display = "none";
+  }
+  }
+  function showgst(){
+      var status = document.getElementById("gst");
+      var a = status.value;
+      if(a=="Yes"){
 
-<div class="row container-fluid  p-2">
-    <div class="col-sm-6 m-0 p-0"> <label for="empno">Enable Service Tax:</label></div>
-    <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;" 
-      name="servicetax" id="servicetax" onchange="save()">
-     {% if ft.servicetax  %}
-     <option value="Yes" selected >Yes</option>
-     <option value="No" >No</option>
-   {% else %}
-     <option value="Yes" >Yes</option>
-     <option value="No" selected>No</option>
-   {% endif %}
-      </select></div>
-</div>
+          window.location.href="{% url 'tally_gst' cmp.id %}" 
+      }
+      else{
+          document.getElementById('enbgst').style.display="flex";
+      }
+  }
+  function showtds(){
+      var status = document.getElementById("tds");
+      var a = status.value;
+      if(a=="Yes"){
 
-<h6><b>Payroll</b></h6>
-<div class="row container-fluid  p-2">
-    <div class="col-sm-6 m-0 p-0"> <label for="empno">Maintain Payroll:</label></div>
-    <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;" 
-      name="payroll" id="payroll" onchange="save()">
-     {% if ft.payroll %}
-     <option value="Yes" selected >Yes</option>
-     <option value="No" >No</option>
-   {% else %}
-     <option value="Yes" >Yes</option>
-     <option value="No" selected>No</option>
-   {% endif %}
-      </select></div>
-</div>
-<h6><b>Others</b></h6>
-<div class="row container-fluid  p-2">
-    <div class="col-sm-6 m-0 p-0"> <label for="empno">Enable Multiple Addresses:</label></div>
-    <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;" 
-      name="multiple_addrss" id="multiple_addrss" onchange="save()">
-     {% if ft.multiple_addrss %}
-     <option value="Yes" selected >Yes</option>
-     <option value="No" >No</option>
-   {% else %}
-     <option value="Yes" >Yes</option>
-     <option value="No" selected>No</option>
-   {% endif %}
-      </select></div>
-</div>
-<div class="row container-fluid  p-2">
-    <div class="col-sm-6 m-0 p-0"> <label for="empno">Mark Modified Vouchers:</label></div>
-    <div class="col-sm-6 m-0 p-0"><select style="background-color: #2f516f;color: white;" 
-      name="vouchers" id="vouchers" onchange="save()">
-     {% if ft.vouchers %}
-     <option value="Yes" selected >Yes</option>
-     <option value="No" >No</option>
-   {% else %}
-     <option value="Yes" >Yes</option>
-     <option value="No" selected>No</option>
-   {% endif %}
-      </select></div>
-</div>
-<!-- <input type="submit" value="sub"> -->
-                    
-        </div>
-        
-    </form>
-    </div>
-</div>
-</body>
+           window.location.href="{% url 'tds' cmp.id %}"
+      }
+      else{
+          document.getElementById('enbtds').style.display="flex";
+      }
+  }
+</script>
+
 
 {% endblock %}
