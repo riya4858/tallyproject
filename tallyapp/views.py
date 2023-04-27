@@ -55,8 +55,9 @@ def company_create(request):
                 telephone=telephone,mobile=mobile,fax=fax,email=email,website=website,fin_begin=fin_begin,
                 books_begin=books_begin,currency_symbol=currency_symbol,formal_name=formal_name,fin_end=a)
             ctg.save()
-            messages.info(request,'Company created successfully(Enable the features as per your business needs)')
-            return render(request,'features.html',{'cmp':ctg})
+            # messages.info(request,'Company created successfully(Enable the features as per your business needs)')
+            # return render(request,'features.html',{'cmp':ctg})
+            return redirect('index')
     return render(request,'createcompany.html')
 
 def group(request,pk):
